@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <title>NEUMACONCE - Bocar Concepción</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -35,27 +35,18 @@
         <div class="row">
             <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</a>
+                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+56974229630</a>
                     <span class="text-body">|</span>
                     <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>bocar@bocar.cl</a>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-body px-3" href="">
+                    <a class="text-body px-3" href="https://www.facebook.com/BOCARIMPORTACIONES/">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a class="text-body px-3" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-body px-3" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-body px-3" href="">
+                    <a class="text-body px-3" href="https://www.instagram.com/neumaconce/">
                         <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-body pl-3" href="">
-                        <i class="fab fa-youtube"></i>
                     </a>
                 </div>
             </div>
@@ -69,32 +60,24 @@
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
+                    <h1 class="text-uppercase text-primary mb-1">NEUMA CONCE</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="index" class="nav-item nav-link active">Inicio</a>
+                        <a href="about" class="nav-item nav-link">Sobre nosotros</a>
+                        <a href="service" class="nav-item nav-link">Servicios</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
+                                <a href="team" class="dropdown-item">Equipo</a>
+                                <a href="testimonial" class="dropdown-item">Testimonio</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="contact" class="nav-item nav-link">Contacto</a>
                     </div>
                 </div>
             </nav>
@@ -103,52 +86,37 @@
     <!-- Navbar End -->
 
 
-    <!-- Search Start -->
-    <div class="container-fluid bg-white pt-3 px-lg-5">
-        <div class="row mx-n2">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Pickup Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
+  <!-- Search Start -->
+    <div class="container-fluid bg-white py-1 px-lg-5">
+        <div class="row mx-n2 mb-3 align-items-center">
+            <div class="col-12 px-2 py-2">
+                <p class="font-weight-bold mb-1">Selecciona tu vehículo</p>
+                <p class="mb-1" style="font-size: 14px;">Por favor introduzca los detalles de su auto para confirmar compatibilidad</p>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 px-2 align-items-center">
+                <select class="custom-select px-4" style="height: 50px;">
+                    <option selected>Año</option>
+                    <!-- Add options for years here -->
                 </select>
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Drop Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
+            <div class="col-xl-3 col-lg-4 col-md-6 px-2 align-items-center">
+                <select class="custom-select px-4" style="height: 50px;">
+                    <option selected>Marca</option>
+                    <!-- Add options for brands here -->
                 </select>
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
-                        data-target="#date" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="time" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
-                        data-target="#time" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Select A Car</option>
-                    <option value="1">Car 1</option>
-                    <option value="2">Car 1</option>
-                    <option value="3">Car 1</option>
+            <div class="col-xl-3 col-lg-4 col-md-6 px-2 align-items-center">
+                <select class="custom-select px-4" style="height: 50px;">
+                    <option selected>Modelo</option>
+                    <!-- Add options for models here -->
                 </select>
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+            <div class="col-xl-3 col-lg-4 col-md-6 px-2 d-flex align-items-center justify-content-center">
+                <button class="btn btn-primary btn-block" type="submit" style="height: 50px;">Buscar</button>
             </div>
         </div>
     </div>
     <!-- Search End -->
-
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0" style="margin-bottom: 90px;">
@@ -158,9 +126,9 @@
                     <img class="w-100" src="img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
-                            <h1 class="display-1 text-white mb-md-4">Best Rental Cars In Your Location</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
+                            <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
+                            <h1 class="display-1 text-white mb-md-4">Los mejores repuestos de la región</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Compra Aquí</a>
                         </div>
                     </div>
                 </div>
@@ -168,9 +136,9 @@
                     <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
-                            <h1 class="display-1 text-white mb-md-4">Quality Cars with Unlimited Miles</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
+                            <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
+                            <h1 class="display-1 text-white mb-md-4">Lleva tu automóvil a un nivel superior</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Compra Aquí</a>
                         </div>
                     </div>
                 </div>
@@ -194,11 +162,11 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">01</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Welcome To <span class="text-primary">Royal Cars</span></h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Bienvenidos a <span class="text-primary">NeumaConce</span></h1>
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
                     <img class="w-75 mb-4" src="img/about.png" alt="">
-                    <p>Justo et eos et ut takimata sed sadipscing dolore lorem, et elitr labore labore voluptua no rebum sed, stet voluptua amet sed elitr ea dolor dolores no clita. Dolores diam magna clita ea eos amet, amet rebum voluptua vero vero sed clita accusam takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no ipsum sanctus sanctus no et no ipsum amet, tempor labore est labore no. Eos diam eirmod lorem ut eirmod, ipsum diam sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr accusam takimata labore, et at erat eirmod consetetur tempor eirmod invidunt est, ipsum nonumy at et.</p>
+                    <p>Bienvenido a NeumaConce, su destino confiable para todas sus necesidades de partes y repuestos de vehículos en Concepción, Chile. Nos enorgullece ofrecer una amplia gama de piezas de calidad, así como un conveniente servicio de retiro en nuestro local o despacho a su ubicación, ya sea en la ciudad o en regiones. Además de nuestro extenso inventario, también proporcionamos servicios especializados de desabolladuría y pintura de autos para mantener su vehículo en óptimas condiciones estéticas y de funcionamiento. En NeumaConce, nuestro compromiso es brindarle soluciones integrales para todas sus necesidades automotrices.</p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -207,7 +175,7 @@
                         <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
                             <i class="fa fa-2x fa-headset text-secondary"></i>
                         </div>
-                        <h4 class="text-uppercase m-0">24/7 Car Rental Support</h4>
+                        <h4 class="text-uppercase m-0">Asistencia por redes o correo</h4>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
@@ -215,7 +183,7 @@
                         <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
                             <i class="fa fa-2x fa-car text-secondary"></i>
                         </div>
-                        <h4 class="text-light text-uppercase m-0">Car Reservation Anytime</h4>
+                        <h4 class="text-light text-uppercase m-0">Despacho local y a regiones</h4>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
@@ -223,7 +191,7 @@
                         <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
                             <i class="fa fa-2x fa-map-marker-alt text-secondary"></i>
                         </div>
-                        <h4 class="text-uppercase m-0">Lots Of Pickup Locations</h4>
+                        <h4 class="text-uppercase m-0">Freire #82, Concepción</h4>
                     </div>
                 </div>
             </div>

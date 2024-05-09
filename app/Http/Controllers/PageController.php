@@ -1,47 +1,37 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\File;
 
 class PageController extends Controller
 {
     public function index()
     {
-        $indexPath = public_path('index.html');
-
-        if (file_exists($indexPath)) {
-            return response()->file($indexPath);
-        } else {
-            throw new FileNotFoundException($indexPath);
-        }
+        return view('index');
     }
 
     public function about()
     {
-        return response()->file(public_path('about.html'));
+        return view('about');
     }
 
     public function service()
     {
-        return response()->file(public_path('service.html'));
+        return view('service');
     }
 
     public function contact()
     {
-        return response()->file(public_path('contact.html'));
+        return view('contact');
     }
     
     public function team()
     {
-        return response()->file(public_path('team.html'));
+        return view('team');
     }
 
     public function testimonial()
     {
-        return response()->file(public_path('testimonial.html'));
+        return view('testimonial');
     }
 }
