@@ -78,6 +78,28 @@
                             </div>
                         </div>
                         <a href="contact" class="nav-item nav-link">Contacto</a>
+                        @auth
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Cerrar Sesión') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </nav>
@@ -123,7 +145,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="media/photos/photo1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
@@ -133,7 +155,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="media/photos/photo2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>

@@ -1,23 +1,21 @@
 @extends('layouts.simple')
 
 @section('content')
-    <!-- Hero -->
-    <div class="hero bg-white overflow-hidden">
-        <div class="hero-inner">
-            <div class="content content-full text-center">
-                <h1 class="font-w700 mb-2">
-                    Dash<span class="text-primary">mix</span> <span class="font-w300">+ Laravel <span class="text-danger">7</span></span>
-                </h1>
-                <h2 class="h4 font-w400 text-muted mb-4 invisible" data-toggle="appear" data-timeout="150">
-                    Welcome to the starter kit! Build something amazing!
-                </h2>
-                <span class="m-2 d-inline-block invisible" data-toggle="appear" data-timeout="300">
-                    <a class="btn btn-alt-primary px-4 py-3" href="/dashboard">
-                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Enter Dashboard
-                    </a>
-                </span>
-            </div>
-        </div>
+  <!-- Hero -->
+  <div class="hero bg-body-extra-light">
+    <div class="hero-inner">
+      <div class="content content-full text-center">
+        <h1 class="fw-bold mb-2">
+          Dash<span class="text-primary">mix</span> + Laravel <span class="text-danger">9</span>
+        </h1>
+        <h2 class="h4 fw-medium text-muted mb-5">
+          Welcome to the starter kit. Build something amazing.
+        </h2>
+        <a class="btn btn-hero btn-primary px-4 py-3 d-inline-block" href="/dashboard">
+          <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Enter Dashboard
+        </a>
+      </div>
     </div>
-    <!-- END Hero -->
+  </div>
+  <!-- END Hero -->
 @endsection
