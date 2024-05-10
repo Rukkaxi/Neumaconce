@@ -327,9 +327,24 @@
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                 <i class="nav-main-link-icon fa fa-lightbulb"></i>
-                <span class="nav-main-link-name">Examples</span>
+                <span class="nav-main-link-name">Mantenedores</span>
               </a>
               <ul class="nav-main-submenu">
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
+                    <span class="nav-main-link-name">Mantenedor de Usuarios</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
+                    <span class="nav-main-link-name">Mantenedor de Vehículos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
+                    <span class="nav-main-link-name">Mantenedor de Productos</span>
+                  </a>
+                </li>
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
                     <span class="nav-main-link-name">DataTables</span>
@@ -347,6 +362,20 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-main-heading">Módulo de Venta</li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link" href="#">
+                      <i class="nav-main-link-icon fa fa-shopping-cart"></i>
+                        <span class="nav-main-link-name">Pedidos</span>
+                  </a>
+                </li>
+                  <li class="nav-main-item">
+                    <a class="nav-main-link" href="#">
+                      <i class="nav-main-link-icon fa fa-credit-card"></i>
+                        <span class="nav-main-link-name">Métodos de Pago</span>
+                    </a>
+                  </li>
+
             <li class="nav-main-heading">More</li>
             <li class="nav-main-item">
               <a class="nav-main-link" href="/">
