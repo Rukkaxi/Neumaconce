@@ -323,7 +323,7 @@
                 <span class="nav-main-link-badge badge rounded-pill bg-primary">5</span>
               </a>
             </li>
-            <li class="nav-main-heading">Various</li>
+            <li class="nav-main-heading">Gestión de Contenidos</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                 <i class="nav-main-link-icon fa fa-lightbulb"></i>
@@ -332,57 +332,45 @@
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                    <span class="nav-main-link-name">Mantenedor de Usuarios</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                    <span class="nav-main-link-name">Mantenedor de Vehículos</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                    <span class="nav-main-link-name">Mantenedor de Productos</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                    <span class="nav-main-link-name">DataTables</span>
+                    <span class="nav-main-link-name">Usuarios</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">
-                    <span class="nav-main-link-name">Slick Slider</span>
+                    <span class="nav-main-link-name">Vehículos</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
-                    <span class="nav-main-link-name">Blank</span>
+                    <span class="nav-main-link-name">Productos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/...') ? ' active' : '' }}" href="/pages/...">
+                    <span class="nav-main-link-name">Categorias</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-main-heading">Módulo de Venta</li>
+            <li class="nav-main-heading">Módulo de Ventas</li>
                 <li class="nav-main-item">
                   <a class="nav-main-link" href="#">
                       <i class="nav-main-link-icon fa fa-shopping-cart"></i>
                         <span class="nav-main-link-name">Pedidos</span>
                   </a>
                 </li>
-                  <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
-                      <i class="nav-main-link-icon fa fa-credit-card"></i>
-                        <span class="nav-main-link-name">Métodos de Pago</span>
-                    </a>
-                  </li>
-
-            <li class="nav-main-heading">More</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link" href="/">
-                <i class="nav-main-link-icon fa fa-globe"></i>
-                <span class="nav-main-link-name">Landing</span>
-              </a>
-            </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link" href="#">
+                    <i class="nav-main-link-icon fa fa-credit-card"></i>
+                      <span class="nav-main-link-name">Métodos de Pago</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link" href="#">
+                    <i class="nav-main-link-icon fa fa-cubes"></i>
+                    <span class="nav-main-link-name">Inventario</span>
+                  </a>
+                </li>  
           </ul>
         </div>
         <!-- END Side Navigation -->
