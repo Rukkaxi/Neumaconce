@@ -23,7 +23,9 @@ Route::get('/xd', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/pages/users', [UserController::class, 'index']);
+#Route::get('/pages/users', [UserController::class, 'index']);
+Route::get('pages/users', [UserController::class, 'index'])->name('pages.users');
+
 //editar usuario
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');

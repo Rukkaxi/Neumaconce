@@ -82,7 +82,8 @@ class UserController extends Controller
         $user->delete();
 
         // Redireccionar a la lista de usuarios con un mensaje de éxito
-        return redirect()->route('users.index')
-            ->with('success', 'Usuario eliminado correctamente.');
+        return redirect()->route('pages.users')->with('success', 'Usuario eliminado correctamente.');
     }
+
+    
 }
