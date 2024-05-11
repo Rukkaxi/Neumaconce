@@ -72,9 +72,8 @@ class UserController extends Controller
         // Actualizar el usuario
         $user->update($request->all());
 
-        // Redireccionar a la lista de usuarios con un mensaje de éxito
-        return redirect()->route('users.index')
-            ->with('success', 'Usuario actualizado correctamente.');
+        // Redireccionar al usuario a la página deseada
+        return redirect('http://127.0.0.1:8000/pages/users')->with('success', 'Usuario actualizado correctamente.');
     }
 
     // Eliminar un usuario de la base de datos
