@@ -30,13 +30,7 @@
   <div class="bg-body-light">
     <div class="content content-full">
       <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-        <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">DataTables Example</h1>
-        <nav class="flex-shrink-0 my-2 my-sm-0 ms-sm-3" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">Examples</li>
-            <li class="breadcrumb-item active" aria-current="page">Plugin</li>
-          </ol>
-        </nav>
+        <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">Lista de Usuarios</h1>
       </div>
     </div>
   </div>
@@ -44,92 +38,47 @@
 
   <!-- Page Content -->
   <div class="content">
-    <!-- Info -->
-    <div class="block block-rounded">
-      <div class="block-header block-header-default">
-        <h3 class="block-title">Plugin Example</h3>
-      </div>
-      <div class="block-content">
-        <p>
-          This page showcases how easily you can add a plugin’s JS/CSS assets and init it using custom JS code.
-        </p>
-      </div>
-    </div>
-    <!-- END Info -->
-
     <!-- Dynamic Table Full -->
     <div class="block block-rounded">
-      <div class="block-header block-header-default">
-        <h3 class="block-title">Dynamic Table <small>Full</small></h3>
-      </div>
       <div class="block-content block-content-full">
-        <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
         <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
           <thead>
             <tr>
-              <th class="text-center" style="width: 80px;">#</th>
-              <th>Name</th>
-              <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-              <th style="width: 15%;">Registered</th>
+              <th class="text-center" style="width: 80px;">ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th style="width: 15%;">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            @for ($i = 1; $i < 21; $i++)
+            @if(isset($users) && count($users) > 0)
+              @foreach ($users as $user)
+                <tr>
+                  <td class="text-center">{{ $user->id }}</td>
+                  <td>{{ $user->name }}</td>
+                  <td>{{ $user->email }}</td>
+                  <td>{{ $user->rol }}</td>
+                  <td class="text-center">
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info">Editar</a>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">Eliminar</button>
+                    </form>
+                  </td>
+                </tr>
+              @endforeach
+            @else
               <tr>
-                <td class="text-center"><?php echo $i; ?></td>
-                <td class="fw-semibold">
-                  <a href="javascript:void(0)">John Doe</a>
-                </td>
-                <td class="d-none d-sm-table-cell">
-                  client{{ $i }}<em class="text-muted">@example.com</em>
-                </td>
-                <td>
-                  <em class="text-muted">{{ rand(2, 10) }} days ago</em>
-                </td>
+                <td colspan="5" class="text-center">No hay usuarios disponibles</td>
               </tr>
-            @endfor
+            @endif
           </tbody>
         </table>
       </div>
     </div>
     <!-- END Dynamic Table Full -->
-
-    <!-- Dynamic Table with Export Buttons -->
-    <div class="block block-rounded">
-      <div class="block-header block-header-default">
-        <h3 class="block-title">Dynamic Table <small>Export Buttons</small></h3>
-      </div>
-      <div class="block-content block-content-full">
-        <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/tables_datatables.js -->
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
-          <thead>
-            <tr>
-              <th class="text-center" style="width: 80px;">#</th>
-              <th>Name</th>
-              <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-              <th style="width: 15%;">Registered</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for ($i = 1; $i < 21; $i++)
-              <tr>
-                <td class="text-center">{{ $i }}</td>
-                <td class="fw-semibold">
-                  <a href="javascript:void(0)">John Smith</a>
-                </td>
-                <td class="d-none d-sm-table-cell">
-                  client{{ $i }}<em class="text-muted">@example.com</em>
-                </td>
-                <td>
-                  <em class="text-muted">{{ rand(2, 10) }} days ago</em>
-                </td>
-              </tr>
-            @endfor
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <!-- END Dynamic Table with Export Buttons -->
   </div>
   <!-- END Page Content -->
 @endsection

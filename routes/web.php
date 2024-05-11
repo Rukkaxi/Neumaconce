@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Models\User;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +23,21 @@ Route::get('/xd', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/pages/users', [UserController::class, 'index']);
+Route::get('/pages/vehicles', [VehicleController::class, 'index']);
+Route::get('/pages/products', [ProductController::class, 'index']);
  
 // DashMix Example Routes
 Route::view('/landing', 'landing');   
 Route::match(['get', 'post'], '/dashboard', function(){
     return view('dashboard');
 });
+
+
 Route::view('/pages/users', 'pages.users');
 Route::view('/pages/vehicles', 'pages.vehicles');
 Route::view('/pages/products', 'pages.products');
+
 
 // Usando el espacio de nombres completo para PageController
 Route::get('/', [PageController::class, 'index']);
