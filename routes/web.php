@@ -24,6 +24,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/pages/users', [UserController::class, 'index']);
+//editar usuario
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+//eliminar usuario
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::view('/pages/vehicles', 'pages.vehicles');
 Route::view('/pages/products', 'pages.products');
  
@@ -40,4 +44,5 @@ Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/service', [PageController::class, 'service']);
 Route::get('/team', [PageController::class, 'team']);
 Route::get('/testimonial', [PageController::class, 'testimonial']);
+
 
