@@ -26,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/pages/users', [UserController::class, 'index']);
 //editar usuario
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 //eliminar usuario
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::view('/pages/vehicles', 'pages.vehicles');
