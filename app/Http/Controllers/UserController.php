@@ -73,7 +73,7 @@ class UserController extends Controller
         $user->update($request->all());
 
         // Redireccionar al usuario a la página deseada
-        return redirect('pages/users')->with('success', 'Usuario actualizado correctamente.');
+        return redirect('pages/users');
     }
 
     // Eliminar un usuario de la base de datos
@@ -82,7 +82,7 @@ class UserController extends Controller
         $user->delete();
 
         // Redireccionar a la lista de usuarios con un mensaje de éxito
-        return redirect()->route('pages.users')->with('success', 'Usuario eliminado correctamente.');
+        return redirect()->route('pages.users');
     }
 
     
