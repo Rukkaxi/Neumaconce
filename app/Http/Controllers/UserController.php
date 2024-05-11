@@ -73,7 +73,7 @@ class UserController extends Controller
         $user->update($request->all());
 
         // Redireccionar al usuario a la página deseada
-        return redirect('http://127.0.0.1:8000/pages/users')->with('success', 'Usuario actualizado correctamente.');
+        return redirect('pages/users')->with('success', 'Usuario actualizado correctamente.');
     }
 
     // Eliminar un usuario de la base de datos
