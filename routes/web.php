@@ -28,9 +28,9 @@ Route::view('/landing', 'landing');
 Route::match(['get', 'post'], '/dashboard', function(){
     return view('dashboard');
 });
-Route::view('/pages/slick', 'pages.slick');
-Route::view('/pages/datatables', 'pages.datatables');
-Route::view('/pages/blank', 'pages.blank');
+Route::view('/pages/users', 'pages.users');
+Route::view('/pages/vehicles', 'pages.vehicles');
+Route::view('/pages/products', 'pages.products');
 
 // Usando el espacio de nombres completo para PageController
 Route::get('/', [PageController::class, 'index']);

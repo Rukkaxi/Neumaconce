@@ -331,17 +331,17 @@
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
+                  <a class="nav-main-link{{ request()->is('pages/users') ? ' active' : '' }}" href="/pages/users">
                     <span class="nav-main-link-name">Usuarios</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">
+                  <a class="nav-main-link{{ request()->is('pages/vehicles') ? ' active' : '' }}" href="/pages/vehicles">
                     <span class="nav-main-link-name">Vehículos</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
+                  <a class="nav-main-link{{ request()->is('pages/products') ? ' active' : '' }}" href="/pages/products">
                     <span class="nav-main-link-name">Productos</span>
                   </a>
                 </li>
