@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Http\Models;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
@@ -53,7 +55,8 @@ class UserController extends Controller
     // Mostrar el formulario para editar un usuario
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles = Role::all(); // Suponiendo que tienes un modelo Role para los roles
+        return view('users.edit', compact('user', 'roles'));
     }
 
     // Actualizar el usuario en la base de datos

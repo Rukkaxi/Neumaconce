@@ -21,7 +21,16 @@
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" id="email" value="{{ $user->email }}" class="form-control">
                             </div>
-
+                            
+                            <div class="form-group">
+                                <label for="rol">Rol:</label>
+                                <select name="rol" id="rol" class="form-control">
+                                    <option value="admin" @if($user->rol == 'admin') selected @endif>Admin</option>
+                                    <option value="user" @if($user->rol == 'user') selected @endif>User</option>
+                                    <!-- Agrega más opciones según tus necesidades -->
+                                </select>
+                            </div>
+                            
                             <!-- Agrega más campos según tus necesidades -->
 
                             <button type="submit" class="btn btn-primary">Guardar</button>
