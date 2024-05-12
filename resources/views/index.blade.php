@@ -100,6 +100,23 @@
                                 <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
                             @endif
                         @endauth
+                        <!-- Carrito -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="carritoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-shopping-cart"></i> <!-- Icono de carrito -->
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="carritoDropdown">
+                                <!-- Mini carrito -->
+                                <div class="mini-carrito px-3 py-2">
+                                    <!-- Lista de productos en el carrito (aún por implementar) -->
+                                    <!-- Aquí puedes mostrar los productos y sus cantidades -->
+                                </div>
+                                <!-- Opciones del carrito -->
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Ir al carro</a>
+                                <button type="button" class="dropdown-item btn btn-primary">Comprar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
