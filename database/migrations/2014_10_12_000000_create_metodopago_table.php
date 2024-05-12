@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMetodo_PagoTable extends Migration
+class CreateMetodoPagoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,6 @@ class CreateMetodo_PagoTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->timestamps();
         });
     }
 
@@ -31,3 +30,4 @@ class CreateMetodo_PagoTable extends Migration
         Schema::dropIfExists('metodo_pago');
     }
 }
+
