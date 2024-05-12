@@ -25,9 +25,9 @@
                             <div class="form-group">
                                 <label for="rol">Rol:</label>
                                 <select name="rol" id="rol" class="form-control">
-                                    <option value="admin" @if($user->rol == 'admin') selected @endif>Admin</option>
-                                    <option value="user" @if($user->rol == 'user') selected @endif>User</option>
-                                    <!-- Agrega más opciones según tus necesidades -->
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->rol }}" @if($user->rol == $role->rol) selected @endif>{{ $role->rol }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             
