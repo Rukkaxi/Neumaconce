@@ -54,7 +54,7 @@ Route::get('/testimonial', [PageController::class, 'testimonial']);
 // Rutas para PaymentMethod
 Route::resource('payment-methods', PaymentMethodController::class);
 
-// Nota: El uso de Route::resource() genera automáticamente rutas para CRUD (create, read, update, delete) basadas en convenciones RESTful.
+// NOTA: El uso de Route::resource() genera automáticamente rutas para CRUD (create, read, update, delete) basadas en convenciones RESTful.
 
 /* // Rutas protegidas por autenticación (se necesita loguearse)
 Route::middleware('auth')->group(function () {
