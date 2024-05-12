@@ -46,6 +46,6 @@ class User extends Authenticatable
     ];
     public function role()
     {
-        return $this->belongsTo(Role::class, 'rol');
+        return $this->belongsToMany(Role::class, 'rol_usuario', 'id_usuario', 'id_rol');
     }
 }
