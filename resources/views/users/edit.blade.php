@@ -24,7 +24,7 @@
                             
                             <div class="form-group">
                                 <label for="rol">Rol:</label>
-                                <select name="rol" id="rol" class="form-control">
+                                <select name="rol" id="id" class="form-control">
                                     @foreach($roles as $role)
                                         <option value="{{ $role->rol }}" @if($user->rol == $role->rol) selected @endif>{{ $role->rol }}</option>
                                     @endforeach
