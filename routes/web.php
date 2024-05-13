@@ -2,32 +2,37 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Auth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::group(['middleware' => ['role:Admin|Moderador']], function(){
+
+    //Permisos y Roles
+    Route::resource('permissions', App\Http\Controllers\PermisionController::class);
+    Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
+
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
+    Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionsToRole']);
+    Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionsToRole']);
+
+    //Usuarios. Para la administracion de roles-permisos
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::get('users/{userId}/delete', [App\Http\Controllers\userController::class, 'destroy']);
+
+}
+);
+
+
 
 Route::get('/xd', function () {
     return view('welcome');
 }); 
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
  
 // DashMix Example Routes
 Route::view('/landing', 'landing');   
-Route::match(['get', 'post'], '/dashboard', function(){
-    return view('dashboard');
-});
+Route::match(['get', 'post'], '/dashboard', function(){ return view('dashboard'); })->name('dashboard');
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
