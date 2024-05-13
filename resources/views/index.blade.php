@@ -102,7 +102,7 @@
                         @endauth
                         <!-- Carrito -->
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="carritoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#" id="carritoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-shopping-cart"></i> <!-- Icono de carrito -->
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="carritoDropdown">
