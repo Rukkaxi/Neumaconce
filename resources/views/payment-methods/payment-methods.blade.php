@@ -28,7 +28,7 @@
                                         <td>{{ $paymentMethod->descripcion }}</td>
                                         <td>
                                             <a href="{{ route('payment-methods.edit', $paymentMethod->id) }}" class="btn btn-primary">Editar</a>
-                                             <form action="{{ route('payment-methods.destroy', $paymentMethod->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('payment-methods.destroy', $paymentMethod->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar este método de pago?')">Eliminar</button>

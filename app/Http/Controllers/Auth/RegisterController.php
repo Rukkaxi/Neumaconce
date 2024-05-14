@@ -8,8 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Role;
-use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -66,32 +64,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Crear el usuario con el campo 'rol'
-        $user = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'rol' => 'User', // Asignar el rol por defecto
         ]);
-
-        // Obtener el ID del rol 'User' de la tabla roles
-        $role = Role::where('rol', 'User')->first();
-
-        // Verificar si se encontró el rol 'User'
-        if ($role) {
-            // Verificar si el usuario ya tiene asignado el rol
-            if (!$user->roles->contains($role)) {
-                // Asignar el rol al usuario
-                $user->roles()->attach($role->id);
-
-                // Crear el registro en la tabla rol_usuario solo si no existe
-                DB::table('rol_usuario')->updateOrInsert([
-                    'id_usuario' => $user->id,
-                    'id_rol' => $role->id,
-                ]);
-            }
-        }
-
-        return $user;
     }
 }

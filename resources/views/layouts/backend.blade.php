@@ -327,27 +327,37 @@
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                 <i class="nav-main-link-icon fa fa-lightbulb"></i>
-                <span class="nav-main-link-name">Mantenedores</span>
+                <span class="nav-main-link-name">Administrar</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/users') ? ' active' : '' }}" href="/pages/users">
-                    <span class="nav-main-link-name">Usuarios</span>
+                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
+                    <span class="nav-main-link-name">DataTables</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/vehicles') ? ' active' : '' }}" href="/pages/vehicles">
-                    <span class="nav-main-link-name">Vehículos</span>
+                  <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">
+                    <span class="nav-main-link-name">Slick Slider</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/products') ? ' active' : '' }}" href="/pages/products">
-                    <span class="nav-main-link-name">Productos</span>
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
+                    <span class="nav-main-link-name">Blank</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/...') ? ' active' : '' }}" href="/pages/...">
-                    <span class="nav-main-link-name">Categorias</span>
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('users')}}">
+                    <span class="nav-main-link-name">Dar roles a usuarios</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('roles')}}">
+                    <span class="nav-main-link-name">Roles</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('permissions')}}">
+                    <span class="nav-main-link-name">Permisos</span>
                   </a>
                 </li>
               </ul>
@@ -360,7 +370,7 @@
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/payment-methods') ? ' active' : '' }}" href="/pages/payment-methods">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('payment-methods')}}">
                     <i class="nav-main-link-icon fa fa-credit-card"></i>
                       <span class="nav-main-link-name">Métodos de Pago</span>
                   </a>

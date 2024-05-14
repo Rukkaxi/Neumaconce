@@ -4,6 +4,8 @@
     --secondary: #2B2E4A;
     --light: #F4F5F8;
     --dark: #1C1E32;
+    --bg-light: #E5E7EB;
+    --bg-dark: #D1D5DB;
 }
 
 h1,
@@ -55,6 +57,17 @@ h6,
     z-index: 99;
 }
 
+.card {
+    background-color: var(--bg-light);
+    color: var(--secondary);
+}
+
+.card-header{
+    background-color: var(--bg-dark);
+    color: var(--secondary);
+}
+
+
 .nav-bar::before {
     position: absolute;
     content: "";
@@ -70,9 +83,9 @@ h6,
     content: "";
     width: 100%;
     height: 50%;
-    bottom: 0;
+    bottom: 0;  
     left: 0;
-    background: #ffffff;
+    background: var(--secondary);
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -312,4 +325,17 @@ h6,
 .bg-banner {
     background: linear-gradient(rgba(28, 30, 50, .9), rgba(28, 30, 50, .9)), url(../img/bg-banner.jpg);
     background-attachment: fixed;
+}
+
+.background-image-wrapper {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity (0.5) to make it darker or lighter */
 }

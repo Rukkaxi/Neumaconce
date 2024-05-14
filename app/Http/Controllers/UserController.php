@@ -2,88 +2,99 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Http\Models;
+
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    // Mostrar una lista de usuarios
-    // Mostrar una lista de usuarios
-    // Mostrar una lista de usuarios
+
+    /* public function __construct()
+    {
+        $this->middleware('permission:Ver Usuarios', ['only' => ['index']]);
+        $this->middleware('permission:Crear Usuario', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Eliminar Usuarios', ['only' => ['destroy']]);
+        $this->middleware('permission:Editar Usuarios', ['only' => ['update', 'edit']]);
+    } */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $users = User::get();
+        return view('role-permission.user.index', [
+            'users' => $users
+        ]);
     }
 
-
-
-    // Mostrar el formulario para crear un nuevo usuario
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name', 'name')->all();
+        return view('role-permission.user.create', [
+            'roles' => $roles
+        ]);
     }
 
-    // Guardar el nuevo usuario en la base de datos
     public function store(Request $request)
     {
-        // Validar los datos del formulario
+
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            // Agrega aquí las reglas de validación necesarias
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|max:255',
+            'roles' => 'required'
         ]);
 
-        // Crear el usuario
-        User::create($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        // Redireccionar a la lista de usuarios con un mensaje de éxito
-        return redirect()->route('users.index')
-            ->with('success', 'Usuario creado correctamente.');
+        $user->syncRoles([$request->roles]);
+
+        return redirect('/users')->with('status', 'Usuario creado exitósamente con roles');
     }
 
-    // Mostrar los detalles de un usuario específico
-    public function show(User $user)
-    {
-        return view('users.show', compact('user'));
-    }
-
-    // Mostrar el formulario para editar un usuario
     public function edit(User $user)
     {
-        $roles = Role::all(); // Suponiendo que tienes un modelo Role para los roles
-        return view('users.edit', compact('user', 'roles'));
+        $roles = Role::pluck('name', 'name')->all();
+        $userRoles = $user->roles->pluck('name', 'name')->all();
+        return view('role-permission.user.edit', [
+            'user' => $user,
+            'roles' => $roles,
+            'userRoles' => $userRoles
+        ]);
     }
 
-    // Actualizar el usuario en la base de datos
     public function update(Request $request, User $user)
     {
-        // Validar los datos del formulario
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            // Agrega aquí las reglas de validación necesarias
+            'name' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|max:255',
+            'roles' => 'required'
         ]);
 
-        // Actualizar el usuario
-        $user->update($request->all());
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
 
-        // Redireccionar al usuario a la página deseada
-        return redirect('pages/users');
+        ];
+
+        if (!empty($request->password)) {
+            $data += [
+                'password' => Hash::make($request->password)
+            ];
+        }
+
+        $user->update($data);
+        $user->syncRoles($request->roles);
+        return redirect('/users')->with('status', 'Usuario actualizado exitósamente con roles');
     }
 
-    // Eliminar un usuario de la base de datos
-    public function destroy(User $user)
+    public function destroy($userId)
     {
+        $user = User::findOrFail($userId);
         $user->delete();
-
-        // Redireccionar a la lista de usuarios con un mensaje de éxito
-        return redirect()->route('pages.users');
+        return redirect('/users')->with('status', 'Usuario eliminado exitósamente con roles');
     }
-
-    
 }

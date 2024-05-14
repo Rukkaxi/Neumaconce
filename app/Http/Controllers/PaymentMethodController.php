@@ -10,7 +10,7 @@ class PaymentMethodController extends Controller
     public function index()
     {
         $paymentMethods = PaymentMethod::all();
-        return view('pages.payment-methods', compact('paymentMethods'));
+        return view('payment-methods.index', compact('paymentMethods'));
     }
 
     public function create()
