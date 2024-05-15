@@ -119,7 +119,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="media/photos/photo1.jpg" alt="Image">
+                    <img class="w-100" src="media/photos/photo1.png" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="media/photos/photo2.jpg" alt="Image">
+                    <img class="w-100" src="media/photos/photo2.png" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
@@ -200,7 +200,7 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">02</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Our Services</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Nuestros Servicios</h1>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
@@ -210,11 +210,11 @@
                             </div>
                             <h1 class="display-2 text-white mt-n2 m-0">01</h1>
                         </div>
-                        <h4 class="text-uppercase mb-3">Car Rental</h4>
+                        <h4 class="text-uppercase mb-3">Repuestos de Automovil</h4>
                         <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-2">
+          <!--      <div class="col-lg-4 col-md-6 mb-2">
                     <div class="service-item active d-flex flex-column justify-content-center px-4 mb-4">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
@@ -226,15 +226,16 @@
                         <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
                 </div>
+                -->
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
                                 <i class="fa fa-2x fa-car text-secondary"></i>
                             </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">03</h1>
+                            <h1 class="display-2 text-white mt-n2 m-0">02</h1>
                         </div>
-                        <h4 class="text-uppercase mb-3">Car Inspection</h4>
+                        <h4 class="text-uppercase mb-3">Inspección Vehicular</h4>
                         <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
                 </div>
@@ -244,9 +245,9 @@
                             <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
                                 <i class="fa fa-2x fa-cogs text-secondary"></i>
                             </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">04</h1>
+                            <h1 class="display-2 text-white mt-n2 m-0">03</h1>
                         </div>
-                        <h4 class="text-uppercase mb-3">Auto Repairing</h4>
+                        <h4 class="text-uppercase mb-3">Mantención de Automoviles</h4>
                         <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
                 </div>
@@ -256,13 +257,13 @@
                             <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
                                 <i class="fa fa-2x fa-spray-can text-secondary"></i>
                             </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">05</h1>
+                            <h1 class="display-2 text-white mt-n2 m-0">04</h1>
                         </div>
-                        <h4 class="text-uppercase mb-3">Auto Painting</h4>
+                        <h4 class="text-uppercase mb-3">Pintura de Automoviles</h4>
                         <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-2">
+                <!--    <div class="col-lg-4 col-md-6 mb-2">
                     <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
@@ -274,6 +275,7 @@
                         <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
                 </div>
+                -->
             </div>
         </div>
     </div>
@@ -285,10 +287,10 @@
         <div class="container py-5">
             <div class="bg-banner py-5 px-4 text-center">
                 <div class="py-5">
-                    <h1 class="display-1 text-uppercase text-primary mb-4">50% OFF</h1>
-                    <h1 class="text-uppercase text-light mb-4">Special Offer For New Members</h1>
-                    <p class="mb-4">Only for Sunday from 1st Jan to 30th Jan 2045</p>
-                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Register Now</a>
+                    <h1 class="display-1 text-uppercase text-primary mb-4">20% DE DESCUENTO</h1>
+                    <h1 class="text-uppercase text-light mb-4">Descuento especial para nuevos miembros</h1>
+                    <p class="mb-4">Solo disponible de Lunes a viernes</p>
+                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Regístrate Ahora</a>
                 </div>
             </div>
         </div>
@@ -296,7 +298,7 @@
     <!-- Banner End -->
 
 
-    <!-- Rent A Car Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">03</h1>
@@ -431,10 +433,10 @@
             </div>
         </div>
     </div>
-    <!-- Rent A Car End -->
+     -->
 
 
-    <!-- Team Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="display-1 text-primary text-center">04</h1>
@@ -491,10 +493,10 @@
             </div>
         </div>
     </div>
-    <!-- Team End -->
+     -->
 
 
-    <!-- Banner Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="row mx-0">
@@ -521,10 +523,10 @@
             </div>
         </div>
     </div>
-    <!-- Banner End -->
+   -->
 
 
-    <!-- Testimonial Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="display-1 text-primary text-center">05</h1>
@@ -569,34 +571,34 @@
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+     -->
 
 
     <!-- Contact Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
-            <h1 class="display-1 text-primary text-center">06</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Contact Us</h1>
+            <h1 class="display-1 text-primary text-center">03</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Tu opinión nos importa, Contáctanos</h1>
             <div class="row">
                 <div class="col-lg-7 mb-2">
                     <div class="contact-form bg-light mb-4" style="padding: 30px;">
                         <form>
                             <div class="row">
                                 <div class="col-6 form-group">
-                                    <input type="text" class="form-control p-4" placeholder="Your Name" required="required">
+                                    <input type="text" class="form-control p-4" placeholder="Tu Name" required="required">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <input type="email" class="form-control p-4" placeholder="Your Email" required="required">
+                                    <input type="email" class="form-control p-4" placeholder="Tu Email" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control p-4" placeholder="Subject" required="required">
+                                <input type="text" class="form-control p-4" placeholder="Título" required="required">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control py-3 px-4" rows="5" placeholder="Message" required="required"></textarea>
+                                <textarea class="form-control py-3 px-4" rows="5" placeholder="Mensaje" required="required"></textarea>
                             </div>
                             <div>
-                                <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
+                                <button class="btn btn-primary py-3 px-5" type="submit">Enviar Mensaje</button>
                             </div>
                         </form>
                     </div>
@@ -606,31 +608,19 @@
                         <div class="d-flex mb-3">
                             <i class="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Head Office</h5>
-                                <p>123 Street, New York, USA</p>
+                                <h5 class="text-light">Casa Matriz</h5>
+                                <p>FREIRE #82, CONCEPCIÓN</p>
                             </div>
                         </div>
-                        <div class="d-flex mb-3">
-                            <i class="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
-                            <div class="mt-n1">
-                                <h5 class="text-light">Branch Office</h5>
-                                <p>123 Street, New York, USA</p>
-                            </div>
-                        </div>
+                    
                         <div class="d-flex mb-3">
                             <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Customer Service</h5>
-                                <p>customer@example.com</p>
+                                <h5 class="text-light">Correo Electronico</h5>
+                                <p>bocar@bocar.cl</p>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
-                            <div class="mt-n1">
-                                <h5 class="text-light">Return & Refund</h5>
-                                <p class="m-0">refund@example.com</p>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -642,30 +632,32 @@
     <!-- Vendor Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
+        <h1 class="display-1 text-primary text-center">04</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Nuestra Galeria</h1>
             <div class="owl-carousel vendor-carousel">
                 <div class="bg-light p-4">
-                    <img src="img/vendor-1.png" alt="">
+                    <img src="media/photos/vendor-1.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-2.png" alt="">
+                    <img src="media/photos/vendor-2.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-3.png" alt="">
+                    <img src="media/photos/vendor-3.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-4.png" alt="">
+                    <img src="media/photos/vendor-4.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-5.png" alt="">
+                    <img src="media/photos/vendor-5.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-6.png" alt="">
+                    <img src="media/photos/vendor-6.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-7.png" alt="">
+                    <img src="media/photos/vendor-7.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-8.png" alt="">
+                    <img src="media/photos/vendor-8.png" alt="">
                 </div>
             </div>
         </div>
@@ -690,7 +682,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Usefull Links</h4>
+                <h4 class="text-uppercase text-light mb-4">UASDASDASDA</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Private Policy</a>
                     <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Term & Conditions</a>
@@ -704,22 +696,23 @@
                 <h4 class="text-uppercase text-light mb-4">Car Gallery</h4>
                 <div class="row mx-n1">
                     <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-1.jpg" alt=""></a>
+                        <a href=""><img class="w-100" src="media/photos/vendor-1.png" alt=""></a>
+                        
                     </div>
                     <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-2.jpg" alt=""></a>
+                        <a href=""><img class="w-100" src="media/photos/vendor-2.png" alt=""></a>
                     </div>
                     <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-3.jpg" alt=""></a>
+                        <a href=""><img class="w-100" src="media/photos/vendor-3.png" alt=""></a>
                     </div>
                     <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-4.jpg" alt=""></a>
+                        <a href=""><img class="w-100" src="media/photos/vendor-4.png" alt=""></a>
                     </div>
                     <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-5.jpg" alt=""></a>
+                        <a href=""><img class="w-100" src="media/photos/vendor-5.png" alt=""></a>
                     </div>
                     <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-6.jpg" alt=""></a>
+                        <a href=""><img class="w-100" src="media/photos/vendor-6.png" alt=""></a>
                     </div>
                 </div>
             </div>

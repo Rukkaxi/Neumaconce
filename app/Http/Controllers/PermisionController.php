@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Permission;
 
 class PermisionController extends Controller
 {
-
+/*
     public function __construct()
     {
         $this->middleware('permission:Ver Permisos', ['only' => ['index']]);
@@ -15,6 +15,7 @@ class PermisionController extends Controller
         $this->middleware('permission:Eliminar Permisos', ['only' => ['destroy']]);
         $this->middleware('permission:Editar Permisos', ['only' => ['update', 'edit']]);
     }
+    */
     public function index()
     {
         $permissions = Permission::get();
