@@ -24,7 +24,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Fotos</th>
+                                <th>Foto</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
