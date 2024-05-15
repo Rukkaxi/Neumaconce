@@ -13,8 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Listado de Métodos de Pago
-                        <!-- href="{{ route('payment-methods.create') }}" -->
-                        <a href=" {{url('payment-methods/create')}} " class="btn btn-primary float-end">Añadir Métodos de pago</a>
+                        <a href=" {{url('payment-methods/create')}} " class="btn btn-primary float-end">Añadir Métodos de Pago</a>
                     </h4>
                 </div>
 
@@ -29,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($paymentMethods as $paymentMethod)
+                            @foreach ($payment_methods as $paymentMethod)
                                 <tr>
                                     <td>{{ $paymentMethod->id }}</td>
                                     <td>{{ $paymentMethod->name }}</td>
@@ -50,5 +49,6 @@
             </div>
         </div>
     </div>  
+    
 </div>
 @endsection

@@ -11,7 +11,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('payment-methods.store') }}" method="POST">
+                    <form action="{{ route('payment-methods.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name">Nombre</label>
@@ -20,6 +20,10 @@
                         <div class="mb-3">
                             <label for="description">Descripción</label>
                             <input type="text" id="description" name="description" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="photo">Foto</label>
+                            <input type="file" id="photo" name="photo" class="form-control">
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-success">Guardar</button>

@@ -21,11 +21,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($paymentMethods as $paymentMethod)
+                                @foreach ($payment_methods as $paymentMethod)
                                     <tr>
                                         <td>{{ $paymentMethod->id }}</td>
-                                        <td>{{ $paymentMethod->nombre }}</td>
-                                        <td>{{ $paymentMethod->descripcion }}</td>
+                                        <td>{{ $paymentMethod->name }}</td>
+                                        <td>{{ $paymentMethod->description }}</td>
                                         <td>
                                             <a href="{{ route('payment-methods.edit', $paymentMethod->id) }}" class="btn btn-primary">Editar</a>
                                             <form action="{{ route('payment-methods.destroy', $paymentMethod->id) }}" method="POST" style="display: inline;">

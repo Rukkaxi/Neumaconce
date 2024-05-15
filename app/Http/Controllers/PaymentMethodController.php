@@ -9,8 +9,8 @@ class PaymentMethodController extends Controller
 {
     public function index()
     {
-        $paymentMethods = PaymentMethod::all();
-        return view('payment-methods.index', compact('paymentMethods'));
+        $payment_methods = PaymentMethod::all();
+        return view('payment-methods.index', compact('payment_methods'));
     }
 
     public function create()
@@ -21,13 +21,21 @@ class PaymentMethodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validación para la foto
         ]);
 
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('payment-methods', 'public');
+        }
+
         PaymentMethod::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
+            'name' => $request->name,
+            'guard_name' => 'web',
+            'description' => $request->description,
+            'photo' => $photoPath,
         ]);
 
         return redirect()->route('payment-methods.index')->with('success', 'Método de pago creado correctamente');
@@ -41,15 +49,44 @@ class PaymentMethodController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validación para la foto
+        ]);
+
         $paymentMethod = PaymentMethod::findOrFail($id);
-        $paymentMethod->update($request->all());
+
+        if ($request->hasFile('photo')) {
+            // Eliminar la foto anterior si existe
+            if ($paymentMethod->photo) {
+                Storage::disk('public')->delete($paymentMethod->photo);
+            }
+            $photoPath = $request->file('photo')->store('payment-methods', 'public');
+            $paymentMethod->photo = $photoPath;
+        }
+
+
+        $paymentMethod->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
         return redirect()->route('payment-methods.index')->with('success', 'Método de pago actualizado correctamente');
     }
 
     public function destroy($id)
     {
         $paymentMethod = PaymentMethod::findOrFail($id);
+        if ($paymentMethod->photo) {
+            Storage::disk('public')->delete($paymentMethod->photo);
+        }
         $paymentMethod->delete();
         return redirect()->route('payment-methods.index')->with('success', 'Método de pago eliminado correctamente');
+    }
+
+    public function show($id)
+    {
+        $paymentMethod = PaymentMethod::findOrFail($id);
+        return view('payment-methods.show', compact('paymentMethod'));
     }
 }
