@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Listado de Métodos de Pago
-                        <a href=" {{url('payment-methods/create')}} " class="btn btn-primary float-end">Añadir Roles</a>
+                        <a href=" {{url('payment-methods/create')}} " class="btn btn-primary float-end">Añadir Métodos de pago</a>
                     </h4>
                 </div>
 
