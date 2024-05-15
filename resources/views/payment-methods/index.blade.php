@@ -13,6 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Listado de Métodos de Pago
+                        <!-- href="{{ route('payment-methods.create') }}" -->
                         <a href=" {{url('payment-methods/create')}} " class="btn btn-primary float-end">Añadir Métodos de pago</a>
                     </h4>
                 </div>
@@ -49,6 +50,5 @@
             </div>
         </div>
     </div>  
-    <a href="{{ route('payment-methods.create') }}">Agregar Método de Pago</a>
 </div>
 @endsection
