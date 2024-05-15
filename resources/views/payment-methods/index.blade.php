@@ -24,6 +24,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
+                                <th>Fotos</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -33,6 +34,13 @@
                                     <td>{{ $paymentMethod->id }}</td>
                                     <td>{{ $paymentMethod->name }}</td>
                                     <td>{{ $paymentMethod->description }}</td>
+                                    <td>
+                                            @if($paymentMethod->photo)
+                                                <img src="{{ asset('storage/' . $paymentMethod->photo) }}" alt="{{ $paymentMethod->name }}" width="50">
+                                            @else
+                                                No Foto
+                                            @endif
+                                        </td>
                                     <td>
                                         <a href="{{ route('payment-methods.edit', $paymentMethod->id) }}">Editar</a>
                                         <form action="{{ route('payment-methods.destroy', $paymentMethod->id) }}" method="POST" style="display:inline;">

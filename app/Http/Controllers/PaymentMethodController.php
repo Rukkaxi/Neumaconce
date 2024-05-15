@@ -10,6 +10,7 @@ class PaymentMethodController extends Controller
     public function index()
     {
         $payment_methods = PaymentMethod::all();
+        //dd($payment_methods);  // Añade esto para depurar
         return view('payment-methods.index', compact('payment_methods'));
     }
 
