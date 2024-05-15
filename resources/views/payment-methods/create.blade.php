@@ -1,17 +1,33 @@
 @extends('layouts.backend')
 
 @section('content')
-    <h1>Crear Método de Pago</h1>
-    <form action="{{ route('payment-methods.store') }}" method="POST">
-        @csrf
-        <div>
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Crear Método de Pago
+                        <a href=" {{url('payment-methods')}} " class="btn btn-success float-end">Volver</a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('payment-methods.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Descripción</label>
+                            <input type="text" id="description" name="description" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+                </div>      
+            </div>    
         </div>
-        <div>
-            <label for="descripcion">Descripción</label>
-            <input type="text" id="descripcion" name="descripcion" required>
-        </div>
-        <button type="submit">Guardar</button>
-    </form>
+    </div>
+</div>
 @endsection
