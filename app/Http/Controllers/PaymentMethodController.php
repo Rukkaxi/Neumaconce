@@ -38,7 +38,7 @@ class PaymentMethodController extends Controller
             'name' => $request->name,
             'guard_name' => 'web',
             'description' => $request->description,
-            'photo' => $photoPath,
+            'photo' => $request->$photoPath,
         ]);
 
         return redirect()->route('payment-methods.index')->with('success', 'Método de pago creado correctamente');
