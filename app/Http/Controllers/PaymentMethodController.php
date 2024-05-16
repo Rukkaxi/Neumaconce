@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Storage;
 
+
 class PaymentMethodController extends Controller
 {
     public function index()
@@ -37,7 +38,7 @@ class PaymentMethodController extends Controller
             'name' => $request->name,
             'guard_name' => 'web',
             'description' => $request->description,
-            'photo' => $photoPath,
+            'photo' => $request->$photoPath,
         ]);
 
         return redirect()->route('payment-methods.index')->with('success', 'Método de pago creado correctamente');

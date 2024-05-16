@@ -33,16 +33,6 @@ class CreatePermissionTables extends Migration
 
             $table->unique(['name', 'guard_name']);
         });
-
-        Schema::create($tableNames['payment_methods'], function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->text('description');  // For MySQL 8.0 use text('description', 125);
-            $table->string('photo')->nullable(); // Column for optional photo
-            $table->timestamps();
-            $table->unique(['name', 'guard_name']);
-        });
         
 
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
@@ -148,6 +138,5 @@ class CreatePermissionTables extends Migration
         Schema::drop($tableNames['model_has_permissions']);
         Schema::drop($tableNames['roles']);
         Schema::drop($tableNames['permissions']);
-        Schema::drop($tableNames['payment_methods']);
     }
 }
