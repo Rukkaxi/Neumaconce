@@ -30,7 +30,9 @@
 
   <!-- Scripts -->
   <script>
-    window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
+    window.Laravel = {
+      !!json_encode(['csrfToken' => csrf_token()]) !!
+    };
   </script>
 </head>
 
@@ -323,10 +325,10 @@
                 <span class="nav-main-link-badge badge rounded-pill bg-primary">5</span>
               </a>
             </li>
-            <li class="nav-main-heading">Various</li>
+            <li class="nav-main-heading">Gestión de Contenidos</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                <i class="nav-main-link-icon fa fa-lightbulb"></i>
+                <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
                 <span class="nav-main-link-name">Administrar</span>
               </a>
               <ul class="nav-main-submenu">
@@ -346,27 +348,84 @@
                   </a>
                 </li>
                 <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('communes')}}">
+                    <i class="nav-main-link-icon fa-solid fa-map-location-dot"></i>
+                    <span class="nav-main-link-name">Comunas</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('regions')}}">
+                    <i class="nav-main-link-icon fa-solid fa-earth-americas"></i>
+                    <span class="nav-main-link-name">Regiones</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('products')}}">
+                    <i class="nav-main-link-icon fa-solid fa-box-open"></i>
+                    <span class="nav-main-link-name">Productos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('categories')}}">
+                    <i class="nav-main-link-icon fa-solid fa-list"></i>
+                    <span class="nav-main-link-name">Categorías</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('tags')}}">
+                    <i class="nav-main-link-icon fa-solid fa-tag"></i>
+                    <span class="nav-main-link-name">Etiquetas</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('vehicles')}}">
+                    <i class="nav-main-link-icon fa-solid fa-car"></i>
+                    <span class="nav-main-link-name">Vehiculos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('brands')}}">
+                    <i class="nav-main-link-icon fa-regular fa-copyright"></i>
+                    <span class="nav-main-link-name">Marcas</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('users')}}">
+                    <i class="nav-main-link-icon fa-solid fa-users"></i>
                     <span class="nav-main-link-name">Dar roles a usuarios</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('roles')}}">
+                    <i class="nav-main-link-icon fa-solid fa-list-check"></i>
                     <span class="nav-main-link-name">Roles</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('permissions')}}">
+                    <i class="nav-main-link-icon fa-solid fa-key"></i>
                     <span class="nav-main-link-name">Permisos</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-main-heading">More</li>
+            <li class="nav-main-heading">Módulo de Ventas</li>
             <li class="nav-main-item">
-              <a class="nav-main-link" href="/">
-                <i class="nav-main-link-icon fa fa-globe"></i>
-                <span class="nav-main-link-name">Landing</span>
+              <a class="nav-main-link" href="#">
+                <i class="nav-main-link-icon fa fa-shopping-cart"></i>
+                <span class="nav-main-link-name">Pedidos</span>
+              </a>
+            </li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('payment-methods')}}">
+                <i class="nav-main-link-icon fa fa-credit-card"></i>
+                <span class="nav-main-link-name">Métodos de Pago</span>
+              </a>
+            </li>
+            <li class="nav-main-item">
+              <a class="nav-main-link" href="#">
+                <i class="nav-main-link-icon fa fa-cubes"></i>
+                <span class="nav-main-link-name">Inventario</span>
               </a>
             </li>
           </ul>
