@@ -13,7 +13,8 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -27,9 +28,6 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <!-- Other header content -->
-    @yield('scripts')
-
 </head>
 
 <body>
@@ -73,7 +71,7 @@
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
                         <a href='/' class="nav-item nav-link">Inicio</a>
-
+                        
                         <a href="{{ route('shop.index') }}" class="nav-item nav-link">Tienda</a>
                         <a href="service" class="nav-item nav-link">Servicios</a>
 
@@ -91,41 +89,185 @@
 
                         {{-- Dropdown de admin --}}
                         @auth
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola, {{Auth::user()->name }}</a>
-                            <div class="dropdown-menu rounded-0 m-0">
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola, {{Auth::user()->name }}</a>
+                                <div class="dropdown-menu rounded-0 m-0">
 
-                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
 
-                                <a class="dropdown-item" href="{{ route('wishlist') }}">Mi lista de deseados</a>
+                                    <a class="dropdown-item" href="{{ route('wishlist') }}">Mi lista de deseados</a>
 
-                                <a class="dropdown-item" href="{{ url('profiles') }}">Perfil</a>
+                                    <a class="dropdown-item" href="{{ url('profiles') }}">Perfil</a>
 
-
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                    {{ __('Cerrar Sesión') }}
-                                </a>
+                                        {{ __('Cerrar Sesión') }}
+                                    </a>
 
+                                    
 
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
+                            @endif
+                        @endauth
+                       <!-- Carrito -->
+                        <!-- Carrito -->
+                        <div class="nav-item dropdown">
+                            <a href="#" id="cart-toggle-btn" class="nav-link dropdown-toggle">
+                                <i class="fas fa-shopping-cart"></i>
+                                @if(Session::has('cart'))
+                                    <span class="badge badge-danger cart-count">{{ count(Session::get('cart')) }}</span>
+                                @endif
+                            </a>
+                            <div class="dropdown-menu rounded-0 m-0" id="cart-toggle-menu" aria-labelledby="cart-toggle-btn" style="width: 300px; right: 0; left: auto;">
+                                <div class="px-3 py-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">Carrito</span>
+                                        <span class="fw-bold">
+                                            @if(Session::has('cart'))
+                                                {{ count(Session::get('cart')) }} Producto(s)
+                                            @else
+                                                0 Productos
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <hr class="dropdown-divider">
+                                    @if(Session::has('cart') && count(Session::get('cart')) > 0)
+                                        @php $totalPrice = 0; @endphp
+                                        @foreach(Session::get('cart') as $id => $details)
+                                            @php $subtotal = $details['price'] * $details['quantity']; @endphp
+                                            @php $totalPrice += $subtotal; @endphp
+                                            <div class="d-flex flex-column mb-2 cart-item" data-product-id="{{ $id }}">
+                                                <div class="d-flex justify-content-between">
+                                                    <span>{{ $details['name'] }}</span>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-product-id="{{ $id }}">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="quantity-controls d-flex align-items-center mt-2">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary decrease-btn" data-product-id="{{ $id }}">-</button>
+                                                    <input type="number" value="{{ $details['quantity'] }}" min="1" id="quantity-{{ $id }}" class="form-control form-control-sm text-center mx-2" style="width: 40px;">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary increase-btn" data-product-id="{{ $id }}">+</button>
+                                                    <span class="fw-bold product-price">${{ number_format($subtotal, 2) }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <hr class="dropdown-divider">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold">Precio Total</span>
+                                            <span class="fw-bold total-price">${{ number_format($totalPrice, 2) }}</span>
+                                        </div>
+                                        <hr class="dropdown-divider">
+                                        <div class="text-center mb-3">
+                                            <a href="{{ route('cart.index') }}" class="btn btn-secondary me-3">Ir al Carrito</a>
+                                            <a href="{{ route('checkout') }}" class="btn btn-primary">Comprar</a>
+                                        </div>
+                                    @else
+                                        <div class="text-center mb-3">
+                                            No hay productos en el carrito
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                        @else
-                        <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
 
-                        @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
-                        @endif
-                        @endauth
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const cartToggleLink = document.getElementById('cart-toggle-btn');
+                                const decreaseButtons = document.querySelectorAll('.decrease-btn');
+                                const increaseButtons = document.querySelectorAll('.increase-btn');
+                                const deleteButtons = document.querySelectorAll('.delete-btn');
+                                const totalPriceElement = document.querySelector('.total-price');
+                                const cartCountElement = document.querySelector('.cart-count');
+                                const cartMenu = document.getElementById('cart-toggle-menu');
 
-                        <!-- Cart Icon -->
-                        <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#cartModal">
-                            <i class="fa fa-shopping-cart"></i>
-                        </a>
+                                cartToggleLink.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    cartMenu.classList.toggle('show');
+                                });
+
+                                decreaseButtons.forEach(button => {
+                                    button.addEventListener('click', () => updateQuantity(button.getAttribute('data-product-id'), 'decrease'));
+                                });
+
+                                increaseButtons.forEach(button => {
+                                    button.addEventListener('click', () => updateQuantity(button.getAttribute('data-product-id'), 'increase'));
+                                });
+
+                                deleteButtons.forEach(button => {
+                                    button.addEventListener('click', () => confirmDelete(button.getAttribute('product-id')));
+                                });
+
+                                function updateQuantity(productId, action) {
+                                    const quantityElement = document.getElementById('quantity-' + productId);
+                                    let quantity = parseInt(quantityElement.value);
+
+                                    if (action === 'increase') {
+                                        quantity++;
+                                    } else if (action === 'decrease' && quantity > 1) {
+                                        quantity--;
+                                    }
+
+                                    quantityElement.value = quantity;
+
+                                    // Obtenemos el precio del producto desde el elemento HTML
+                                    const price = parseFloat(document.querySelector('.cart-item[product-id="' + productId + '"] .product-price').textContent.replace('$', '').trim());
+
+                                    // Calculamos el subtotal utilizando la nueva cantidad
+                                    const subtotal = quantity * price;
+
+                                    // Actualizamos el precio del producto en el HTML con el nuevo subtotal
+                                    document.querySelector('.cart-item[product-id="' + productId + '"] .product-price').textContent = '$' + subtotal.toFixed(2);
+
+                                    // Llamamos a la función para actualizar el precio total del carrito
+                                    updateTotalPrice();
+                                }
+
+                                function updateTotalPrice() {
+                                    let totalPrice = 0;
+                                    document.querySelectorAll('.cart-item').forEach(item => {
+                                        const price = parseFloat(item.querySelector('.product-price').textContent.replace('$', '').trim());
+                                        const quantity = parseInt(item.querySelector('.quantity-controls input').value);
+                                        totalPrice += price * quantity;
+                                    });
+                                    totalPriceElement.textContent = '$' + totalPrice.toFixed(2);
+                                }
+
+
+
+                                function updateCartCount() {
+                                    const itemCount = document.querySelectorAll('.cart-item').length;
+                                    cartCountElement.textContent = itemCount;
+                                }
+
+                                function confirmDelete(productId) {
+                                    if (confirm("¿Está seguro que desea eliminar este producto?")) {
+                                        const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
+                                        cartItem.remove();
+                                        updateTotalPrice();
+                                        updateCartCount();
+                                    }
+                                }
+                            });
+                        </script>
+
+
+
+
+
+
+
+
                     </div>
                 </div>
             </nav>
@@ -133,22 +275,14 @@
     </div>
     <!-- Navbar End -->
 
-    @include('layouts.cart')
-
     <main class="py-4">
         @yield('content')
     </main>
 
 
-
     <!-- JavaScript Libraries -->
-
-    <!-- Scripts del cart (versiones mas recientes) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
@@ -156,164 +290,7 @@
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Cart -->
-
-    <!-- test -->
-
-    <script>
-        $(document).ready(function() {
-            console.log("jQuery is working!");
-        });
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-            // Test if jQuery is working
-            console.log("jQuery is loaded and working!");
-
-            // Test AJAX request
-            $('#test-button').click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "/test-ajax",
-                    method: "GET",
-                    success: function(response) {
-                        console.log("AJAX request successful!");
-                        console.log(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("AJAX request failed!");
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-
-            // Add to cart functionality
-            $(document).on('click', '.add-to-cart', function(e) {
-                e.preventDefault();
-
-                var productId = $(this).data('product-id'); // Assuming productId is stored in a data attribute
-                var id = $(this).data('id');
-                var quantity = 1; // or get from input field
-
-                $.ajax({
-                    url: "{{ route('cart.add') }}",
-                    method: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: id,
-                        quantity: quantity
-                    },
-                    success: function(response) {
-                        updateCartModal(response.cart);
-                        $('#cartModal').modal('show');
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-
-            // Remove from cart functionality
-            $(document).on('click', '.remove-from-cart', function(e) {
-                e.preventDefault();
-
-                var id = $(this).data('id');
-
-                $.ajax({
-                    url: '/cart/remove/' + id, // Changed to use 'id' variable
-                    type: 'POST', // Ensure that the method is set to POST
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        updateCartModal(response.cart);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-
-            // Update cart modal
-            function updateCartModal(cart) {
-                $('#cart-items').empty();
-                var totalPrice = 0;
-                $.each(cart, function(i, item) {
-                    var itemPrice = parseFloat(item.price) * parseFloat(item.quantity);
-                    var row = '<tr>' +
-                        '<td>' +
-                        (item.attributes && item.attributes.image ?
-                            '<img src="' + item.attributes.image + '" alt="' + item.name + '" style="width: 100px; height: 100px;">' :
-                            '<span>No Image</span>') +
-                        '</td>' +
-                        '<td>' + item.name + '</td>' +
-                        '<td>$' + item.price + '</td>' +
-                        '<td>' +
-                        '<button class="btn btn-secondary btn-sm decrease-quantity" data-id="' + item.id + '">-</button>' +
-                        '<span>' + item.quantity + '</span>' +
-                        '<button class="btn btn-secondary btn-sm increase-quantity" data-id="' + item.id + '">+</button>' +
-                        '</td>' +
-                        '<td>' +
-                        '<button class="btn btn-danger btn-sm remove-from-cart" data-id="' + item.id + '">Quitar</button>' +
-                        '</td>' +
-                        '</tr>';
-                    $('#cart-items').append(row);
-                    totalPrice += itemPrice;
-                });
-                $('#cart-total').text('$' + totalPrice.toFixed(2)); // Update total price dynamically
-            }
-
-
-            // Increase quantity button click handler
-            $(document).on('click', '.increase-quantity', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                updateQuantity(id, 'increase');
-            });
-
-            // Decrease quantity button click handler
-            $(document).on('click', '.decrease-quantity', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                updateQuantity(id, 'decrease');
-            });
-
-            // Function to update quantity
-            function updateQuantity(id, action) {
-                var quantity = parseInt($('#cart-items').find('[data-id="' + id + '"]').siblings('span').text());
-                if (action === 'increase') {
-                    quantity++;
-                } else if (action === 'decrease' && quantity > 1) {
-                    quantity--;
-                }
-                $.ajax({
-                    url: '/cart/update/' + id,
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        quantity: quantity
-                    },
-                    success: function(response) {
-                        updateCartModal(response.cart);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            }
-
-        });
-    </script>
-
-
-
-
-
-
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
-
 </html>

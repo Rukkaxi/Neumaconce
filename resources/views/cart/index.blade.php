@@ -1,139 +1,54 @@
-<!-- resources/views/cart.blade.php -->
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h2>Carrito de Compras</h2>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody id="cart-items">
-                @foreach($cartItems as $item)
-                <tr>
-                    <td>
-                        @if(isset($item->attributes['image']))
-                        <img src="{{ asset($item->attributes['image']) }}" alt="{{ $item->name }}" style="width: 100px; height: 100px;">
-                        @else
-                        <span>No Image</span>
-                        @endif
-                    </td>
-                    <td>{{ $item->name }}</td>
-                    <td>${{ $item->price }}</td>
-                    <td>
-                        <button class="btn btn-secondary btn-sm decrease-quantity" data-id="{{ $item->id }}">-</button>
-                        <span>{{ $item->quantity }}</span>
-                        <button class="btn btn-secondary btn-sm increase-quantity" data-id="{{ $item->id }}">+</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $item->id }}">Quitar</button>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-3">
-        <strong>Total: <span id="cart-total">$ {{ \Cart::getTotal() }}</span></strong>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    <div class="row">
+        <div class="col-md-8">
+            @if(!empty($cart))
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($cart as $id => $details)
+                            <tr>
+                                <td>{{ $details['name'] }}</td>
+                                <td>{{ $details['price'] }}</td>
+                                <td>{{ $details['quantity'] }}</td>
+                                <td>{{ $details['price'] * $details['quantity'] }}</td>
+                                <td>
+                                    <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>No hay productos en el carrito</p>
+            @endif
+        </div>
+        <div class="col-md-4">
+            <h4>Total: ${{ $total }}</h4>
+            <a href="{{ route('checkout') }}" class="btn btn-primary">Comprar</a>
+            <form action="{{ route('cart.clear') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-secondary">Vaciar Carrito</button>
+            </form>
+        </div>
     </div>
 </div>
-@endsection
-<!-- 
-@section('scripts')
-<script>
-    $(document).ready(function() {
-        // Update cart modal functionality
-        function updateCartView(cart) {
-            $('#cart-items').empty();
-            var totalPrice = 0;
-            $.each(cart, function(i, item) {
-                var itemPrice = parseFloat(item.price) * parseFloat(item.quantity);
-                var row = '<tr>' +
-                    '<td>' +
-                    (item.attributes && item.attributes.image ?
-                        '<img src="' + item.attributes.image + '" alt="' + item.name + '" style="width: 100px; height: 100px;">' :
-                        '<span>No Image</span>') +
-                    '</td>' +
-                    '<td>' + item.name + '</td>' +
-                    '<td>$' + item.price + '</td>' +
-                    '<td>' +
-                    '<button class="btn btn-secondary btn-sm decrease-quantity" data-id="' + item.id + '">-</button>' +
-                    '<span>' + item.quantity + '</span>' +
-                    '<button class="btn btn-secondary btn-sm increase-quantity" data-id="' + item.id + '">+</button>' +
-                    '</td>' +
-                    '<td>' +
-                    '<button class="btn btn-danger btn-sm remove-from-cart" data-id="' + item.id + '">Quitar</button>' +
-                    '</td>' +
-                    '</tr>';
-                $('#cart-items').append(row);
-                totalPrice += itemPrice;
-            });
-            $('#cart-total').text('$' + totalPrice.toFixed(2));
-        }
-
-        // Handle increase quantity button click
-        $(document).on('click', '.increase-quantity', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            updateQuantity(id, 'increase');
-        });
-
-        // Handle decrease quantity button click
-        $(document).on('click', '.decrease-quantity', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            updateQuantity(id, 'decrease');
-        });
-
-        // Function to update quantity
-        function updateQuantity(id, action) {
-            var quantity = parseInt($('[data-id="' + id + '"]').siblings('span').text());
-            if (action === 'increase') {
-                quantity++;
-            } else if (action === 'decrease' && quantity > 1) {
-                quantity--;
-            }
-            $.ajax({
-                url: '/cart/update/' + id,
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    quantity: quantity
-                },
-                success: function(response) {
-                    updateCartView(response.cart);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-
-        // Handle remove from cart button click
-        $(document).on('click', '.remove-from-cart', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/cart/remove/' + id,
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    updateCartView(response.cart);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-    });
-</script> -->
 @endsection

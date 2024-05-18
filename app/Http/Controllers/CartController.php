@@ -4,66 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Darryldecode\Cart\Cart as Cart;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-
-    /* public function show()
+    public function index()
     {
-        $cartItems = \Cart::getContent();
-        return view('cart.index', compact('cartItems'));
-    } */
+        $cart = Session::get('cart', []);
+        $total = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['price'] * $item['quantity'];
+        }, 0);
 
-
-    public function add(Request $request)
-    {
-        $product = Product::find($request->id);
-
-        \Cart::add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => $request->quantity,
-            'attributes' => [
-                'image' => $product->image1, // Include image attribute here
-                // You can include other attributes as needed
-            ]
-        ]);
-
-        return response()->json(['success' => 'Product added to cart!', 'cart' => \Cart::getContent()]);
+        return view('cart.index', compact('cart', 'total'));
     }
 
-    public function update(Request $request, $id)
+    public function add(Product $product)
     {
-        \Cart::update($id, [
-            'quantity' => [
-                'relative' => false,
-                'value' => $request->quantity
-            ],
-        ]);
+        $cart = Session::get('cart', []);
+        
+        if (isset($cart[$product->id])) {
+            $cart[$product->id]['quantity']++;
+        } else {
+            $cart[$product->id] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+            ];
+        }
 
-        return response()->json(['success' => 'Cart updated successfully!', 'cart' => \Cart::getContent()]);
+        Session::put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Producto agregado al carrito');
     }
 
-    public function remove($id)
+    public function remove(Product $product)
     {
-        \Cart::remove($id);
+        $cart = Session::get('cart', []);
 
-        return response()->json(['success' => 'Product removed from cart!', 'cart' => \Cart::getContent()]);
+        if (isset($cart[$product->id])) {
+            unset($cart[$product->id]);
+            Session::put('cart', $cart);
+        }
+
+        return redirect()->back()->with('success', 'Producto eliminado del carrito');
     }
 
     public function clear()
     {
-        \Cart::clear();
+        Session::forget('cart');
 
-        return response()->json(['success' => 'Cart cleared successfully!', 'cart' => \Cart::getContent()]);
-    }
-
-    public function show()
-    {
-        $cartItems = \Cart::getContent();
-
-        return view('cart', compact('cartItems'));
+        return redirect()->back()->with('success', 'Carrito vaciado');
     }
 }
