@@ -74,7 +74,6 @@ class CartController extends Controller
         Session::put('cart', $cart);
 
         $total = $this->calculateTotal($cart);
-
         $subtotal = isset($cart[$productId]) ? $cart[$productId]['price'] * $quantity : 0;
 
         return response()->json([

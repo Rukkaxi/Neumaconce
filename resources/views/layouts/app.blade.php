@@ -208,6 +208,7 @@
                                     button.addEventListener('click', () => confirmDelete(button.getAttribute('data-product-id')));
                                 });
 
+                                loadCartItems(); // Cargar el estado del carrito desde sessionStorage al cargar la página
                                 updateTotalPrice();
 
                                 function updateQuantity(productId, action) {
@@ -272,6 +273,9 @@
                                             // Actualizar el precio total y el contador de elementos del carrito basados en la respuesta del servidor
                                             totalPriceElement.textContent = formatPrice(data.total);
                                             cartItemCountElement.textContent = `${data.itemCount} Producto(s)`;
+
+                                            // Guardar el estado actualizado del carrito en sessionStorage
+                                            removeFromCartSessionStorage(productId);
                                         })
                                         .catch(error => {
                                             console.error('Hubo un error con la operación de red:', error);
@@ -282,11 +286,17 @@
                                 function updateCartSessionStorage(productId, quantity) {
                                     const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
                                     const updatedCart = cart.map(item => {
-                                        if (item.id === productId) {
+                                        if (item.id == productId) {
                                             item.quantity = quantity;
                                         }
                                         return item;
                                     });
+                                    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+                                }
+
+                                function removeFromCartSessionStorage(productId) {
+                                    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+                                    const updatedCart = cart.filter(item => item.id != productId);
                                     sessionStorage.setItem('cart', JSON.stringify(updatedCart));
                                 }
 
@@ -306,10 +316,10 @@
                                     return '$' + price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                                 }
                             });
-
                         </script>
 
 
+                        
 
                     </div>
                 </div>

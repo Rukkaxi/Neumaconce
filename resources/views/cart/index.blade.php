@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                @if(!empty($cart))
+                @if(Session::has('cart') && count(Session::get('cart')) > 0)
                     <table class="table">
                         <thead>
                             <tr>
@@ -24,7 +24,7 @@
                             @php
                                 $totalCart = 0; // Variable para almacenar el total del carrito
                             @endphp
-                            @foreach($cart as $id => $details)
+                            @foreach(Session::get('cart') as $id => $details)
                                 @php
                                     $productTotal = $details['price'] * $details['quantity']; // Calcular el total del producto
                                     $totalCart += $productTotal; // Actualizar el total del carrito
@@ -35,13 +35,13 @@
                                     <td>
                                         <div class="quantity-controls d-flex align-items-center">
                                             <button type="button" class="btn btn-outline-secondary btn-sm decrease-btn" data-product-id="{{ $id }}">-</button>
-                                            <span id="quantity-{{ $id }}" class="mx-2">{{ $details['quantity'] }}</span>
+                                            <input type="text" value="{{ $details['quantity'] }}" id="quantity-{{ $id }}" class="form-control form-control-sm text-center mx-2 quantity-input" style="width: 40px;">
                                             <button type="button" class="btn btn-outline-secondary btn-sm increase-btn" data-product-id="{{ $id }}">+</button>
                                         </div>
                                     </td>
                                     <td class="product-total">$<span class="product-total-span">{{ number_format($productTotal, 0, ',', '.') }}</span></td>
                                     <td>
-                                        <form id="delete-form-{{ $id }}" action="{{ route('cart.remove', $id) }}" method="POST" class="delete-form">
+                                        <form id="delete-form-{{ $id }}" action="{{ route('cart.remove', $id) }}" method="POST" class="delete-form" data-product-id="{{ $id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger delete-btn" data-product-id="{{ $id }}">Eliminar</button>
@@ -72,10 +72,14 @@
         </div>
     </div>
 </div>
+@endsection
+
+@push('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const decreaseButtons = document.querySelectorAll('.decrease-btn');
         const increaseButtons = document.querySelectorAll('.increase-btn');
+        const deleteForms = document.querySelectorAll('.delete-form');
         const cartTotalElement = document.getElementById('cart-total');
 
         decreaseButtons.forEach(button => {
@@ -86,13 +90,12 @@
             button.addEventListener('click', () => updateQuantity(button.getAttribute('data-product-id'), 'increase'));
         });
 
-        const deleteForms = document.querySelectorAll('.delete-form');
         deleteForms.forEach(form => {
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const productId = form.getAttribute('data-product-id');
                 fetch(form.action, {
-                    method: form.method,
+                    method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -111,10 +114,7 @@
 
         function updateQuantity(productId, action) {
             const quantityElement = document.getElementById(`quantity-${productId}`);
-            let quantity = parseInt(quantityElement.textContent);
-            const rowElement = document.querySelector(`tr[data-product-id="${productId}"]`);
-            const productTotalElement = rowElement.querySelector('.product-total-span');
-            const price = parseFloat(rowElement.querySelector('td:nth-child(2)').textContent.replace(/[^\d.-]/g, ''));
+            let quantity = parseInt(quantityElement.value);
 
             if (action === 'increase') {
                 quantity++;
@@ -122,9 +122,7 @@
                 quantity--;
             }
 
-            quantityElement.textContent = quantity;
-            const productTotal = quantity * price;
-            productTotalElement.textContent = '$' + productTotal.toLocaleString('es-CL');
+            quantityElement.value = quantity;
 
             fetch('/cart/update-quantity', {
                 method: 'POST',
@@ -146,9 +144,8 @@
         }
 
         function updateCartTotal(total) {
-            cartTotalElement.textContent = '$' + total.toLocaleString('es-CL');
+            cartTotalElement.textContent = total.toLocaleString('es-CL');
         }
     });
 </script>
-@endsection
-
+@endpush
