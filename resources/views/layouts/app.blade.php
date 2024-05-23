@@ -128,7 +128,7 @@
                                     <span class="badge badge-danger cart-count">{{ count(Session::get('cart')) }}</span>
                                 @endif
                             </a>
-                            <div class="dropdown-menu rounded-0 m-0" id="cart-toggle-menu" aria-labelledby="cart-toggle-btn" style="width: 300px; right: 0; left: auto;">
+                            <div class="dropdown-menu rounded-0 m-0" id="cart-toggle-menu" aria-labelledby="cart-toggle-btn" style="width: 320px; right: 0; left: auto;">
                                 <div class="px-3 py-2">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="fw-bold" style="letter-spacing: 1px;">Carrito</span>
@@ -146,7 +146,7 @@
                                         @foreach(Session::get('cart') as $id => $details)
                                             @php $subtotal = $details['price'] * $details['quantity']; @endphp
                                             @php $totalPrice += $subtotal; @endphp
-                                            <div class="d-flex flex-column mb-2 cart-item" data-product-id="{{ $id }}" style="font-size: 12px;">
+                                            <div class="d-flex flex-column mb-3 cart-item" data-product-id="{{ $id }}" style="font-size: 12px;">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span>{{ $details['name'] }}</span>
                                                     <button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-product-id="{{ $id }}" style="font-size: 10px;">
@@ -179,6 +179,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {
@@ -242,6 +243,18 @@
 
                                 function confirmDelete(productId) {
                                     if (confirm("¿Está seguro que desea eliminar este producto?")) {
+                                        // Eliminar el elemento del carrito del DOM
+                                        const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
+                                        if (cartItem) {
+                                            cartItem.remove(); // Eliminar el elemento del carrito del DOM
+                                        } else {
+                                            console.error("No se encontró el elemento del producto en el carrito.");
+                                        }
+
+                                        // Actualizar el precio total y el contador de elementos del carrito antes de la solicitud
+                                        updateTotalPrice();
+
+                                        // Realizar la solicitud Fetch para eliminar el producto del carrito en el backend
                                         fetch('/cart/remove/' + productId, {
                                             method: 'DELETE',
                                             headers: {
@@ -256,18 +269,7 @@
                                             return response.json();
                                         })
                                         .then(data => {
-                                            // Eliminar el producto del carrito en la sesión
-                                            const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
-                                            const updatedCart = cart.filter(item => item.id !== productId);
-                                            sessionStorage.setItem('cart', JSON.stringify(updatedCart));
-
-                                            // Eliminar el elemento del carrito del DOM
-                                            const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
-                                            if (cartItem) {
-                                                cartItem.remove(); // Eliminar el elemento del carrito del DOM
-                                            } else {
-                                                console.error("No se encontró el elemento del producto en el carrito.");
-                                            }
+                                            // Actualizar el precio total y el contador de elementos del carrito basados en la respuesta del servidor
                                             totalPriceElement.textContent = formatPrice(data.total);
                                             cartItemCountElement.textContent = `${data.itemCount} Producto(s)`;
                                         })
@@ -280,7 +282,7 @@
                                 function updateCartSessionStorage(productId, quantity) {
                                     const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
                                     const updatedCart = cart.map(item => {
-                                        if (item.id == productId) {
+                                        if (item.id === productId) {
                                             item.quantity = quantity;
                                         }
                                         return item;
@@ -304,16 +306,8 @@
                                     return '$' + price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                                 }
                             });
+
                         </script>
-
-
-
-                            
-
-
-                        
-
-
 
 
 

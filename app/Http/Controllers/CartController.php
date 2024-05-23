@@ -45,10 +45,12 @@ class CartController extends Controller
         }
 
         $total = $this->calculateTotal($cart);
+        $itemCount = count($cart);
 
         return response()->json([
             'success' => true,
-            'total' => $total
+            'total' => $total,
+            'itemCount' => $itemCount
         ]);
     }
 
