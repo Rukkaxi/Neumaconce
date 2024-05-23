@@ -120,10 +120,9 @@
                                 <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
                             @endif
                         @endauth
-                       <!-- Carrito -->
                         <!-- Carrito -->
                         <div class="nav-item dropdown">
-                            <a href="#" id="cart-toggle-btn" class="nav-link dropdown-toggle">
+                            <a href="#" id="cart-toggle-btn" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-shopping-cart"></i>
                                 @if(Session::has('cart'))
                                     <span class="badge badge-danger cart-count">{{ count(Session::get('cart')) }}</span>
@@ -132,8 +131,8 @@
                             <div class="dropdown-menu rounded-0 m-0" id="cart-toggle-menu" aria-labelledby="cart-toggle-btn" style="width: 300px; right: 0; left: auto;">
                                 <div class="px-3 py-2">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="fw-bold">Carrito</span>
-                                        <span class="fw-bold">
+                                        <span class="fw-bold" style="letter-spacing: 1px;">Carrito</span>
+                                        <span class="fw-bold cart-item-count" style="letter-spacing: 1px;">
                                             @if(Session::has('cart'))
                                                 {{ count(Session::get('cart')) }} Producto(s)
                                             @else
@@ -147,33 +146,33 @@
                                         @foreach(Session::get('cart') as $id => $details)
                                             @php $subtotal = $details['price'] * $details['quantity']; @endphp
                                             @php $totalPrice += $subtotal; @endphp
-                                            <div class="d-flex flex-column mb-2 cart-item" data-product-id="{{ $id }}">
-                                                <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-column mb-2 cart-item" data-product-id="{{ $id }}" style="font-size: 12px;">
+                                                <div class="d-flex justify-content-between align-items-center">
                                                     <span>{{ $details['name'] }}</span>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-product-id="{{ $id }}">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-product-id="{{ $id }}" style="font-size: 10px;">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </div>
                                                 <div class="quantity-controls d-flex align-items-center mt-2">
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary decrease-btn" data-product-id="{{ $id }}">-</button>
-                                                    <input type="number" value="{{ $details['quantity'] }}" min="1" id="quantity-{{ $id }}" class="form-control form-control-sm text-center mx-2" style="width: 40px;">
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary increase-btn" data-product-id="{{ $id }}">+</button>
-                                                    <span class="fw-bold product-price">${{ number_format($subtotal, 2) }}</span>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary decrease-btn" data-product-id="{{ $id }}" style="font-size: 10px;">-</button>
+                                                    <input type="text" value="{{ $details['quantity'] }}" id="quantity-{{ $id }}" class="form-control form-control-sm text-center mx-2 quantity-input" style="width: 40px; font-size: 12px;">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary increase-btn" data-product-id="{{ $id }}" style="font-size: 10px;">+</button>
+                                                    <span class="fw-bold product-price" data-unit-price="{{ $details['price'] }}" style="font-size: 12px;">{{ number_format($subtotal, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
                                         @endforeach
                                         <hr class="dropdown-divider">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <span class="fw-bold">Precio Total</span>
-                                            <span class="fw-bold total-price">${{ number_format($totalPrice, 2) }}</span>
+                                            <span class="fw-bold" style="font-size: 12px;">Precio Total</span>
+                                            <span class="fw-bold total-price" style="font-size: 12px;">{{ number_format($totalPrice, 0, ',', '.') }}</span>
                                         </div>
                                         <hr class="dropdown-divider">
                                         <div class="text-center mb-3">
-                                            <a href="{{ route('cart.index') }}" class="btn btn-secondary me-3">Ir al Carrito</a>
-                                            <a href="{{ route('checkout') }}" class="btn btn-primary">Comprar</a>
+                                            <a href="{{ route('cart.index') }}" class="btn btn-secondary me-3" style="font-size: 12px;">Ir al Carrito</a>
+                                            <a href="{{ route('checkout') }}" class="btn btn-primary" style="font-size: 12px;">Comprar</a>
                                         </div>
                                     @else
-                                        <div class="text-center mb-3">
+                                        <div class="text-center mb-3" style="font-size: 12px;">
                                             No hay productos en el carrito
                                         </div>
                                     @endif
@@ -184,12 +183,12 @@
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {
                                 const cartToggleLink = document.getElementById('cart-toggle-btn');
+                                const cartMenu = document.getElementById('cart-toggle-menu');
                                 const decreaseButtons = document.querySelectorAll('.decrease-btn');
                                 const increaseButtons = document.querySelectorAll('.increase-btn');
                                 const deleteButtons = document.querySelectorAll('.delete-btn');
                                 const totalPriceElement = document.querySelector('.total-price');
-                                const cartCountElement = document.querySelector('.cart-count');
-                                const cartMenu = document.getElementById('cart-toggle-menu');
+                                const cartItemCountElement = document.querySelector('.cart-item-count');
 
                                 cartToggleLink.addEventListener('click', function(event) {
                                     event.preventDefault();
@@ -205,8 +204,10 @@
                                 });
 
                                 deleteButtons.forEach(button => {
-                                    button.addEventListener('click', () => confirmDelete(button.getAttribute('product-id')));
+                                    button.addEventListener('click', () => confirmDelete(button.getAttribute('data-product-id')));
                                 });
+
+                                updateTotalPrice();
 
                                 function updateQuantity(productId, action) {
                                     const quantityElement = document.getElementById('quantity-' + productId);
@@ -220,49 +221,97 @@
 
                                     quantityElement.value = quantity;
 
-                                    // Obtenemos el precio del producto desde el elemento HTML
-                                    const price = parseFloat(document.querySelector('.cart-item[product-id="' + productId + '"] .product-price').textContent.replace('$', '').trim());
+                                    const productPrice = parseFloat(document.querySelector('.cart-item[data-product-id="' + productId + '"] .product-price').getAttribute('data-unit-price'));
+                                    const subtotal = quantity * productPrice;
+                                    document.querySelector('.cart-item[data-product-id="' + productId + '"] .product-price').textContent = formatPrice(subtotal);
 
-                                    // Calculamos el subtotal utilizando la nueva cantidad
-                                    const subtotal = quantity * price;
-
-                                    // Actualizamos el precio del producto en el HTML con el nuevo subtotal
-                                    document.querySelector('.cart-item[product-id="' + productId + '"] .product-price').textContent = '$' + subtotal.toFixed(2);
-
-                                    // Llamamos a la función para actualizar el precio total del carrito
                                     updateTotalPrice();
+                                    updateCartSessionStorage(productId, quantity); // Guardar la cantidad actualizada en sessionStorage
                                 }
 
                                 function updateTotalPrice() {
                                     let totalPrice = 0;
                                     document.querySelectorAll('.cart-item').forEach(item => {
-                                        const price = parseFloat(item.querySelector('.product-price').textContent.replace('$', '').trim());
-                                        const quantity = parseInt(item.querySelector('.quantity-controls input').value);
-                                        totalPrice += price * quantity;
+                                        const unitPrice = parseFloat(item.querySelector('.product-price').getAttribute('data-unit-price'));
+                                        const quantity = parseInt(item.querySelector('.quantity-input').value);
+                                        totalPrice += unitPrice * quantity;
                                     });
-                                    totalPriceElement.textContent = '$' + totalPrice.toFixed(2);
-                                }
-
-
-
-                                function updateCartCount() {
-                                    const itemCount = document.querySelectorAll('.cart-item').length;
-                                    cartCountElement.textContent = itemCount;
+                                    totalPriceElement.textContent = formatPrice(totalPrice);
+                                    cartItemCountElement.textContent = document.querySelectorAll('.cart-item').length + " Producto(s)";
                                 }
 
                                 function confirmDelete(productId) {
                                     if (confirm("¿Está seguro que desea eliminar este producto?")) {
-                                        const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
-                                        cartItem.remove();
-                                        updateTotalPrice();
-                                        updateCartCount();
+                                        fetch('/cart/remove/' + productId, {
+                                            method: 'DELETE',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error('Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            // Eliminar el producto del carrito en la sesión
+                                            const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+                                            const updatedCart = cart.filter(item => item.id !== productId);
+                                            sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+
+                                            // Eliminar el elemento del carrito del DOM
+                                            const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
+                                            if (cartItem) {
+                                                cartItem.remove(); // Eliminar el elemento del carrito del DOM
+                                            } else {
+                                                console.error("No se encontró el elemento del producto en el carrito.");
+                                            }
+                                            totalPriceElement.textContent = formatPrice(data.total);
+                                            cartItemCountElement.textContent = `${data.itemCount} Producto(s)`;
+                                        })
+                                        .catch(error => {
+                                            console.error('Hubo un error con la operación de red:', error);
+                                        });
                                     }
+                                }
+
+                                function updateCartSessionStorage(productId, quantity) {
+                                    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+                                    const updatedCart = cart.map(item => {
+                                        if (item.id == productId) {
+                                            item.quantity = quantity;
+                                        }
+                                        return item;
+                                    });
+                                    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+                                }
+
+                                function loadCartItems() {
+                                    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+                                    cart.forEach(item => {
+                                        const productId = item.id;
+                                        const quantity = item.quantity;
+                                        const quantityElement = document.getElementById('quantity-' + productId);
+                                        if (quantityElement) {
+                                            quantityElement.value = quantity;
+                                        }
+                                    });
+                                }
+
+                                function formatPrice(price) {
+                                    return '$' + price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                                 }
                             });
                         </script>
 
 
 
+                            
+
+
+                        
 
 
 

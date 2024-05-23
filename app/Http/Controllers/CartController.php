@@ -11,9 +11,7 @@ class CartController extends Controller
     public function index()
     {
         $cart = Session::get('cart', []);
-        $total = array_reduce($cart, function ($carry, $item) {
-            return $carry + $item['price'] * $item['quantity'];
-        }, 0);
+        $total = $this->calculateTotal($cart);
 
         return view('cart.index', compact('cart', 'total'));
     }
@@ -21,7 +19,7 @@ class CartController extends Controller
     public function add(Product $product)
     {
         $cart = Session::get('cart', []);
-        
+
         if (isset($cart[$product->id])) {
             $cart[$product->id]['quantity']++;
         } else {
@@ -37,22 +35,57 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Producto agregado al carrito');
     }
 
-    public function remove(Product $product)
+    public function remove($id)
     {
         $cart = Session::get('cart', []);
 
-        if (isset($cart[$product->id])) {
-            unset($cart[$product->id]);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
             Session::put('cart', $cart);
         }
 
-        return redirect()->back()->with('success', 'Producto eliminado del carrito');
+        $total = $this->calculateTotal($cart);
+
+        return response()->json([
+            'success' => true,
+            'total' => $total
+        ]);
     }
 
     public function clear()
     {
         Session::forget('cart');
 
-        return redirect()->back()->with('success', 'Carrito vaciado');
+        return redirect()->route('cart.index')->with('success', 'Carrito vaciado');
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $cart = Session::get('cart', []);
+        $productId = $request->input('productId');
+        $quantity = $request->input('quantity');
+
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] = $quantity;
+        }
+
+        Session::put('cart', $cart);
+
+        $total = $this->calculateTotal($cart);
+
+        $subtotal = isset($cart[$productId]) ? $cart[$productId]['price'] * $quantity : 0;
+
+        return response()->json([
+            'success' => true,
+            'subtotal' => $subtotal,
+            'total' => $total
+        ]);
+    }
+
+    private function calculateTotal($cart)
+    {
+        return array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['price'] * $item['quantity'];
+        }, 0);
     }
 }

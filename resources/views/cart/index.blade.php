@@ -7,48 +7,148 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="row">
-        <div class="col-md-8">
-            @if(!empty($cart))
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($cart as $id => $details)
+        <div class="col-md-12">
+            <div class="table-responsive">
+                @if(!empty($cart))
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>{{ $details['name'] }}</td>
-                                <td>{{ $details['price'] }}</td>
-                                <td>{{ $details['quantity'] }}</td>
-                                <td>{{ $details['price'] * $details['quantity'] }}</td>
-                                <td>
-                                    <form action="{{ route('cart.remove', $id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form>
-                                </td>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Acción</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <p>No hay productos en el carrito</p>
-            @endif
+                        </thead>
+                        <tbody>
+                            @php
+                                $totalCart = 0; // Variable para almacenar el total del carrito
+                            @endphp
+                            @foreach($cart as $id => $details)
+                                @php
+                                    $productTotal = $details['price'] * $details['quantity']; // Calcular el total del producto
+                                    $totalCart += $productTotal; // Actualizar el total del carrito
+                                @endphp
+                                <tr data-product-id="{{ $id }}">
+                                    <td>{{ $details['name'] }}</td>
+                                    <td>${{ number_format($details['price'], 0, ',', '.') }}</td>
+                                    <td>
+                                        <div class="quantity-controls d-flex align-items-center">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm decrease-btn" data-product-id="{{ $id }}">-</button>
+                                            <span id="quantity-{{ $id }}" class="mx-2">{{ $details['quantity'] }}</span>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm increase-btn" data-product-id="{{ $id }}">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="product-total">$<span class="product-total-span">{{ number_format($productTotal, 0, ',', '.') }}</span></td>
+                                    <td>
+                                        <form id="delete-form-{{ $id }}" action="{{ route('cart.remove', $id) }}" method="POST" class="delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger delete-btn" data-product-id="{{ $id }}">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No hay productos en el carrito</p>
+                @endif
+            </div>
         </div>
-        <div class="col-md-4">
-            <h4>Total: ${{ $total }}</h4>
-            <a href="{{ route('checkout') }}" class="btn btn-primary">Comprar</a>
-            <form action="{{ route('cart.clear') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-secondary">Vaciar Carrito</button>
-            </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Total del Carrito: $<span id="cart-total">{{ number_format($totalCart, 0, ',', '.') }}</span></h4>
+            <div class="mb-3 text-center">
+                <a href="{{ route('checkout') }}" class="btn btn-primary btn-lg">Comprar</a>
+            </div>
+            <div class="mb-3 text-center">
+                <form action="{{ route('cart.clear') }}" method="POST" onsubmit="return confirm('¿Está seguro que desea vaciar el carrito?');">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary btn-lg">Vaciar Carrito</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const decreaseButtons = document.querySelectorAll('.decrease-btn');
+        const increaseButtons = document.querySelectorAll('.increase-btn');
+        const cartTotalElement = document.getElementById('cart-total');
+
+        decreaseButtons.forEach(button => {
+            button.addEventListener('click', () => updateQuantity(button.getAttribute('data-product-id'), 'decrease'));
+        });
+
+        increaseButtons.forEach(button => {
+            button.addEventListener('click', () => updateQuantity(button.getAttribute('data-product-id'), 'increase'));
+        });
+
+        const deleteForms = document.querySelectorAll('.delete-form');
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const productId = form.getAttribute('data-product-id');
+                fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const rowElement = document.querySelector(`tr[data-product-id="${productId}"]`);
+                        rowElement.remove();
+                        updateCartTotal(data.total);
+                    }
+                });
+            });
+        });
+
+        function updateQuantity(productId, action) {
+            const quantityElement = document.getElementById(`quantity-${productId}`);
+            let quantity = parseInt(quantityElement.textContent);
+            const rowElement = document.querySelector(`tr[data-product-id="${productId}"]`);
+            const productTotalElement = rowElement.querySelector('.product-total-span');
+            const price = parseFloat(rowElement.querySelector('td:nth-child(2)').textContent.replace(/[^\d.-]/g, ''));
+
+            if (action === 'increase') {
+                quantity++;
+            } else if (action === 'decrease' && quantity > 1) {
+                quantity--;
+            }
+
+            quantityElement.textContent = quantity;
+            const productTotal = quantity * price;
+            productTotalElement.textContent = '$' + productTotal.toLocaleString('es-CL');
+
+            fetch('/cart/update-quantity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    productId: productId,
+                    quantity: quantity
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartTotal(data.total);
+                }
+            });
+        }
+
+        function updateCartTotal(total) {
+            cartTotalElement.textContent = '$' + total.toLocaleString('es-CL');
+        }
+    });
+</script>
 @endsection
+
