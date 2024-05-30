@@ -10,10 +10,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Vehículos
-                        <a href=" {{ url('vehicles/create') }} " class="btn btn-primary float-end">Añadir Vehiculos</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center ">
+                    <h4 class="mb-0">Vehículos</h4>
+                    <a href=" {{ url('vehicles/create') }} " class="btn btn-primary float-end">Añadir Vehiculos</a>
+
                 </div>
 
                 <div class="card-body">

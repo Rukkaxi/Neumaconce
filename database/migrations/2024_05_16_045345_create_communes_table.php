@@ -15,11 +15,11 @@ class CreateCommunesTable extends Migration
         Schema::create('communes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('regionId');
+            $table->unsignedBigInteger('region_id');
             $table->timestamps();
 
             // Define foreign key constraint
-            $table->foreign('regionId')->references('id')->on('regions')->onDelete('cascade');
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
         });
     }
 

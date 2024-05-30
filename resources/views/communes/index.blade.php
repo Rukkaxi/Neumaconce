@@ -10,10 +10,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Comunas
-                        <a href="{{ url('communes/create') }}" class="btn btn-primary float-end">Añadir Comuna</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center ">
+                    <h4 class="mb-0">Comunas</h4>
+                    <a href="{{ url('communes/create') }}" class="btn btn-primary float-end">Añadir Comuna</a>
+
                 </div>
 
                 <div class="card-body">

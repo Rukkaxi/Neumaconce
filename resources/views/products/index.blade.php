@@ -10,10 +10,9 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Productos
-                        <a href=" {{ url('products/create') }} " class="btn btn-primary float-end">Añadir Producto</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Productos</h4>
+                    <a href="{{ url('products/create') }}" class="btn btn-primary float-end">Añadir Producto</a>
                 </div>
 
                 <div class="card-body">
@@ -25,9 +24,11 @@
                                 <th>Nombre</th>
                                 <th>Precio</th>
                                 <th>Stock</th>
-                                <th>Imagen</th>
+                                <th>Descripción</th>
+                                <th>Disponibilidad</th>
+                                <th>Imágenes</th>
                                 <th>Categorías</th>
-                                <th>Tags</th> <!-- Add the Tags column header -->
+                                <th>Tags</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -38,9 +39,11 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->stock }}</td>
+                                <td>{{ $product->description }}</td>
+                                <td>{{ $product->available ? 'Sí' : 'No' }}</td>
                                 <td>
-                                    @if (!empty($product->image))
-                                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }} Image" width="100" height="100">
+                                    @if (!empty($product->image1))
+                                    <img src="{{ asset($product->image1) }}" alt="{{ $product->name }} Image 1" width="100" height="100">
                                     @else
                                     No Image Available
                                     @endif
@@ -50,7 +53,7 @@
                                     <span class="badge bg-primary">{{ $category->name }}</span>
                                     @endforeach
                                 </td>
-                                <td> <!-- Add the Tags column data -->
+                                <td>
                                     @foreach ($product->tags as $tag)
                                     <span class="badge bg-secondary">{{ $tag->name }}</span>
                                     @endforeach
@@ -65,7 +68,6 @@
                                 </td>
                             </tr>
                             @endforeach
-                            
                         </tbody>
                     </table>
 

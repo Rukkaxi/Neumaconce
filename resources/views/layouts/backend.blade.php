@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-  <title>Dashmix - Bootstrap 5 Admin Template &amp; UI Framework</title>
+  <title>NeumaConce - Administración</title>
 
   <meta name="description" content="Dashmix - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
   <meta name="author" content="pixelcave">
@@ -14,7 +14,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- Icons -->
+  <!-- Icons Cambiar aquí iconos de neumaconce -->
   <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
   <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
@@ -276,10 +276,10 @@
           <!-- Logo -->
           <a class="fw-semibold text-white tracking-wide" href="/">
             <span class="smini-visible">
-              D<span class="opacity-75">x</span>
+              N<span class="opacity-75">c</span>
             </span>
             <span class="smini-hidden">
-              Dash<span class="opacity-75">mix</span>
+              Neuma<span class="opacity-75">Conce</span>
             </span>
           </a>
           <!-- END Logo -->
@@ -325,99 +325,100 @@
                 <span class="nav-main-link-badge badge rounded-pill bg-primary">5</span>
               </a>
             </li>
-            <li class="nav-main-heading">Gestión de Contenidos</li>
+            <li class="nav-main-heading">Administración de Página</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                 <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
-                <span class="nav-main-link-name">Administrar</span>
+                <span class="nav-main-link-name">Gestionar Permisos</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                    <span class="nav-main-link-name">DataTables</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">
-                    <span class="nav-main-link-name">Slick Slider</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
-                    <span class="nav-main-link-name">Blank</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('communes')}}">
-                    <i class="nav-main-link-icon fa-solid fa-map-location-dot"></i>
-                    <span class="nav-main-link-name">Comunas</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('regions')}}">
-                    <i class="nav-main-link-icon fa-solid fa-earth-americas"></i>
-                    <span class="nav-main-link-name">Regiones</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('products')}}">
-                    <i class="nav-main-link-icon fa-solid fa-box-open"></i>
-                    <span class="nav-main-link-name">Productos</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('categories')}}">
-                    <i class="nav-main-link-icon fa-solid fa-list"></i>
-                    <span class="nav-main-link-name">Categorías</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('tags')}}">
-                    <i class="nav-main-link-icon fa-solid fa-tag"></i>
-                    <span class="nav-main-link-name">Etiquetas</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('vehicles')}}">
-                    <i class="nav-main-link-icon fa-solid fa-car"></i>
-                    <span class="nav-main-link-name">Vehiculos</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('brands')}}">
-                    <i class="nav-main-link-icon fa-regular fa-copyright"></i>
-                    <span class="nav-main-link-name">Marcas</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('users')}}">
+                  <a class="nav-main-link{{ request()->is('users') ? ' active' : '' }}" href="{{url('users')}}">
                     <i class="nav-main-link-icon fa-solid fa-users"></i>
                     <span class="nav-main-link-name">Dar roles a usuarios</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('roles')}}">
+                  <a class="nav-main-link{{ request()->is('roles') ? ' active' : '' }}" href="{{url('roles')}}">
                     <i class="nav-main-link-icon fa-solid fa-list-check"></i>
                     <span class="nav-main-link-name">Roles</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('permissions')}}">
+                  <a class="nav-main-link{{ request()->is('permissions') ? ' active' : '' }}" href="{{url('permissions')}}">
                     <i class="nav-main-link-icon fa-solid fa-key"></i>
                     <span class="nav-main-link-name">Permisos</span>
                   </a>
                 </li>
               </ul>
             </li>
+            <li class="nav-main-item{{ request()->is('products/*') || request()->is('categories') || request()->is('tags') || request()->is('vehicles') || request()->is('brands') ? ' open' : '' }}">
+              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
+                <span class="nav-main-link-name">Gestionar Productos</span>
+              </a>
+              <ul class="nav-main-submenu">
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('products') ? ' active' : '' }}" href="{{url('products')}}">
+                    <i class="nav-main-link-icon fa-solid fa-box-open"></i>
+                    <span class="nav-main-link-name">Productos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('categories') ? ' active' : '' }}" href="{{url('categories')}}">
+                    <i class="nav-main-link-icon fa-solid fa-list"></i>
+                    <span class="nav-main-link-name">Categorías</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('tags') ? ' active' : '' }}" href="{{url('tags')}}">
+                    <i class="nav-main-link-icon fa-solid fa-tag"></i>
+                    <span class="nav-main-link-name">Etiquetas</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('vehicles') ? ' active' : '' }}" href="{{url('vehicles')}}">
+                    <i class="nav-main-link-icon fa-solid fa-car"></i>
+                    <span class="nav-main-link-name">Vehiculos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('brands') ? ' active' : '' }}" href="{{url('brands')}}">
+                    <i class="nav-main-link-icon fa-regular fa-copyright"></i>
+                    <span class="nav-main-link-name">Marcas</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-main-item{{ request()->is('orders/*') || request()->is('regions') || request()->is('communes') ? ' open' : '' }}">
+              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
+                <span class="nav-main-link-name">Gestionar Pedidos</span>
+              </a>
+              <ul class="nav-main-submenu">
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('regions') ? ' active' : '' }}" href="{{url('regions')}}">
+                    <i class="nav-main-link-icon fa-solid fa-earth-americas"></i>
+                    <span class="nav-main-link-name">Regiones</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('communes') ? ' active' : '' }}" href="{{url('communes')}}">
+                    <i class="nav-main-link-icon fa-solid fa-map-location-dot"></i>
+                    <span class="nav-main-link-name">Comunas</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link" href="#">
+                    <i class="nav-main-link-icon fa fa-shopping-cart"></i>
+                    <span class="nav-main-link-name">Pedidos</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li class="nav-main-heading">Módulo de Ventas</li>
             <li class="nav-main-item">
-              <a class="nav-main-link" href="#">
-                <i class="nav-main-link-icon fa fa-shopping-cart"></i>
-                <span class="nav-main-link-name">Pedidos</span>
-              </a>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{url('payment-methods')}}">
+              <a class="nav-main-link{{ request()->is('payment-methods') ? ' active' : '' }}" href="{{url('payment-methods')}}">
                 <i class="nav-main-link-icon fa fa-credit-card"></i>
                 <span class="nav-main-link-name">Métodos de Pago</span>
               </a>
@@ -433,6 +434,8 @@
         <!-- END Side Navigation -->
       </div>
       <!-- END Sidebar Scrolling -->
+
+
     </nav>
     <!-- END Sidebar -->
 
@@ -472,8 +475,8 @@
                 User Options
               </div>
               <div class="p-2">
-                <a class="dropdown-item" href="javascript:void(0)">
-                  <i class="far fa-fw fa-user me-1"></i> Profile
+                <a class="dropdown-item" href="{{ url('profiles') }}">
+                  <i class="far fa-fw fa-user me-1"></i> Perfil
                 </a>
                 <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                   <span><i class="far fa-fw fa-envelope me-1"></i> Inbox</span>
@@ -492,9 +495,12 @@
                 <!-- END Side Overlay -->
 
                 <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0)">
-                  <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i> Sign Out
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i> Cerrar Sesión
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
               </div>
             </div>
           </div>

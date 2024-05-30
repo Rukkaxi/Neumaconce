@@ -27,10 +27,10 @@
     <!-- Topbar End --> --}}
 
 
-    {{-- @include('layouts.nav') --}}
+    
 
-    <!-- Navbar Start - Ahora está en /layouts--> 
-{{--     <div class="container-fluid position-relative nav-bar p-0">
+    <!-- Navbar Start - Ahora está en /layouts-->
+    {{-- <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
@@ -57,62 +57,32 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
-                                    </a>
+    onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">
+    {{ __('Cerrar Sesión') }}
+    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-                        @else
-                            <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+    </div>
+    </div>
+    @else
+    <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
-                            @endif
-                        @endauth
-                    </div>
-                </div>
-            </nav>
-        </div>
+    @if (Route::has('register'))
+    <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
+    @endif
+    @endauth
+    </div>
+    </div>
+    </nav>
+    </div>
     </div> --}}
     <!-- Navbar End -->
 
 
-  <!-- Search Start -->
-    <div class="container-fluid bg-white py-1 px-lg-5">
-        <div class="row mx-n2 mb-3 align-items-center">
-            <div class="col-12 px-2 py-2">
-                <p class="font-weight-bold mb-1">Selecciona tu vehículo</p>
-                <p class="mb-1" style="font-size: 14px;">Por favor introduzca los detalles de su auto para confirmar compatibilidad</p>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 px-2 align-items-center">
-                <select class="custom-select px-4" style="height: 50px;">
-                    <option selected>Año</option>
-                    <!-- Add options for years here -->
-                </select>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 px-2 align-items-center">
-                <select class="custom-select px-4" style="height: 50px;">
-                    <option selected>Marca</option>
-                    <!-- Add options for brands here -->
-                </select>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 px-2 align-items-center">
-                <select class="custom-select px-4" style="height: 50px;">
-                    <option selected>Modelo</option>
-                    <!-- Add options for models here -->
-                </select>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 px-2 d-flex align-items-center justify-content-center">
-                <button class="btn btn-primary btn-block" type="submit" style="height: 50px;">Buscar</button>
-            </div>
-        </div>
-    </div>
-    <!-- Search End -->
+    @include('layouts.search')
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0" style="margin-bottom: 90px;">
@@ -194,7 +164,7 @@
         </div>
     </div>
     <!-- About End -->
-    
+
 
     <!-- Services Start -->
     <div class="container-fluid py-5">
@@ -751,4 +721,3 @@
 
 
     @endsection
-

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\Wishlist;
 
 class ProductController extends Controller
 {
@@ -23,56 +25,50 @@ class ProductController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $tags = Tag::all();
-        return view('products.create', compact('brands','categories','tags'));
+        return view('products.create', compact('brands', 'categories', 'tags'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string',
-            'price' => 'required|numeric',
-            'brandId' => 'required|exists:brands,id', // Assuming the brand_id is posted in the request
+            'price' => 'nullable|numeric',
+            'brandId' => 'required|exists:brands,id',
             'stock' => 'integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string',
+            'available' => 'required|boolean',
+            'image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'required|array',
             'tags.*' => 'exists:tags,id',
         ]);
 
-        $path = '';
-        $filename = '';
-
-        if ($request->has('image')) {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-
-            $filename = time() . '.' . $extension;
-            $path = 'images/products';
-            $file->move(public_path($path), $filename);
+        $images = [];
+        for ($i = 1; $i <= 5; $i++) {
+            if ($request->hasFile('image' . $i)) {
+                $file = $request->file('image' . $i);
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '_' . $i . '.' . $extension;
+                $path = 'images/products';
+                $file->move(public_path($path), $filename);
+                $images['image' . $i] = $path . '/' . $filename;
+            } else {
+                $images['image' . $i] = null;
+            }
         }
 
-        // Create a new Product record
-        /* Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'brandId' => $request->brandId,
-            'stock' => $request->stock ?? 0,
-            'image' => $filename ? $path . '/' . $filename : null
-        ]); */
-
-        $product = Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'brandId' => $request->brandId,
-            'stock' => $request->stock ?? 0,
-            'image' => $filename ? $path . '/' . $filename : null
-        ]);
+        $product = Product::create(array_merge($request->only([
+            'name', 'price', 'brandId', 'stock', 'description', 'available'
+        ]), $images));
 
         $product->tags()->attach($request->tags);
         $product->categories()->attach($request->categories);
 
-        // Redirect to the index page with a success message
         return redirect('products')->with('status', 'Producto creado exitósamente');
     }
 
@@ -82,52 +78,53 @@ class ProductController extends Controller
         $brands = Brand::all();
         $tags = Tag::all();
         $product = Product::findOrFail($id);
-        return view('products.edit', compact('product','brands','categories','tags'));
+        return view('products.edit', compact('product', 'brands', 'categories', 'tags'));
     }
 
     public function update(Request $request, $id)
     {
-
-        
         $request->validate([
             'name' => 'required|string',
-            'price' => 'required|numeric',
-            'brandId' => 'required|exists:brands,id', // Assuming the brand_id is posted in the request
+            'price' => 'nullable|numeric',
+            'brandId' => 'required|exists:brands,id',
             'stock' => 'integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string',
+            'available' => 'required|boolean',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'required|array',
             'tags.*' => 'exists:tags,id',
         ]);
 
-        $path = '';
-
         $product = Product::findOrFail($id);
 
-        if ($request->has('image')) {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
+        $images = [];
+        for ($i = 1; $i <= 5; $i++) {
+            if ($request->hasFile('image' . $i)) {
+                $file = $request->file('image' . $i);
+                $extension = $file->getClientOriginalExtension();
 
-            if (File::exists($product->image)) {
-                File::delete($product->image);
+                if (File::exists($product->{'image' . $i})) {
+                    File::delete($product->{'image' . $i});
+                }
+
+                $filename = time() . '_' . $i . '.' . $extension;
+                $path = 'images/products';
+                $file->move(public_path($path), $filename);
+                $images['image' . $i] = $path . '/' . $filename;
+            } else {
+                $images['image' . $i] = $product->{'image' . $i};
             }
-
-            $filename = time() . '.' . $extension;
-            $path = 'images/products';
-            $file->move(public_path($path), $filename);
         }
 
-        $filename = isset($filename) ? $filename : basename($product->image);
-
-        // Update the Product record
-        $product->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'brandId' => $request->brandId,
-            'stock' => $request->stock ?? 0,
-            'image' => $path . '/' . $filename
-        ]);
+        $product->update(array_merge($request->only([
+            'name', 'price', 'brandId', 'stock', 'description', 'available'
+        ]), $images));
 
         $product->categories()->sync($request->categories);
         $product->tags()->sync($request->tags);
@@ -138,10 +135,35 @@ class ProductController extends Controller
     public function destroy($productId)
     {
         $product = Product::find($productId);
-        if ($product->image && File::exists($product->image)) {
-            File::delete($product->image);
+        for ($i = 1; $i <= 5; $i++) {
+            if ($product->{'image' . $i} && File::exists($product->{'image' . $i})) {
+                File::delete($product->{'image' . $i});
+            }
         }
         $product->delete();
         return redirect('products')->with('status', 'Producto eliminado exitósamente!');
+    }
+
+    public function show($id)
+    {
+        $product = Product::with('brand', 'categories', 'tags')->findOrFail($id);
+        return view('shop.show', compact('product'));
+    }
+
+    public function wishlist()
+    {
+        $userId = auth()->id();
+        $wishlist = Wishlist::where('user_id', $userId)->with('product')->get();
+        return view('wishlist', compact('wishlist'));
+    }
+
+    public function addToWishlist(Request $request, $productId)
+    {
+        $userId = auth()->id();
+        Wishlist::create([
+            'user_id' => $userId,
+            'product_id' => $productId
+        ]);
+        return redirect()->back()->with('status', 'Product added to wishlist successfully.');
     }
 }

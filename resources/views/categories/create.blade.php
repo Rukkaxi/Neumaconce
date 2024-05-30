@@ -7,10 +7,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h4>Crear Marca
-                        <a href=" {{url('categories')}} " class="btn btn-success float-end">Volver</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Crear Categoría</h4>
+                    <a href=" {{url('categories')}} " class="btn btn-primary float-end">Volver</a>
                 </div>
 
                 <div class="card-body">
@@ -25,7 +24,7 @@
                             <input type="file" id="photo" name="photo" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-success">Guardar</button>
+                            <button type="submit" class="btn btn-success float-end">Guardar</button>
                         </div>
                     </form>
                 </div>

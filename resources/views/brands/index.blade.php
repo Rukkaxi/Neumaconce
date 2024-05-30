@@ -10,10 +10,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Marcas
-                        <a href=" {{ url('brands/create') }} " class="btn btn-primary float-end">Añadir Marcas</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center ">
+                    <h4 class="mb-0">Marcas</h4>
+                    <a href=" {{ url('brands/create') }} " class="btn btn-primary float-end">Añadir Marcas</a>
+
                 </div>
 
                 <div class="card-body">
@@ -39,16 +39,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                <a href="{{ route('brands.edit', $brand->id) }}" class="btn btn-warning">Editar</a>
-                                <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </td>
+                                    <a href="{{ route('brands.edit', $brand->id) }}" class="btn btn-warning">Editar</a>
+                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
 

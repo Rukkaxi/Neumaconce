@@ -10,10 +10,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Categorías
-                        <a href="{{ url('categories/create') }}" class="btn btn-primary float-end">Añadir Categoría</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Categorías</h4>
+                    <a href="{{ url('categories/create') }}" class="btn btn-primary float-end">Añadir Categoría</a>
+
                 </div>
 
                 <div class="card-body">
