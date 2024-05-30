@@ -41,7 +41,7 @@ class CreatePermissionTables extends Migration
             $table->text('description');  // For MySQL 8.0 use text('description', 125);
             $table->string('photo')->nullable(); // Column for optional photo
             $table->timestamps();
-            #$table->unique(['name', 'guard_name']);
+            $table->unique(['name', 'guard_name']);
         });
         
 

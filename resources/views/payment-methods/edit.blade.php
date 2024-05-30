@@ -26,10 +26,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="photo">Foto</label>
-                            @if($paymentMethod->photo)
-                            <img src="{{ asset('storage/' . $paymentMethod->photo) }}" alt="Foto actual" class="img-fluid mb-2" style="max-width: 300px;">
-                            @endif
-                            <input type="file" name="photo" value="{{ $paymentMethod->photo }}" class="form-control" id="photo">
+                            <input type="file" name="photo" class="form-control" id="photo">
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-success">Actualizar</button>
