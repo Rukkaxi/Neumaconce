@@ -123,6 +123,73 @@
     </div>
     <!-- Carousel End -->
 
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Nuestros Productos</h1>
+            <div class="row justify-content-center">
+                @foreach($products as $product)
+                    <div class="col-lg-4 col-md-6 mb-4 d-flex">
+                        <div class="product-item d-flex flex-column justify-content-between">
+                            <!-- Cuadro de imagen del producto -->
+                            <div class="product-image mb-3">
+                                @if($product->image)
+                                    <img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid">
+                                @else
+                                    <div class="no-photo-placeholder">
+                                        No Foto
+                                    </div>
+                                @endif
+                            </div>
+                            
+                            <!-- Detalles del producto -->
+                            <div class="product-details">
+                                <!-- Nombre del producto -->
+                                <h4 class="text-uppercase">{{ $product->name }}</h4>
+                                
+                                <!-- Categorías -->
+                                <div class="mt-3">
+                                    <strong>Categorías:</strong>
+                                    @foreach($product->categories as $category)
+                                        <a href="{{ route('category.show', $category->id) }}" class="badge badge-primary">{{ $category->name }}</a>
+                                    @endforeach
+                                </div>
+                                
+                                <!-- Etiquetas -->
+                                <div class="mt-3">
+                                    <strong>Etiquetas:</strong>
+                                    @foreach($product->tags as $tag)
+                                        <a href="{{ route('tag.show', $tag->id) }}" class="badge badge-secondary">{{ $tag->name }}</a>
+                                    @endforeach
+                                </div>
+                                
+                                <!-- Precio y Stock -->
+                                <div class="mt-3">
+                                    <p>Precio: ${{ $product->price }}</p>
+                                    <p>Stock: {{ $product->stock }}</p>
+                                </div>
+                                
+                                <!-- Botón Añadir al Carrito -->
+                                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                    @csrf
+                                    <div class="text-center mt-auto">
+                                        <button type="submit" class="btn btn-primary">Añadir al Carrito</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- Products End -->
+
+
+
+
+
 
     <!-- About Start -->
     <div class="container-fluid py-5">
@@ -171,7 +238,7 @@
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">02</h1>
             <h1 class="display-4 text-uppercase text-center mb-5">Our Services</h1>
-            <div class="row">
+            <div class="row">                
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
                         <div class="d-flex align-items-center justify-content-between mb-3">
@@ -248,6 +315,7 @@
         </div>
     </div>
     <!-- Services End -->
+
 
 
     <!-- Banner Start -->
