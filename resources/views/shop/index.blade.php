@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
 @include('layouts.categories')
 
 <div class="container-fluid">
-    <div class="row mx-5"> <!-- Margen lateral de la pag aqui -->
+    <div class="row mx-5">
         <!-- Sidebar for search filter -->
         <div class="col-lg-3 mb-4">
             <div class="card mb-4">
@@ -43,7 +42,7 @@
                             <p class="card-text mt-auto">${{ $product->price }}</p>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('shop.product.show', $product->id) }}" class="btn btn-primary">View Details</a>
-                                <a href="#" class="btn btn-primary ml-2">Add to Cart</a>
+                                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -53,7 +52,13 @@
         </div>
     </div>
 </div>
+
+<button id="test-button">Test AJAX</button>
+
+
 @endsection
+
+
 
 @section('styles')
 <style>
