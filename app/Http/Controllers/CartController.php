@@ -8,14 +8,6 @@ use Darryldecode\Cart\Cart as Cart;
 
 class CartController extends Controller
 {
-
-    /* public function show()
-    {
-        $cartItems = \Cart::getContent();
-        return view('cart.index', compact('cartItems'));
-    } */
-
-
     public function add(Request $request)
     {
         $product = Product::find($request->id);
@@ -26,13 +18,29 @@ class CartController extends Controller
             'price' => $product->price,
             'quantity' => $request->quantity,
             'attributes' => [
-                'image' => $product->image1, // Include image attribute here
-                // You can include other attributes as needed
+                'image' => $product->image1,
             ]
         ]);
 
-        return response()->json(['success' => 'Product added to cart!', 'cart' => \Cart::getContent()]);
+        return response()->json([
+            'success' => 'Product added to cart!',
+            'cart' => \Cart::getContent(),
+            'total' => \Cart::getTotal()
+        ]);
     }
+
+    public function content()
+    {
+        $cartItems = \Cart::getContent();
+        $total = \Cart::getTotal();
+
+        return response()->json([
+            'success' => true,
+            'cart' => $cartItems,
+            'total' => $total
+        ]);
+    }
+
 
     public function update(Request $request, $id)
     {
@@ -43,27 +51,39 @@ class CartController extends Controller
             ],
         ]);
 
-        return response()->json(['success' => 'Cart updated successfully!', 'cart' => \Cart::getContent()]);
+        return response()->json([
+            'success' => 'Cart updated successfully!',
+            'cart' => \Cart::getContent(),
+            'total' => \Cart::getTotal()
+        ]);
     }
 
     public function remove($id)
     {
         \Cart::remove($id);
 
-        return response()->json(['success' => 'Product removed from cart!', 'cart' => \Cart::getContent()]);
+        return response()->json([
+            'success' => 'Product removed from cart!',
+            'cart' => \Cart::getContent(),
+            'total' => \Cart::getTotal()
+        ]);
     }
 
     public function clear()
     {
         \Cart::clear();
 
-        return response()->json(['success' => 'Cart cleared successfully!', 'cart' => \Cart::getContent()]);
+        return response()->json([
+            'success' => 'Cart cleared successfully!',
+            'cart' => \Cart::getContent(),
+            'total' => \Cart::getTotal()
+        ]);
     }
 
     public function show()
     {
         $cartItems = \Cart::getContent();
 
-        return view('cart', compact('cartItems'));
+        return view('cart.index', compact('cartItems'));
     }
 }

@@ -123,6 +123,7 @@ Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/content{id}', [CartController::class, 'content'])->name('cart.content');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
