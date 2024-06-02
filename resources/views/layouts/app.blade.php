@@ -13,8 +13,7 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -82,48 +81,49 @@
                                 <a href="testimonial" class="dropdown-item">Testimonio</a>
                             </div>
                         </div>
-                        <a href="contact" class="nav-item nav-link">Contacto</a>
+                        
+                        <a class="nav-link" href="{{ route('cotizaciones') }}">Cotizaciones</a>
+
 
                         {{-- Menu admin --}}
                         @auth
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="team" class="dropdown-item">Equipo</a>
-                                    <a href="testimonial" class="dropdown-item">Testimonio</a>
-                                </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="team" class="dropdown-item">Equipo</a>
+                                <a href="testimonial" class="dropdown-item">Testimonio</a>
                             </div>
+                        </div>
                         @endauth
 
                         {{-- Dropdown de admin --}}
                         @auth
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola, {{Auth::user()->name }}</a>
-                                <div class="dropdown-menu rounded-0 m-0">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola, {{Auth::user()->name }}</a>
+                            <div class="dropdown-menu rounded-0 m-0">
 
-                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
 
-                                    
-                                    
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+
+
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
-                                    </a>
+                                    {{ __('Cerrar Sesión') }}
+                                </a>
 
-                                    
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
+                        </div>
                         @else
-                            <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
+                        <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
-                            @endif
+                        @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
+                        @endif
                         @endauth
                     </div>
                 </div>
@@ -150,4 +150,5 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CotizacionController;
 /* Route::group(['middleware' => ['role:Admin|Moderador']], function(){
  */
     
@@ -61,6 +62,8 @@ Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::clas
 // Profile
 Route::resource('profile', App\Http\Controllers\UserController::class);
 
+//contizacion
+Route::get('/cotizaciones', [CotizacionController::class, 'showForm'])->name('cotizaciones');
 
 Route::get('/xd', function () {
     return view('welcome');
