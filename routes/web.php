@@ -13,12 +13,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
 
-/* Route::group(['middleware' => ['role:Admin|Moderador']], function(){
- */
-
-
-/* }
-); */
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
 Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
@@ -97,34 +91,13 @@ Route::get('/api/vehicles/years', [VehicleController::class, 'getYears']);
 Route::get('/api/vehicles/brands', [VehicleController::class, 'getBrands']);
 Route::get('/api/vehicles/models', [VehicleController::class, 'getModels']);
 
-// DerrylDecode Cart
+// Rutas del carrito
 
-// *TEST* PORQUE MARCA CADA INSTANCIA DE \CART COMO INDEFINIDA PERO REALMENTE SI FUNCIONA
-/* Route::get('/test-cart', function () {
-    \Cart::add([
-        'id' => 1,
-        'name' => 'Test Product',
-        'price' => 1001,
-        'quantity' => 1,
-        'attributes' => []
-    ]);
-
-    return \Cart::getContent();
-}); */
-
-/* test ajax */
-
-Route::get('/test-ajax', function () {
-    return response()->json(['message' => 'AJAX is working!']);
-});
-
-
-Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/cart/content{id}', [CartController::class, 'content'])->name('cart.content');
-Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add'); // Esta es la ruta que falta
+Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 
 
 
