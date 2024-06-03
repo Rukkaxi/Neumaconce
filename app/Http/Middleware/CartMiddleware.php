@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Session;
+use App\Models\Cart;
 
 class CartMiddleware
 {
@@ -11,8 +13,8 @@ class CartMiddleware
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param  \Closure  $next
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
@@ -30,7 +32,9 @@ class CartMiddleware
         // Pasar el carrito a la solicitud para que esté disponible en el controlador
         $request->attributes->set('cart', $cart);
         
-        view()->share('cartItems', Cart::getContent());
+        // Compartir los datos del carrito con todas las vistas
+        view()->share('cartItems', $cart->items);
+        view()->share('cartTotal', $cart->getTotal());
         
         return $next($request);
     }
