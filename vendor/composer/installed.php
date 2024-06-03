@@ -43,6 +43,15 @@
                 0 => '*',
             ),
         ),
+        'darryldecode/cart' => array(
+            'pretty_version' => '4.2.4',
+            'version' => '4.2.4.0',
+            'reference' => '25e347f89aecb20e769e228f10e62fa3d770e75d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../darryldecode/cart',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'davedevelopment/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
