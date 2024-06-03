@@ -3,25 +3,29 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PaymentMethodController;
+/* Route::group(['middleware' => ['role:Admin|Moderador']], function(){
+ */
+    
 
-Route::group(['middleware' => ['role:Admin|Moderador']], function(){
+/* }
+); */
+//Permisos y Roles
+Route::resource('permissions', App\Http\Controllers\PermisionController::class);
+Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
 
-   
-}
-);
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
+Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionsToRole']);
+Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionsToRole']);
 
- //Permisos y Roles
- Route::resource('permissions', App\Http\Controllers\PermisionController::class);
- Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
+//Usuarios. Para la administracion de roles-permisos
+Route::resource('users', App\Http\Controllers\UserController::class);
+Route::get('users/{userId}/delete', [App\Http\Controllers\userController::class, 'destroy']);
 
- Route::resource('roles', App\Http\Controllers\RoleController::class);
- Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
- Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionsToRole']);
- Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionsToRole']);
-
- //Usuarios. Para la administracion de roles-permisos
- Route::resource('users', App\Http\Controllers\UserController::class);
- Route::get('users/{userId}/delete', [App\Http\Controllers\userController::class, 'destroy']);
+// Métodos de Pago
+Route::resource('payment-methods', App\Http\Controllers\PaymentMethodController::class);
+Route::get('payment-methods/{id}/delete', [App\Http\Controllers\PaymentMethodController::class, 'destroy']);
 
 
 Route::get('/xd', function () {

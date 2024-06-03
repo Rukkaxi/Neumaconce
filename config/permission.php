@@ -69,6 +69,8 @@ return [
          */
 
         'role_has_permissions' => 'role_has_permissions',
+
+        'payment_methods' => 'payment_methods', // payment_method
     ],
 
     'column_names' => [

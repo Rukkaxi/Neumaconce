@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-fArrans',
-        'version' => 'dev-fArrans',
-        'reference' => '4ddd4547631e8358e968da64e2986d6fe47f8a4d',
+        'pretty_version' => 'dev-PROD',
+        'version' => 'dev-PROD',
+        'reference' => '2122895ffd885c3a8304ee42668f56e76cd16406',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -404,9 +404,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-fArrans',
-            'version' => 'dev-fArrans',
-            'reference' => '4ddd4547631e8358e968da64e2986d6fe47f8a4d',
+            'pretty_version' => 'dev-PROD',
+            'version' => 'dev-PROD',
+            'reference' => '2122895ffd885c3a8304ee42668f56e76cd16406',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -722,9 +722,9 @@
             ),
         ),
         'psr/http-factory' => array(
-            'pretty_version' => '1.1.0',
-            'version' => '1.1.0.0',
-            'reference' => '2b4765fddfe3b508ac62f829e852b1501d3f6e8a',
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
+            'reference' => 'e616d01114759c4c489f93b099585439f795fe35',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-factory',
             'aliases' => array(),
@@ -763,8 +763,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0.0 || 2.0.0 || 3.0.0',
-                1 => '1.0|2.0',
+                0 => '1.0|2.0',
+                1 => '1.0.0 || 2.0.0 || 3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
