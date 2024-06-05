@@ -85,17 +85,6 @@
                         <a class="nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
 
 
-                        {{-- Menu admin --}}
-                        @auth
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team" class="dropdown-item">Equipo</a>
-                                <a href="testimonial" class="dropdown-item">Testimonio</a>
-                            </div>
-                        </div>
-                        @endauth
-
                         {{-- Dropdown de admin --}}
                         @auth
                         <div class="nav-item dropdown">
