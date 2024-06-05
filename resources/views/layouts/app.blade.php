@@ -11,6 +11,8 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet">
@@ -33,33 +35,15 @@
 
 
     <!-- Topbar Start -->
-    <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
-        <div class="row">
-            <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+56974229630</a>
-                    <span class="text-body">|</span>
-                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>bocar@bocar.cl</a>
-                </div>
-            </div>
-            <div class="col-md-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-body px-3" href="https://www.facebook.com/BOCARIMPORTACIONES/">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-body px-3" href="https://www.instagram.com/neumaconce/">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Topbar End -->
 
 
     <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
+            <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
+            </div>
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
                     <h1 class="text-uppercase text-primary mb-1">NEUMA CONCE</h1>
@@ -81,7 +65,7 @@
                                 <a href="testimonial" class="dropdown-item">Testimonio</a>
                             </div>
                         </div>
-                        
+
                         <a class="nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
 
 

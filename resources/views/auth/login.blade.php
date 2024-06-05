@@ -1,15 +1,16 @@
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; border: none;">
-    <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
-        <div class="card-header bg-primary text-white">{{ __('Login') }}</div>
+<div class="container" style="background-image: url('media/photos/photo1.jpg'); background-size: cover; background-position: center; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="card" style="max-width: 500px; width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <div class="card-body">
+            <h3 class="card-title text-center">Iniciar Sesión</h3>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="email">{{ __('E-Mail Address') }}</label>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <label for="email">Correo Electrónico</label>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="usuario@example.com">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -17,8 +18,8 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="password">{{ __('Password') }}</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Ingrese su contraseña">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -26,18 +27,13 @@
                     @enderror
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label class="form-check-label" for="remember">Recuérdame</label>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">
-                        {{ __('Login') }}
-                    </button>
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
+                <a class="btn btn-link" href="{{ route('password.request') }}">He olvidado mi contraseña.</a>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Iniciar Sesión</button>
+                <div class="text-center mt-3">
+                    <a href="{{ route('register') }}">¿Aún no estás registrado?</a>
                 </div>
             </form>
         </div>
