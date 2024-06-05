@@ -12,6 +12,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WebpayController;
 
 /* Route::group(['middleware' => ['role:Admin|Moderador']], function(){
  */
@@ -125,6 +126,14 @@ Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
+
+
+
+// WEB PAY
+
+Route::get('/webpay/init', [WebpayController::class, 'initTransaction'])->name('webpay.init');
+Route::match(['get', 'post'], '/webpay/response', [WebpayController::class, 'response'])->name('webpay.response');
+Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.finish');
 
 
 Route::get('/xd', function () {

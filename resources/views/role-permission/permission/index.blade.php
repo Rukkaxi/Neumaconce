@@ -2,6 +2,14 @@
 
 @section('content')
 
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
 
 <div class="container mt-5">
     <div class="row">
@@ -35,7 +43,7 @@
                                 <td> {{$permission->name}} </td>
                                 <td>
                                     <a href=" {{url('permissions/'.$permission->id.'/edit')}} " class="btn btn-warning">Editar</a>
-                                    <a href=" {{url('permissions/'.$permission->id.'/delete')}} " class="btn btn-danger">Eliminar</a>
+                                    <a href=" {{url('permissions/'.$permission->id.'/delete')}} " class="btn btn-danger delete-button">Eliminar</a>
                                 </td>
                             </tr>
                             @endforeach

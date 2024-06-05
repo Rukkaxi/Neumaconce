@@ -135,6 +135,8 @@
 
     @include('layouts.cart')
 
+    
+
     <main class="py-4">
         @yield('content')
     </main>
@@ -146,6 +148,9 @@
     <!-- Scripts del cart (versiones mas recientes) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> -->
