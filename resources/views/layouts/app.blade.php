@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         
-                        <a class="nav-link" href="{{ route('cotizaciones') }}">Cotizaciones</a>
+                        <a class="nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
 
 
                         {{-- Menu admin --}}

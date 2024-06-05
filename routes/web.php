@@ -62,8 +62,11 @@ Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::clas
 // Profile
 Route::resource('profile', App\Http\Controllers\UserController::class);
 
-//contizacion
-Route::get('/cotizaciones', [CotizacionController::class, 'showForm'])->name('cotizaciones');
+// cotizaciones
+
+Route::get('views/cotizaciones', [CotizacionController::class, 'create'])->name('cotizaciones.form');
+Route::post('views/cotizaciones', [CotizacionController::class, 'store'])->name('cotizaciones.store');
+
 
 Route::get('/xd', function () {
     return view('welcome');
