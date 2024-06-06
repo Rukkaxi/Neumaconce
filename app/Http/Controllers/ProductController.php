@@ -36,8 +36,8 @@ class ProductController extends Controller
             'brandId' => 'required|exists:brands,id',
             'stock' => 'integer',
             'description' => 'required|string',
-            'available' => 'required|boolean',
-            'image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'available' => 'boolean',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -62,9 +62,9 @@ class ProductController extends Controller
             }
         }
 
-        $product = Product::create(array_merge($request->only([
-            'name', 'price', 'brandId', 'stock', 'description', 'available'
-        ]), $images));
+        $productData = $request->only(['name', 'price', 'brandId', 'stock', 'description']);
+        $productData['available'] = $request->has('available');
+        $product = Product::create(array_merge($productData, $images));
 
         $product->tags()->attach($request->tags);
         $product->categories()->attach($request->categories);
@@ -89,7 +89,7 @@ class ProductController extends Controller
             'brandId' => 'required|exists:brands,id',
             'stock' => 'integer',
             'description' => 'required|string',
-            'available' => 'required|boolean',
+            'available' => 'boolean',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -122,9 +122,9 @@ class ProductController extends Controller
             }
         }
 
-        $product->update(array_merge($request->only([
-            'name', 'price', 'brandId', 'stock', 'description', 'available'
-        ]), $images));
+        $productData = $request->only(['name', 'price', 'brandId', 'stock', 'description']);
+        $productData['available'] = $request->has('available');
+        $product->update(array_merge($productData, $images));
 
         $product->categories()->sync($request->categories);
         $product->tags()->sync($request->tags);

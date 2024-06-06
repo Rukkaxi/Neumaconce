@@ -57,11 +57,18 @@
                             @endif
                         </div>
                         <div class="mb-3">
-                            <label>Disponibilidad</label><br>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="available" name="available" value="1" {{ old('available', $product->available) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="available">Disponible para la compra</label>
-                            </div>
+                            <label for="description">Descripción</label>
+                            <textarea id="description" name="description" class="form-control" required>{{ old('description') }}</textarea>
+                            @error('description')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" id="available" name="available" class="form-check-input" {{ old('available') ? 'checked' : '' }}>
+                            <label for="available" class="form-check-label">¿Por Cotizar?</label>
+                            @error('available')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label>Categorías</label><br>

@@ -1,6 +1,26 @@
 @extends('layouts.backend')
 
 @section('content')
+
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
+
+<!-- <script>
+    if (typeof Swal !== 'undefined') {
+        // SweetAlert is loaded, you can use it here
+        Swal.fire('SweetAlert is loaded!');
+    } else {
+        // SweetAlert is not loaded
+        console.error('SweetAlert is not loaded!');
+    }
+</script> -->
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
@@ -24,6 +44,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Imagen</th>
+                                <th>Acciones</th> <!-- Add Actions column -->
                             </tr>
                         </thead>
                         <tbody>
@@ -40,10 +61,10 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('brands.edit', $brand->id) }}" class="btn btn-warning">Editar</a>
-                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display:inline;" class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        <button type="button" class="btn btn-danger delete-button">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
@@ -57,4 +78,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

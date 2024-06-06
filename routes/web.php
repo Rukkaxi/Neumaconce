@@ -12,6 +12,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WebpayController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -99,6 +100,14 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add'); // Esta es la ruta que falta
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 
+
+
+
+// WEB PAY
+
+Route::get('/webpay/init', [WebpayController::class, 'initTransaction'])->name('webpay.init');
+Route::match(['get', 'post'], '/webpay/response', [WebpayController::class, 'response'])->name('webpay.response');
+Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.finish');
 
 
 Route::get('/xd', function () {

@@ -1,6 +1,16 @@
 @extends('layouts.backend')
 
 @section('content')
+
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
@@ -38,7 +48,7 @@
                                     <form action="{{ route('communes.destroy', $commune->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger delete-button">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

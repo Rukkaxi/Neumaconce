@@ -23,9 +23,13 @@ class CommuneController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => 'required|string',
-            'regionId' => 'required|exists:regions,id'
+            'region_id' => 'required|exists:regions,id'
         ]);
-        Commune::create($request->all());
+        
+        Commune::create([
+            'name' => $request->input('name'),
+            'region_id' => $request->input('region_id')
+        ]);
 
         return redirect('communes')->with('status', 'Comuna creada exitósamente!');
     }
@@ -38,10 +42,13 @@ class CommuneController extends Controller
     public function update(Request $request, Commune $commune){
         $request->validate([
             'name' => 'required|string',
-            'regionId' => 'required|exists:regions,id'
+            'region_id' => 'required|exists:regions,id'
         ]);
 
-        $commune->update($request->all());
+        $commune->update([
+            'name' => $request->input('name'),
+            'region_id' => $request->input('region_id')
+        ]);
 
         return redirect('communes')->with('status', 'Comuna actualizada exitósamente!');
     }

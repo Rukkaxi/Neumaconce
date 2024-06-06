@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->default(0); // Default stock to 0
             $table->text('description'); // Add description column
             $table->boolean('available')->default(true); // Add available column
-            $table->string('image1'); // Store image1 path
+            $table->string('image1')->nullable(); // Store image1 path
             $table->string('image2')->nullable(); // Store image2 path
             $table->string('image3')->nullable(); // Store image3 path
             $table->string('image4')->nullable(); // Store image4 path

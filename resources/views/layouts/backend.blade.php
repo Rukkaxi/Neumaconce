@@ -318,18 +318,18 @@
         <!-- Side Navigation -->
         <div class="content-side content-side-full">
           <ul class="nav-main">
-            <li class="nav-main-item">
+            <!-- <li class="nav-main-item">
               <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="/dashboard">
                 <i class="nav-main-link-icon fa fa-location-arrow"></i>
                 <span class="nav-main-link-name">Dashboard</span>
                 <span class="nav-main-link-badge badge rounded-pill bg-primary">5</span>
               </a>
-            </li>
+            </li> -->
             <li class="nav-main-heading">Administración de Página</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
-                <span class="nav-main-link-name">Gestionar Permisos</span>
+                <i class="nav-main-link-icon fa-solid fa-lock"></i>
+                <span class="nav-main-link-name">Permisos y Roles</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
@@ -354,8 +354,8 @@
             </li>
             <li class="nav-main-item{{ request()->is('products/*') || request()->is('categories') || request()->is('tags') || request()->is('vehicles') || request()->is('brands') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
-                <span class="nav-main-link-name">Gestionar Productos</span>
+                <i class="nav-main-link-icon fa-solid fa-cube"></i>
+                <span class="nav-main-link-name">Productos y asociados</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
@@ -392,8 +392,8 @@
             </li>
             <li class="nav-main-item{{ request()->is('orders/*') || request()->is('regions') || request()->is('communes') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                <i class="nav-main-link-icon fa-solid fa-toolbox"></i>
-                <span class="nav-main-link-name">Gestionar Pedidos</span>
+                <i class="nav-main-link-icon fa-solid fa-shopping-cart"></i>
+                <span class="nav-main-link-name">Pedidos y direcciones</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
@@ -423,12 +423,12 @@
                 <span class="nav-main-link-name">Métodos de Pago</span>
               </a>
             </li>
-            <li class="nav-main-item">
+            <!-- <li class="nav-main-item">
               <a class="nav-main-link" href="#">
                 <i class="nav-main-link-icon fa fa-cubes"></i>
                 <span class="nav-main-link-name">Inventario</span>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
         <!-- END Side Navigation -->
@@ -454,9 +454,9 @@
 
           <!-- Open Search Section -->
           <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-          <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="header_search_on">
+          <!-- <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="header_search_on">
             <i class="fa fa-fw opacity-50 fa-search"></i> <span class="ms-1 d-none d-sm-inline-block">Search</span>
-          </button>
+          </button> -->
           <!-- END Open Search Section -->
         </div>
         <!-- END Left Section -->
@@ -467,31 +467,39 @@
           <div class="dropdown d-inline-block">
             <button type="button" class="btn btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-fw fa-user d-sm-none"></i>
-              <span class="d-none d-sm-inline-block">Admin</span>
+              <span class="d-none d-sm-inline-block">Administración</span>
               <i class="fa fa-fw fa-angle-down opacity-50 ms-1 d-none d-sm-inline-block"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
               <div class="bg-primary-dark rounded-top fw-semibold text-white text-center p-3">
-                User Options
+                Páginas
               </div>
               <div class="p-2">
-                <a class="dropdown-item" href="{{ url('profiles') }}">
-                  <i class="far fa-fw fa-user me-1"></i> Perfil
+                <a class="dropdown-item" href="{{ url('/') }}">
+                  <i class="fas fa-home me-1"></i> Inicio
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                <a class="dropdown-item" href="{{ url('shop') }}">
+                  <i class="fas fa-store me-1"></i> Tienda
+                </a>
+                <a class="dropdown-item" href="{{ url('profiles') }}">
+                  <i class="fas fa-user me-1"></i> Perfil
+                </a>
+
+                <!-- <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                   <span><i class="far fa-fw fa-envelope me-1"></i> Inbox</span>
                   <span class="badge bg-primary rounded-pill">3</span>
-                </a>
-                <a class="dropdown-item" href="javascript:void(0)">
+                </a> -->
+                <!-- <a class="dropdown-item" href="javascript:void(0)">
                   <i class="far fa-fw fa-file-alt me-1"></i> Invoices
-                </a>
+                </a> -->
+                <!-- 
                 <div role="separator" class="dropdown-divider"></div>
-
+ -->
                 <!-- Toggle Side Overlay -->
                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
+                <!-- <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
                   <i class="far fa-fw fa-building me-1"></i> Settings
-                </a>
+                </a> -->
                 <!-- END Side Overlay -->
 
                 <div role="separator" class="dropdown-divider"></div>
@@ -507,7 +515,7 @@
           <!-- END User Dropdown -->
 
           <!-- Notifications Dropdown -->
-          <div class="dropdown d-inline-block">
+          <!-- <div class="dropdown d-inline-block">
             <button type="button" class="btn btn-alt-secondary" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-fw fa-bell"></i>
             </button>
@@ -580,14 +588,14 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- END Notifications Dropdown -->
 
           <!-- Toggle Side Overlay -->
           <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-          <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="side_overlay_toggle">
+          <!-- <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="side_overlay_toggle">
             <i class="far fa-fw fa-list-alt"></i>
-          </button>
+          </button> -->
           <!-- END Toggle Side Overlay -->
         </div>
         <!-- END Right Section -->
