@@ -1,4 +1,3 @@
-<!-- resources/views/cart.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -16,8 +15,8 @@
                 </tr>
             </thead>
             <tbody id="cart-items">
-                @foreach($cartItems as $item)
-                <tr>
+                @foreach(\Cart::getContent() as $item)
+                <tr data-id="{{ $item->id }}">
                     <td>
                         @if(isset($item->attributes['image']))
                         <img src="{{ asset($item->attributes['image']) }}" alt="{{ $item->name }}" style="width: 100px; height: 100px;">
@@ -26,10 +25,10 @@
                         @endif
                     </td>
                     <td>{{ $item->name }}</td>
-                    <td>${{ $item->price }}</td>
+                    <td class="price" data-id="{{ $item->id }}"> ${{ $item->price }}</td>
                     <td>
                         <button class="btn btn-secondary btn-sm decrease-quantity" data-id="{{ $item->id }}">-</button>
-                        <span>{{ $item->quantity }}</span>
+                        <span class="quantity" data-id="{{ $item->id }}">{{ $item->quantity }}</span>
                         <button class="btn btn-secondary btn-sm increase-quantity" data-id="{{ $item->id }}">+</button>
                     </td>
                     <td>
@@ -43,97 +42,73 @@
     <div class="mt-3">
         <strong>Total: <span id="cart-total">$ {{ \Cart::getTotal() }}</span></strong>
     </div>
+    <div class="mt-3">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('cart.show') }}" class="btn btn-primary">Comprar</a>
+    </div>
 </div>
-@endsection
-<!-- 
-@section('scripts')
 <script>
-    $(document).ready(function() {
-        // Update cart modal functionality
-        function updateCartView(cart) {
-            $('#cart-items').empty();
-            var totalPrice = 0;
-            $.each(cart, function(i, item) {
-                var itemPrice = parseFloat(item.price) * parseFloat(item.quantity);
-                var row = '<tr>' +
-                    '<td>' +
-                    (item.attributes && item.attributes.image ?
-                        '<img src="' + item.attributes.image + '" alt="' + item.name + '" style="width: 100px; height: 100px;">' :
-                        '<span>No Image</span>') +
-                    '</td>' +
-                    '<td>' + item.name + '</td>' +
-                    '<td>$' + item.price + '</td>' +
-                    '<td>' +
-                    '<button class="btn btn-secondary btn-sm decrease-quantity" data-id="' + item.id + '">-</button>' +
-                    '<span>' + item.quantity + '</span>' +
-                    '<button class="btn btn-secondary btn-sm increase-quantity" data-id="' + item.id + '">+</button>' +
-                    '</td>' +
-                    '<td>' +
-                    '<button class="btn btn-danger btn-sm remove-from-cart" data-id="' + item.id + '">Quitar</button>' +
-                    '</td>' +
-                    '</tr>';
-                $('#cart-items').append(row);
-                totalPrice += itemPrice;
+    document.addEventListener('DOMContentLoaded', function () {
+        const updateCartQuantity = (id, quantity) => {
+            console.log(`Updating quantity of product ${id} to ${quantity}`);
+            document.querySelectorAll(`.quantity[data-id="${id}"]`).forEach(element => {
+                element.innerText = quantity;
             });
-            $('#cart-total').text('$' + totalPrice.toFixed(2));
-        }
+        };
 
-        // Handle increase quantity button click
-        $(document).on('click', '.increase-quantity', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            updateQuantity(id, 'increase');
-        });
-
-        // Handle decrease quantity button click
-        $(document).on('click', '.decrease-quantity', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            updateQuantity(id, 'decrease');
-        });
-
-        // Function to update quantity
-        function updateQuantity(id, action) {
-            var quantity = parseInt($('[data-id="' + id + '"]').siblings('span').text());
-            if (action === 'increase') {
-                quantity++;
-            } else if (action === 'decrease' && quantity > 1) {
-                quantity--;
-            }
-            $.ajax({
-                url: '/cart/update/' + id,
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    quantity: quantity
-                },
-                success: function(response) {
-                    updateCartView(response.cart);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
+        const updateCartTotal = () => {
+            let total = 0;
+            document.querySelectorAll('.quantity').forEach(quantityElement => {
+                const id = quantityElement.dataset.id;
+                const quantity = parseInt(quantityElement.innerText);
+                const priceElement = document.querySelector(`.price[data-id="${id}"]`);
+                if (priceElement) {
+                    const price = parseFloat(priceElement.innerText.replace('$', ''));
+                    total += price * quantity;
                 }
             });
-        }
+            document.querySelectorAll('#cart-total').forEach(element => {
+                element.innerText = `$ ${total.toFixed(2)}`;
+            });
+        };
 
-        // Handle remove from cart button click
-        $(document).on('click', '.remove-from-cart', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/cart/remove/' + id,
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    updateCartView(response.cart);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
+        updateCartTotal();
+
+        document.querySelectorAll('.increase-quantity').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const quantityElement = document.querySelector(`.quantity[data-id="${id}"]`);
+                let quantity = parseInt(quantityElement.innerText);
+                quantity += 1;
+                updateCartQuantity(id, quantity);
+                updateCartTotal();
+            });
+        });
+
+        document.querySelectorAll('.decrease-quantity').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const quantityElement = document.querySelector(`.quantity[data-id="${id}"]`);
+                let quantity = parseInt(quantityElement.innerText);
+                if (quantity > 1) {
+                    quantity -= 1;
+                    updateCartQuantity(id, quantity);
+                    updateCartTotal();
                 }
+            });
+        });
+
+        document.querySelectorAll('.remove-from-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.dataset.id;
+                document.querySelectorAll(`tr[data-id="${id}"]`).forEach(element => {
+                    element.remove();
+                });
+                console.log(`Product ${id} removed from cart`);
+                updateCartQuantity(id, quantity);
+                updateCartTotal();
             });
         });
     });
-</script> -->
+</script>
 @endsection

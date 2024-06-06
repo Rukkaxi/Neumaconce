@@ -1,87 +1,5 @@
     @extends('layouts.app')
-
     @section('content')
-
-    <!-- Topbar Start -->
-    {{-- <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
-        <div class="row">
-            <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+56974229630</a>
-                    <span class="text-body">|</span>
-                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>bocar@bocar.cl</a>
-                </div>
-            </div>
-            <div class="col-md-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-body px-3" href="https://www.facebook.com/BOCARIMPORTACIONES/">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-body px-3" href="https://www.instagram.com/neumaconce/">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End --> --}}
-
-
-    
-
-    <!-- Navbar Start - Ahora está en /layouts-->
-    {{-- <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">NEUMA CONCE</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <a href="index" class="nav-item nav-link active">Inicio</a>
-                        <a href="about" class="nav-item nav-link">Sobre nosotros</a>
-                        <a href="service" class="nav-item nav-link">Servicios</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team" class="dropdown-item">Equipo</a>
-                                <a href="testimonial" class="dropdown-item">Testimonio</a>
-                            </div>
-                        </div>
-                        <a href="contact" class="nav-item nav-link">Contacto</a>
-                        @auth
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-    onclick="event.preventDefault();
-    document.getElementById('logout-form').submit();">
-    {{ __('Cerrar Sesión') }}
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
-    </div>
-    </div>
-    @else
-    <a href="{{ route('login') }}" class="nav-item nav-link text-sm  underline">Iniciar Sesión</a>
-
-    @if (Route::has('register'))
-    <a href="{{ route('register') }}" class="nav-item nav-link text-sm  underline">Registro</a>
-    @endif
-    @endauth
-    </div>
-    </div>
-    </nav>
-    </div>
-    </div> --}}
-    <!-- Navbar End -->
-
-
     @include('layouts.search')
 
     <!-- Carousel Start -->
@@ -131,7 +49,7 @@
             <h1 class="display-4 text-uppercase text-center mb-5">Bienvenidos a <span class="text-primary">NeumaConce</span></h1>
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
-                    <img class="w-75 mb-4" src="img/about.png" alt="">
+                    <img class="w-75 mb-4" src="" alt="">
                     <p>Bienvenido a NeumaConce, su destino confiable para todas sus necesidades de partes y repuestos de vehículos en Concepción, Chile. Nos enorgullece ofrecer una amplia gama de piezas de calidad, así como un conveniente servicio de retiro en nuestro local o despacho a su ubicación, ya sea en la ciudad o en regiones. Además de nuestro extenso inventario, también proporcionamos servicios especializados de desabolladuría y pintura de autos para mantener su vehículo en óptimas condiciones estéticas y de funcionamiento. En NeumaConce, nuestro compromiso es brindarle soluciones integrales para todas sus necesidades automotrices.</p>
                 </div>
             </div>
@@ -167,87 +85,74 @@
 
 
     <!-- Services Start -->
-    <div class="container-fluid py-5">
+     <div class="container-fluid py-5" >
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">02</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Our Services</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Nuestros Servicios</h1>
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
-                                <i class="fa fa-2x fa-taxi text-secondary"></i>
+                <div class="col-lg-4 col-md-6 mb-2 " style="center">
+                    <a href="agendar-visitas.html" class="service-item-link">
+                        <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                    <i class="fa fa-2x fa-taxi text-secondary"></i>
+                                </div>
+                                <h1 class="display-2 text-white mt-n2 m-0">01</h1>
                             </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">01</h1>
+                            <h4 class="text-uppercase mb-3">Agendar Visitas</h4>
+                            <p class="m-0">Agenda visitas para compatibilidad de piezas, revisión técnica, reparación y/o mantenimiento</p>
                         </div>
-                        <h4 class="text-uppercase mb-3">Car Rental</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="service-item active d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
-                                <i class="fa fa-2x fa-money-check-alt text-secondary"></i>
+                    <a href="cotizar.html" class="service-item-link">
+                        <div class="service-item active d-flex flex-column justify-content-center px-4 mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                    <i class="fa fa-2x fa-money-check-alt text-secondary"></i>
+                                </div>
+                                <h1 class="display-2 text-white mt-n2 m-0">02</h1>
                             </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">02</h1>
+                            <h4 class="text-uppercase mb-3">Cotiza con Nosotros</h4>
+                            <p class="m-0">Cotiza algún producto que buscas y te respondemos si lo proveemos</p>
                         </div>
-                        <h4 class="text-uppercase mb-3">Car Financing</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
-                    </div>
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
-                                <i class="fa fa-2x fa-car text-secondary"></i>
+                <!-- <div class="col-lg-4 col-md-6 mb-2">
+                    <a href="shop" class="service-item-link">
+                        <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                    <i class="fa fa-2x fa-car text-secondary"></i>
+                                </div>
+                                <h1 class="display-2 text-white mt-n2 m-0">03</h1>
                             </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">03</h1>
+                            <h4 class="text-uppercase mb-3">Tienda</h4>
+                            <p class="m-0">Venta de productos para vehículos, piezas y repuestos</p>
                         </div>
-                        <h4 class="text-uppercase mb-3">Car Inspection</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
-                                <i class="fa fa-2x fa-cogs text-secondary"></i>
-                            </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">04</h1>
-                        </div>
-                        <h4 class="text-uppercase mb-3">Auto Repairing</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
-                                <i class="fa fa-2x fa-spray-can text-secondary"></i>
-                            </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">05</h1>
-                        </div>
-                        <h4 class="text-uppercase mb-3">Auto Painting</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
-                                <i class="fa fa-2x fa-pump-soap text-secondary"></i>
-                            </div>
-                            <h1 class="display-2 text-white mt-n2 m-0">06</h1>
-                        </div>
-                        <h4 class="text-uppercase mb-3">Auto Cleaning</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
-                    </div>
-                </div>
+                    </a>
+                </div> -->
             </div>
         </div>
-    </div>
+    </div> 
+    
     <!-- Services End -->
+
+    <style>
+        .service-item-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .service-item-link:hover {
+            text-decoration: none;
+        }
+        .service-item-link .service-item:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+    </style>
+
+
 
 
     <!-- Banner Start -->
@@ -274,7 +179,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="img/car-rent-1.png" alt="">
+                        <img class="img-fluid mb-4" src="" alt="">
                         <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">
@@ -295,7 +200,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item active mb-4">
-                        <img class="img-fluid mb-4" src="img/car-rent-2.png" alt="">
+                        <img class="img-fluid mb-4" src="" alt="">
                         <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">
@@ -316,7 +221,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="img/car-rent-3.png" alt="">
+                        <img class="img-fluid mb-4" src="" alt="">
                         <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">
@@ -337,7 +242,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="img/car-rent-4.png" alt="">
+                        <img class="img-fluid mb-4" src="" alt="">
                         <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">
@@ -358,7 +263,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="img/car-rent-5.png" alt="">
+                        <img class="img-fluid mb-4" src="" alt="">
                         <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">
@@ -379,7 +284,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="img/car-rent-6.png" alt="">
+                        <img class="img-fluid mb-4" src="" alt="">
                         <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">
@@ -411,7 +316,7 @@
             <h1 class="display-4 text-uppercase text-center mb-5">Meet Our Team</h1>
             <div class="owl-carousel team-carousel position-relative" style="padding: 0 30px;">
                 <div class="team-item">
-                    <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
+                    <img class="img-fluid w-100" src="" alt="">
                     <div class="position-relative py-4">
                         <h4 class="text-uppercase">Full Name</h4>
                         <p class="m-0">Designation</p>
@@ -423,7 +328,7 @@
                     </div>
                 </div>
                 <div class="team-item">
-                    <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
+                    <img class="img-fluid w-100" src="" alt="">
                     <div class="position-relative py-4">
                         <h4 class="text-uppercase">Full Name</h4>
                         <p class="m-0">Designation</p>
@@ -435,7 +340,7 @@
                     </div>
                 </div>
                 <div class="team-item">
-                    <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
+                    <img class="img-fluid w-100" src="" alt="">
                     <div class="position-relative py-4">
                         <h4 class="text-uppercase">Full Name</h4>
                         <p class="m-0">Designation</p>
@@ -447,7 +352,7 @@
                     </div>
                 </div>
                 <div class="team-item">
-                    <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
+                    <img class="img-fluid w-100" src="" alt="">
                     <div class="position-relative py-4">
                         <h4 class="text-uppercase">Full Name</h4>
                         <p class="m-0">Designation</p>
@@ -485,7 +390,7 @@
                             <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
                             <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
                         </div>
-                        <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="img/banner-right.png" alt="">
+                        <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="" alt="">
                     </div>
                 </div>
             </div>
@@ -502,7 +407,7 @@
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item d-flex flex-column justify-content-center px-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-1.jpg" alt="">
+                        <img class="img-fluid ml-n4" src="" alt="">
                         <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
                     </div>
                     <h4 class="text-uppercase mb-2">Client Name</h4>
@@ -511,7 +416,7 @@
                 </div>
                 <div class="testimonial-item d-flex flex-column justify-content-center px-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-2.jpg" alt="">
+                        <img class="img-fluid ml-n4" src="" alt="">
                         <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
                     </div>
                     <h4 class="text-uppercase mb-2">Client Name</h4>
@@ -520,7 +425,7 @@
                 </div>
                 <div class="testimonial-item d-flex flex-column justify-content-center px-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-3.jpg" alt="">
+                        <img class="img-fluid ml-n4" src="" alt="">
                         <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
                     </div>
                     <h4 class="text-uppercase mb-2">Client Name</h4>
@@ -529,7 +434,7 @@
                 </div>
                 <div class="testimonial-item d-flex flex-column justify-content-center px-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-4.jpg" alt="">
+                        <img class="img-fluid ml-n4" src="" alt="">
                         <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
                     </div>
                     <h4 class="text-uppercase mb-2">Client Name</h4>
@@ -546,27 +451,27 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">06</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Contact Us</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Contáctanos</h1>
             <div class="row">
                 <div class="col-lg-7 mb-2">
                     <div class="contact-form bg-light mb-4" style="padding: 30px;">
                         <form>
                             <div class="row">
                                 <div class="col-6 form-group">
-                                    <input type="text" class="form-control p-4" placeholder="Your Name" required="required">
+                                    <input type="text" class="form-control p-4" placeholder="Tu Nombre" required="required">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <input type="email" class="form-control p-4" placeholder="Your Email" required="required">
+                                    <input type="email" class="form-control p-4" placeholder="Tu Correo Electrónico" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control p-4" placeholder="Subject" required="required">
+                                <input type="text" class="form-control p-4" placeholder="Asunto" required="required">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control py-3 px-4" rows="5" placeholder="Message" required="required"></textarea>
+                                <textarea class="form-control py-3 px-4" rows="5" placeholder="Mensaje" required="required"></textarea>
                             </div>
                             <div>
-                                <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
+                                <button class="btn btn-primary py-3 px-5" type="submit">Enviar Mensaje</button>
                             </div>
                         </form>
                     </div>
@@ -576,29 +481,22 @@
                         <div class="d-flex mb-3">
                             <i class="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Head Office</h5>
-                                <p>123 Street, New York, USA</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <i class="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
-                            <div class="mt-n1">
-                                <h5 class="text-light">Branch Office</h5>
-                                <p>123 Street, New York, USA</p>
+                                <h5 class="text-light">Ubicación</h5>
+                                <p>Freire #82, Concepción</p>
                             </div>
                         </div>
                         <div class="d-flex mb-3">
                             <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Customer Service</h5>
-                                <p>customer@example.com</p>
+                                <h5 class="text-light">Servicio al Cliente</h5>
+                                <p>bocar@bocar.cl</p>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
+                        <div class="d-flex mb-3">
+                            <i class="fa fa-2x fa-phone text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Return & Refund</h5>
-                                <p class="m-0">refund@example.com</p>
+                                <h5 class="text-light">Teléfono</h5>
+                                <p>+56 9 7422 9630</p>
                             </div>
                         </div>
                     </div>
@@ -614,110 +512,35 @@
         <div class="container py-5">
             <div class="owl-carousel vendor-carousel">
                 <div class="bg-light p-4">
-                    <img src="img/vendor-1.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-2.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-3.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-4.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-5.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-6.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-7.png" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="img/vendor-8.png" alt="">
+                    <img src="" alt="">
                 </div>
             </div>
         </div>
     </div>
     <!-- Vendor End -->
 
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
-        <div class="row pt-5">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Get In Touch</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+012 345 67890</p>
-                <p><i class="fa fa-envelope text-white mr-3"></i>bocar@bocar.cl</p>
-                <h6 class="text-uppercase text-white py-2">Follow Us</h6>
-                <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-dark btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Usefull Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Private Policy</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Term & Conditions</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>New Member Registration</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Affiliate Programme</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Return & Refund</a>
-                    <a class="text-body" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Help & FQAs</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Car Gallery</h4>
-                <div class="row mx-n1">
-                    <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-1.jpg" alt=""></a>
-                    </div>
-                    <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-2.jpg" alt=""></a>
-                    </div>
-                    <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-3.jpg" alt=""></a>
-                    </div>
-                    <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-4.jpg" alt=""></a>
-                    </div>
-                    <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-5.jpg" alt=""></a>
-                    </div>
-                    <div class="col-4 px-1 mb-2">
-                        <a href=""><img class="w-100" src="img/gallery-6.jpg" alt=""></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Newsletter</h4>
-                <p class="mb-4">Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem sit sed elitr sed kasd et</p>
-                <div class="w-100 mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-dark border-dark" style="padding: 25px;" placeholder="Your Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary text-uppercase px-3">Sign Up</button>
-                        </div>
-                    </div>
-                </div>
-                <i>Lorem sit sed elitr sed kasd et</i>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
-        <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
-        <p class="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
-    </div>
-    <!-- Footer End -->
-
-
+    @include('layouts.footer')
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
-
     @endsection
