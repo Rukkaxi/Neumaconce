@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-fAviles',
         'version' => 'dev-fAviles',
-        'reference' => 'a04967d8680525213e825d44f6905987741bc7a4',
+        'reference' => 'e5965f7ac8d365d786b162ad7200dafd896d53a8',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -415,7 +415,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-fAviles',
             'version' => 'dev-fAviles',
-            'reference' => 'a04967d8680525213e825d44f6905987741bc7a4',
+            'reference' => 'e5965f7ac8d365d786b162ad7200dafd896d53a8',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -772,8 +772,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
