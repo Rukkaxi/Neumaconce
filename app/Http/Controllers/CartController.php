@@ -91,13 +91,6 @@ class CartController extends Controller
         return view('cart.index', compact('cartItems'));
     }
 
-    /* public function buy()
-    {
-        $cartItems = \Cart::getContent();
-
-        return view('cart.buy', compact('cartItems'));
-    } */
-
     public function showPreOrder(Request $request)
     {
         // Establecer el paso actual en la sesión del usuario
@@ -111,34 +104,12 @@ class CartController extends Controller
         return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step' ));
     }
 
-    /* public function purchase(Request $request)
-    {
-        $request->validate([
-            'address' => 'required|exists:addresses,id',
-            'payment_method' => 'required|exists:payment_methods,id',
-        ]);
-
-        // Lógica de compra aquí
-
-        return redirect()->route('cart.index')->with('success', 'Compra realizada con éxito');
-    }
-
-    public function showBuyPage()
-    {
-        $user = Auth::user();
-        $addresses = $user->addresses; // Asumiendo que tienes una relación definida en el modelo User
-        $paymentMethods = PaymentMethod::all(); // Asumiendo que tienes un modelo PaymentMethod
-
-        return view('cart.buy', compact('addresses', 'paymentMethods'));
-    } */
-
     public function purchase(Request $request)
     {
         $user = Auth::user();
         $cartItems = \Cart::getContent();
         $total = \Cart::getTotal();
         
-
         // Aquí puedes manejar la lógica de la compra, como guardar el pedido en la base de datos
         // Por ejemplo:
         $order = new Order();
@@ -158,8 +129,12 @@ class CartController extends Controller
 
         // Limpia el carrito
         \Cart::clear();
+        
+        // Actualiza el paso en la sesión del usuario
+        $request->session()->put('checkout_step', 1); // O el paso que corresponda después de la compra
 
         return redirect()->route('orders.index')->with('success', 'Compra realizada con éxito');
     }
+
 
 }

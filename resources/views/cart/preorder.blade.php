@@ -1,36 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 <div class="container">
     <!-- Indicador de progreso -->
-    <div class="row">
-        <div class="col-12 text-center mb-4">
-            <ul style="display: flex; justify-content: center; list-style-type: none; padding: 0;">
-                <li class="carro-de-compra__nav-link {{ $step >= 1 ? 'active' : '' }}">
-                    <div>
-                        <a class="card-title card-title--sm-bold">1</a>
-                    </div>
-                    <div>
-                        <a class="card-title card-title--sm-bold">Inicio Sesión</a>
-                    </div>
-                </li>
-                <li class="carro-de-compra__nav-link {{ $step >= 2 ? 'active' : '' }}">
-                    <div>
-                        <a class="card-title card-title--sm-bold">2</a>
-                    </div>
-                    <div>
-                        <a class="card-title card-title--sm-bold">Tipo de Envío</a>
-                    </div>
-                </li>
-                <li class="carro-de-compra__nav-link {{ $step >= 3 ? 'active' : '' }}">
-                    <div>
-                        <a class="card-title card-title--sm-bold">3</a>
-                    </div>
-                    <div>
-                        <a class="card-title card-title--sm-bold">Pago</a>
-                    </div>
-                </li>
-            </ul>
+    <div class="w-full max-w-3xl mx-auto justify-center items-center" >
+        <div class="flex items-center">
+            <div class="step {{ $step >= 1 ? 'active' : 'inactive' }}">1</div>
+            <div class="step-bar {{ $step >= 2 ? '' : 'inactive' }}"></div>
+            <div class="step {{ $step >= 2 ? 'active' : 'inactive' }}">2</div>
+            <div class="step-bar {{ $step >= 3 ? '' : 'inactive' }}"></div>
+            <div class="step {{ $step >= 3 ? 'active' : 'inactive' }}">3</div>
+        </div>
+        <div class="flex justify-between mt-2 text-sm font-medium text-zinc-700">
+            <div class="w-1/3 text-center">Inicio Sesión</div>
+            <div class="w-1/3 text-center">Tipo de Envío</div>
+            <div class="w-1/3 text-center">Pago</div>
         </div>
     </div>
 
@@ -40,8 +25,13 @@
             <div class="card">
                 <div class="card-body">
                     <h2>Detalles del Cliente</h2>
-                    <p><strong>Nombre:</strong> {{ Auth::user()->name }}</p>
-                    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                    @if(Auth::check())
+                        <p><strong>Nombre:</strong> {{ Auth::user()->name }}</p>
+                        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                    @else
+                        <p><strong>Nombre:</strong> Usuario no autenticado</p>
+                        <p><strong>Email:</strong> Usuario no autenticado</p>
+                    @endif
                     
                     <h2>Productos a Comprar</h2>
                     <div class="table-responsive">
@@ -80,6 +70,7 @@
         </div>
         
         <!-- Recuadro de la derecha -->
+        @if(Auth::check())
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -186,8 +177,61 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>¡Advertencia!</h2>
+                    <p>Debes iniciar sesión o registrarte para comprar.</p>
+                    <div class="mt-3">
+                        <a href="{{ route('login') }}" class="btn btn-primary">Iniciar Sesión</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Registrarse</a>
+                        <!-- Agrega el botón de recuperar contraseña cuando se tenga la ruta -->
+                        <!-- <a href="#" class="btn btn-link">¿Olvidaste tu contraseña?</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
+
+<style>
+    .flex{
+        align-items:center;
+    }
+    .step {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: white;
+        border: 2px solid #00c853;
+        color: #00c853;
+    }
+
+    .step.active {
+        background-color: #00c853;
+        color: white;
+    }
+
+    .step.inactive {
+        border-color: #bdbdbd;
+        color: #bdbdbd;
+    }
+
+    .step-bar {
+        flex-grow: 1;
+        height: 2px;
+        background-color: #00c853;
+    }
+
+    .step-bar.inactive {
+        background-color: #bdbdbd;
+    }
+</style>
 
 <script>
     function showNewAddressForm() {
@@ -213,6 +257,9 @@
         } else if (homeDelivery) {
             document.getElementById('store-pickup-options').style.display = 'none';
             document.getElementById('home-delivery-options').style.display = 'block';
+        
+            // Actualizar el paso
+            document.getElementById('step2').classList.add('active');
         }
     }
 
