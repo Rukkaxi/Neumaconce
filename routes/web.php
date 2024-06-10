@@ -76,6 +76,8 @@ Route::get('/shop/product/{id}', [ProductController::class, 'show'])->name('shop
 // Ruta para categorias
 Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.index');
 
+//Direccion
+Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
 
 
 // Lista de Deseos
@@ -99,8 +101,8 @@ Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add'); // Esta es la ruta que falta
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-
-
+Route::get('/cart/preorder', [CartController::class, 'showPreOrder'])->name('cart.showPreOrder');
+Route::get('/cart/preorder/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 
 
 // WEB PAY

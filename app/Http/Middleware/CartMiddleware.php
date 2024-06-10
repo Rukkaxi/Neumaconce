@@ -1,11 +1,11 @@
 <?php
-
+//FALTA IMPLEMENTAR CARTMIDDLEWARE
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Session;
-use App\Models\Cart;
+use Darryldecode\Cart\Cart as Cart;
 
 class CartMiddleware
 {

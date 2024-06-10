@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Darryldecode\Cart\Cart as Cart;
+use App\Models\Address;
+use App\Models\PaymentMethod;
+use App\Models\Commune;
+use App\Models\Region;
 
 class CartController extends Controller
 {
@@ -86,4 +90,76 @@ class CartController extends Controller
 
         return view('cart.index', compact('cartItems'));
     }
+
+    /* public function buy()
+    {
+        $cartItems = \Cart::getContent();
+
+        return view('cart.buy', compact('cartItems'));
+    } */
+
+    public function showPreOrder(Request $request)
+    {
+        // Establecer el paso actual en la sesión del usuario
+        $step = $request->session()->get('checkout_step', 1);
+        
+        $communes = Commune::all();
+        $regions = Region::all();
+        $addresses = Address::where('user_id', auth()->id())->get();
+        $paymentMethods = PaymentMethod::all();
+
+        return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step' ));
+    }
+
+    /* public function purchase(Request $request)
+    {
+        $request->validate([
+            'address' => 'required|exists:addresses,id',
+            'payment_method' => 'required|exists:payment_methods,id',
+        ]);
+
+        // Lógica de compra aquí
+
+        return redirect()->route('cart.index')->with('success', 'Compra realizada con éxito');
+    }
+
+    public function showBuyPage()
+    {
+        $user = Auth::user();
+        $addresses = $user->addresses; // Asumiendo que tienes una relación definida en el modelo User
+        $paymentMethods = PaymentMethod::all(); // Asumiendo que tienes un modelo PaymentMethod
+
+        return view('cart.buy', compact('addresses', 'paymentMethods'));
+    } */
+
+    public function purchase(Request $request)
+    {
+        $user = Auth::user();
+        $cartItems = \Cart::getContent();
+        $total = \Cart::getTotal();
+        
+
+        // Aquí puedes manejar la lógica de la compra, como guardar el pedido en la base de datos
+        // Por ejemplo:
+        $order = new Order();
+        $order->user_id = $user->id;
+        $order->address_id = $request->address;
+        $order->payment_method_id = $request->payment_method;
+        $order->total = $total;
+        $order->save();
+
+        foreach ($cartItems as $item) {
+            $order->items()->create([
+                'product_id' => $item->id,
+                'quantity' => $item->quantity,
+                'price' => $item->price,
+            ]);
+        }
+
+        // Limpia el carrito
+        \Cart::clear();
+
+        return redirect()->route('orders.index')->with('success', 'Compra realizada con éxito');
+    }
+
 }

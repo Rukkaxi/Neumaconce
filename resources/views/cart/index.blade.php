@@ -44,7 +44,7 @@
     </div>
     <div class="mt-3">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
-        <a href="{{ route('cart.show') }}" class="btn btn-primary">Comprar</a>
+        <a href="{{ route('cart.showPreOrder') }}" class="btn btn-primary">Comprar</a>
     </div>
 </div>
 <script>

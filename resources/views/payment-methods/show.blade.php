@@ -1,10 +1,7 @@
-@extends('layouts.backend')
+@extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+
                 <div class="card-header">
                     <h1>Detalles del Método de Pago</h1>
                 </div>
@@ -16,10 +13,7 @@
                         <p><strong>Foto:</strong></p>
                         <img src="{{ asset('storage/' . $paymentMethod->photo) }}" alt="Foto del método de pago" class="img-fluid">
                     @endif
-                    <a href="{{ route('payment-methods.show') }}">Volver al Listado</a>
+                    <a href="{{ url()->previous() }}">Volver al Listado</a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+                </div>
 @endsection
