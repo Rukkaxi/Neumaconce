@@ -7,8 +7,8 @@
     <div class="w-full max-w-3xl mx-auto justify-center items-center" >
         <div class="flex items-center">
             <div class="step {{ $step >= 1 ? 'active' : 'inactive' }}">1</div>
-            <div class="step-bar {{ $step >= 2 ? '' : 'inactive' }}"></div>
-            <div class="step {{ $step >= 2 ? 'active' : 'inactive' }}">2</div>
+            <div class="step-bar {{ $step <= 2 ? '' : 'inactive' }}"></div>
+            <div class="step {{ $step <= 2 ? 'active' : 'inactive' }}">2</div>
             <div class="step-bar {{ $step >= 3 ? '' : 'inactive' }}"></div>
             <div class="step {{ $step >= 3 ? 'active' : 'inactive' }}">3</div>
         </div>
