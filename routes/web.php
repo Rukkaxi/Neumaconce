@@ -12,6 +12,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PhotoController;
 
 /* Route::group(['middleware' => ['role:Admin|Moderador']], function(){
  */
@@ -81,7 +82,14 @@ Route::get('/shop/product/{id}', [ProductController::class, 'show'])->name('shop
 // Ruta para categorias
 Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.index');
 
+// Galeria de imagenes
 
+Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');
+Route::get('/gallery/create', [PhotoController::class, 'create'])->name('gallery.create');
+Route::post('/gallery', [PhotoController::class, 'store'])->name('gallery.store');
+Route::delete('/gallery/{photo}', [PhotoController::class, 'destroy'])->name('gallery.destroy');
+
+Route::get('/dashboard/gallery', [PhotoController::class, 'dashboardIndex'])->name('dashboard.gallery.index');
 
 // Lista de Deseos
 
