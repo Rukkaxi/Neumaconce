@@ -81,6 +81,8 @@ Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.in
 // Lista de Deseos
 
 Route::get('wishlist', [ProductController::class, 'wishlist'])->name('wishlist');
+Route::post('/wishlist/add/{productId}', [ProductController::class, 'addToWishlist'])->name('wishlist.add');
+Route::delete('/wishlist/remove/{id}', [ProductController::class, 'removeFromWishlist'])->name('wishlist.remove');
 
 
 Route::resource('addresses', AddressController::class);

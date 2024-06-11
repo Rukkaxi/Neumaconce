@@ -1,5 +1,3 @@
-<!-- resources/views/wishlist.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -14,14 +12,22 @@
                     <div class="row align-items-center">
                         <div class="col-md-3">
                             <div style="max-width: 150px; max-height: 150px; overflow: hidden;">
-                                <img src="{{ asset($item->product->image) }}" class="fixed-image" alt="{{ $item->product->name }}">
+                                <img src="{{ asset($item->product->image1) }}" class="fixed-image" alt="{{ $item->product->name }}">
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <h5 class="card-title">{{ $item->product->name }}</h5>
                             <p class="card-text">${{ $item->product->price }}</p>
                             <a href="{{ route('shop.product.show', $item->product->id) }}" class="btn btn-primary">View Details</a>
-                            <!-- You can add remove from wishlist button here -->
+                        </div>
+                        <div class="col-md-3">
+                            <form action="{{ route('wishlist.remove', $item->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i> Remove
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </li>

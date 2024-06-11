@@ -42,9 +42,9 @@ class ProductController extends Controller
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'categories' => 'required|array',
+            'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
-            'tags' => 'required|array',
+            'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
 
@@ -63,11 +63,16 @@ class ProductController extends Controller
         }
 
         $productData = $request->only(['name', 'price', 'brandId', 'stock', 'description']);
-        $productData['available'] = $request->has('available');
+        $productData['available'] = $request->has('available') ? true : false; // Ensure it's a boolean value
         $product = Product::create(array_merge($productData, $images));
 
-        $product->tags()->attach($request->tags);
-        $product->categories()->attach($request->categories);
+
+        if ($request->categories) {
+            $product->categories()->attach($request->categories);
+        }
+        if ($request->tags) {
+            $product->tags()->attach($request->tags);
+        }
 
         return redirect('products')->with('status', 'Producto creado exitósamente');
     }
@@ -83,21 +88,21 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'name' => 'required|string',
             'price' => 'nullable|numeric',
             'brandId' => 'required|exists:brands,id',
             'stock' => 'integer',
             'description' => 'required|string',
-            'available' => 'boolean',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'categories' => 'required|array',
+            'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
-            'tags' => 'required|array',
+            'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
 
@@ -123,11 +128,21 @@ class ProductController extends Controller
         }
 
         $productData = $request->only(['name', 'price', 'brandId', 'stock', 'description']);
-        $productData['available'] = $request->has('available');
+        $productData['available'] = $request->has('available') ? true : false; // Ensure it's a boolean value
         $product->update(array_merge($productData, $images));
 
-        $product->categories()->sync($request->categories);
-        $product->tags()->sync($request->tags);
+        if ($request->categories) {
+            $product->categories()->sync($request->categories);
+        } else {
+            $product->categories()->detach();
+        }
+        if ($request->tags) {
+            $product->tags()->sync($request->tags);
+        } else {
+            $product->tags()->detach();
+        }
+
+
 
         return redirect('products')->with('status', 'Producto actualizado exitósamente!');
     }
@@ -146,9 +161,14 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with('brand', 'categories', 'tags')->findOrFail($id);
-        return view('shop.show', compact('product'));
+        $product = Product::with(['brand', 'categories', 'tags'])->findOrFail($id);
+        $userId = auth()->id();
+        $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $id)->first();
+        $isInWishlist = $wishlistItem ? true : false;
+
+        return view('shop.show', compact('product', 'isInWishlist', 'wishlistItem'));
     }
+
 
     public function wishlist()
     {
@@ -165,5 +185,11 @@ class ProductController extends Controller
             'product_id' => $productId
         ]);
         return redirect()->back()->with('status', 'Product added to wishlist successfully.');
+    }
+    public function removeFromWishlist($id)
+    {
+        $userId = auth()->id();
+        Wishlist::where('user_id', $userId)->where('id', $id)->delete();
+        return redirect()->back()->with('status', 'Product removed from wishlist successfully.');
     }
 }

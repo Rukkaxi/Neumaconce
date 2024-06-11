@@ -8,10 +8,11 @@
                 <img src="{{ asset($product->image) }}" class="img-fluid main-image" alt="{{ $product->name }}">
             </div>
             <div id="thumbnailContainer" class="mt-3">
-                @for ($i = 1; $i <= 5; $i++) @if (!empty($product->{'image'.$i}))
-                    <img src="{{ asset($product->{'image'.$i}) }}" class="img-thumbnail" alt="{{ $product->name }} Image">
+                @for ($i = 1; $i <= 5; $i++) 
+                    @if (!empty($product->{'image'.$i}))
+                        <img src="{{ asset($product->{'image'.$i}) }}" class="img-thumbnail thumbnail-image" alt="{{ $product->name }} Image">
                     @endif
-                    @endfor
+                @endfor
             </div>
         </div>
         <div class="col-md-6">
@@ -21,15 +22,28 @@
             <p>Stock: {{ $product->stock }}</p>
             <p>Categories:
                 @foreach($product->categories as $category)
-                <span class="badge badge-secondary">{{ $category->name }}</span>
+                    <span class="badge badge-secondary">{{ $category->name }}</span>
                 @endforeach
             </p>
             <p>Tags:
                 @foreach($product->tags as $tag)
-                <span class="badge badge-primary">{{ $tag->name }}</span>
+                    <span class="badge badge-primary">{{ $tag->name }}</span>
                 @endforeach
             </p>
             <a href="#" class="btn btn-primary">Add to Cart</a>
+            
+            @if($isInWishlist)
+                <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
+                </form>
+            @else
+                <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">Add to Wishlist</button>
+                </form>
+            @endif
         </div>
     </div>
 </div>

@@ -53,8 +53,6 @@
     </div>
 </div>
 
-<button id="test-button">Test AJAX</button>
-
 
 @endsection
 
