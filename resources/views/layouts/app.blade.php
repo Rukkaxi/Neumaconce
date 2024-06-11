@@ -75,7 +75,7 @@
                         <a href='/' class="nav-item nav-link">Inicio</a>
 
                         <a href="{{ route('shop.index') }}" class="nav-item nav-link">Tienda</a>
-                        <a href="service" class="nav-item nav-link">Servicios</a>
+                        <a href="{{ route('gallery.index') }}" class="nav-item nav-link">Galeria</a>
 
                         {{-- Menu usuario registrado/noRegistrado --}}
                         <div class="nav-item dropdown">

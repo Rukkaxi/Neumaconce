@@ -7,7 +7,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="media/photos/photo1.jpg" alt="Image">
+                    <img class="w-100" src="media/photos/photo1.png" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="media/photos/photo2.jpg" alt="Image">
+                    <img class="w-100" src="media/photos/photo2.png" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">NEUMACONCE</h4>
@@ -90,7 +90,7 @@
             <h1 class="display-1 text-primary text-center">02</h1>
             <h1 class="display-4 text-uppercase text-center mb-5">Nuestros Servicios</h1>
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-2 " style="center">
+                <div class="col-lg-4 col-md-6 mb-2 ">
                     <a href="agendar-visitas.html" class="service-item-link">
                         <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
                             <div class="d-flex align-items-center justify-content-between mb-3">
@@ -160,10 +160,10 @@
         <div class="container py-5">
             <div class="bg-banner py-5 px-4 text-center">
                 <div class="py-5">
-                    <h1 class="display-1 text-uppercase text-primary mb-4">50% OFF</h1>
-                    <h1 class="text-uppercase text-light mb-4">Special Offer For New Members</h1>
-                    <p class="mb-4">Only for Sunday from 1st Jan to 30th Jan 2045</p>
-                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Register Now</a>
+                    <h1 class="display-1 text-uppercase text-primary mb-4">20% DE DESCUENTO</h1>
+                    <h1 class="text-uppercase text-light mb-4">Descuento especial para nuevos miembros</h1>
+                    <p class="mb-4">Solo disponible de Lunes a viernes</p>
+                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Regístrate Ahora</a>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
     <!-- Banner End -->
 
 
-    <!-- Rent A Car Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">03</h1>
@@ -306,10 +306,10 @@
             </div>
         </div>
     </div>
-    <!-- Rent A Car End -->
+     -->
 
 
-    <!-- Team Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="display-1 text-primary text-center">04</h1>
@@ -366,10 +366,10 @@
             </div>
         </div>
     </div>
-    <!-- Team End -->
+     -->
 
 
-    <!-- Banner Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="row mx-0">
@@ -396,10 +396,10 @@
             </div>
         </div>
     </div>
-    <!-- Banner End -->
+   -->
 
 
-    <!-- Testimonial Start -->
+    <!-- 
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="display-1 text-primary text-center">05</h1>
@@ -444,14 +444,14 @@
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+     -->
 
 
     <!-- Contact Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
-            <h1 class="display-1 text-primary text-center">06</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Contáctanos</h1>
+            <h1 class="display-1 text-primary text-center">03</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Tu opinión nos importa, Contáctanos</h1>
             <div class="row">
                 <div class="col-lg-7 mb-2">
                     <div class="contact-form bg-light mb-4" style="padding: 30px;">
@@ -481,24 +481,19 @@
                         <div class="d-flex mb-3">
                             <i class="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Ubicación</h5>
-                                <p>Freire #82, Concepción</p>
+                                <h5 class="text-light">Casa Matriz</h5>
+                                <p>FREIRE #82, CONCEPCIÓN</p>
                             </div>
                         </div>
+                    
                         <div class="d-flex mb-3">
                             <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
                             <div class="mt-n1">
-                                <h5 class="text-light">Servicio al Cliente</h5>
+                                <h5 class="text-light">Correo Electronico</h5>
                                 <p>bocar@bocar.cl</p>
                             </div>
                         </div>
-                        <div class="d-flex mb-3">
-                            <i class="fa fa-2x fa-phone text-primary flex-shrink-0 mr-3"></i>
-                            <div class="mt-n1">
-                                <h5 class="text-light">Teléfono</h5>
-                                <p>+56 9 7422 9630</p>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -510,37 +505,110 @@
     <!-- Vendor Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
+        <h1 class="display-1 text-primary text-center">04</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Nuestra Galeria</h1>
             <div class="owl-carousel vendor-carousel">
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-1.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-2.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-3.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-4.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-5.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-6.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-7.png" alt="">
                 </div>
                 <div class="bg-light p-4">
-                    <img src="" alt="">
+                    <img src="media/photos/vendor-8.png" alt="">
                 </div>
             </div>
         </div>
     </div>
     <!-- Vendor End -->
 
-    @include('layouts.footer')
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-uppercase text-light mb-4">Contáctanos</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>FREIRE #82, CONCEPCIÓN</p>
+                <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+569 8765 4321</p>
+                <p><i class="fa fa-envelope text-white mr-3"></i>bocar@bocar.cl</p>
+                <h6 class="text-uppercase text-white py-2">Síguenos</h6>
+                <div class="d-flex justify-content-start">
+                  <!--   <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a> -->
+                    <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="https://web.facebook.com/BOCARIMPORTACIONES?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
+                 <!--    <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a> -->
+                    <a class="btn btn-lg btn-dark btn-lg-square" href="https://www.instagram.com/neumaconce/?hl=es"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-uppercase text-light mb-4">condiciones</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Politicas</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Terminos & Condiciones</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Registros de nuevos miembros</a>
+                    <a class="text-body" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Ayuda & Preguntas</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-uppercase text-light mb-4">Galería de Vehiculos</h4>
+                <div class="row mx-n1">
+                    <div class="col-4 px-1 mb-2">
+                        <a href=""><img class="w-100" src="media/photos/vendor-1.png" alt=""></a>
+                        
+                    </div>
+                    <div class="col-4 px-1 mb-2">
+                        <a href=""><img class="w-100" src="media/photos/vendor-2.png" alt=""></a>
+                    </div>
+                    <div class="col-4 px-1 mb-2">
+                        <a href=""><img class="w-100" src="media/photos/vendor-3.png" alt=""></a>
+                    </div>
+                    <div class="col-4 px-1 mb-2">
+                        <a href=""><img class="w-100" src="media/photos/vendor-4.png" alt=""></a>
+                    </div>
+                    <div class="col-4 px-1 mb-2">
+                        <a href=""><img class="w-100" src="media/photos/vendor-5.png" alt=""></a>
+                    </div>
+                    <div class="col-4 px-1 mb-2">
+                        <a href=""><img class="w-100" src="media/photos/vendor-6.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-uppercase text-light mb-4">Suscribete</h4>
+                <p class="mb-4">Recibe ofertas de tu auto o de los productos que no tenemos en stock a tiempo real una vez que nos llegue a tu correo </p>
+                <div class="w-100 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-dark border-dark" style="padding: 25px;" placeholder="Tu Email">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary text-uppercase px-3">Regístrate</button>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
+        <p class="mb-2 text-center text-body">&copy; <a href="#">NEUMACONCE</a>. Todos los derechos Reservados.</p>
+        <p class="m-0 text-center text-body">Diseñado por <a href="#">FFIB</a></p>
+    </div>
+    <!-- Footer End -->
+
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
     @endsection

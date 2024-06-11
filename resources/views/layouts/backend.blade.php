@@ -416,6 +416,19 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-main-heading">Galeria de Imagenes</li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('gallery-create') ? ' active' : '' }}" href="{{url('gallery/create')}}">
+                <i class="nav-main-link-icon fa fa-credit-card"></i>
+                <span class="nav-main-link-name">Ingresar una imagen</span>
+              </a>
+            </li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('gallery-show') ? ' active' : '' }}" href="{{url('gallery/show')}}">
+                <i class="nav-main-link-icon fa fa-credit-card"></i>
+                <span class="nav-main-link-name">Ver las imagenes</span>
+              </a>
+            </li>
             <li class="nav-main-heading">Módulo de Ventas</li>
             <li class="nav-main-item">
               <a class="nav-main-link{{ request()->is('payment-methods') ? ' active' : '' }}" href="{{url('payment-methods')}}">
