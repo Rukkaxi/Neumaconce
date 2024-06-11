@@ -6,11 +6,19 @@
     <!-- Indicador de progreso -->
     <div class="w-full max-w-3xl mx-auto justify-center items-center" >
         <div class="flex items-center">
+        @if(Auth::check())
             <div class="step {{ $step >= 1 ? 'active' : 'inactive' }}">1</div>
             <div class="step-bar {{ $step <= 2 ? '' : 'inactive' }}"></div>
             <div class="step {{ $step <= 2 ? 'active' : 'inactive' }}">2</div>
             <div class="step-bar {{ $step >= 3 ? '' : 'inactive' }}"></div>
             <div class="step {{ $step >= 3 ? 'active' : 'inactive' }}">3</div>
+        @else
+            <div class="step {{ $step >= 1 ? 'active' : 'inactive' }}">1</div>
+            <div class="step-bar {{ $step >= 2 ? '' : 'inactive' }}"></div>
+            <div class="step {{ $step >= 2 ? 'active' : 'inactive' }}">2</div>
+            <div class="step-bar {{ $step >= 3 ? '' : 'inactive' }}"></div>
+            <div class="step {{ $step >= 3 ? 'active' : 'inactive' }}">3</div>
+        @endif
         </div>
         <div class="flex justify-between mt-2 text-sm font-medium text-zinc-700">
             <div class="w-1/3 text-center">Inicio Sesión</div>
