@@ -72,7 +72,7 @@
             });
         };
 
-        updateCartTotal();
+        
 
         document.querySelectorAll('.increase-quantity').forEach(button => {
             button.addEventListener('click', function () {
@@ -110,5 +110,6 @@
             });
         });
     });
+    
 </script>
 @endsection
