@@ -338,8 +338,8 @@ class ComposerStaticInit7bed13d6ffbdf7bb0adf1d7dc5828bc9
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -731,6 +731,7 @@ class ComposerStaticInit7bed13d6ffbdf7bb0adf1d7dc5828bc9
         'Database\\Seeders\\ProductsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductsTableSeeder.php',
         'Database\\Seeders\\RegionSeeder' => __DIR__ . '/../..' . '/database/seeders/RegionSeeder.php',
         'Database\\Seeders\\TagsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/TagsTableSeeder.php',
+        'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
         'Database\\Seeders\\VehiclesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/VehiclesTableSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',

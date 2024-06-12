@@ -14,6 +14,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\CotizacionController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -121,6 +122,12 @@ Route::get('/cart/preorder/purchase', [CartController::class, 'purchase'])->name
 Route::get('/webpay/init', [WebpayController::class, 'initTransaction'])->name('webpay.init');
 Route::match(['get', 'post'], '/webpay/response', [WebpayController::class, 'response'])->name('webpay.response');
 Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.finish');
+Route::resource('profile', App\Http\Controllers\UserController::class);
+
+// cotizaciones
+
+Route::get('views/cotizaciones', [CotizacionController::class, 'create'])->name('cotizaciones.form');
+Route::post('views/cotizaciones', [CotizacionController::class, 'store'])->name('cotizaciones.store');
 
 
 Route::get('/xd', function () {

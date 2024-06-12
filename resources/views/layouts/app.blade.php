@@ -11,6 +11,8 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet">
@@ -88,6 +90,9 @@
                             </div>
                         </div> -->
                         <a href="contact" class="nav-item nav-link">Contacto</a>
+                            
+
+                        <a class="nav-item nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
 
 
                         {{-- Dropdown de admin --}}

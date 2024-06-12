@@ -30,12 +30,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Brand', 'brandId');
     }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
-
     public function tags()
     {
         return $this->belongsToMany(Tag::class);

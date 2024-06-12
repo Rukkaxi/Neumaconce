@@ -1,0 +1,30 @@
+/* Asegúrate de tener estos estilos para centrar los formularios */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/path-to-your-background-image.jpg'); /* Mantén tu fondo actual */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    min-height: 100vh;
+}
+
+.card {
+    margin-top: -50px; /* Ajusta según sea necesario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.card-header {
+    border-radius: 8px 8px 0 0;
+}
+
+.btn-block {
+    width: 100%;
+}
