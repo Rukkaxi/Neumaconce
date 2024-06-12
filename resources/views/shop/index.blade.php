@@ -35,8 +35,8 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text mt-auto">${{ $product->price }}</p>
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('shop.product.show', $product->id) }}" class="btn btn-primary">View Details</a>
-                                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Add to Cart</button>
+                                <a href="{{ route('shop.product.show', $product->id) }}" class="btn btn-primary">Ver Detalles</a>
+                                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Añadir al carro</button>
                             </div>
                         </div>
                     </div>

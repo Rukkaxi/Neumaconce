@@ -47,9 +47,9 @@
                                 <div>
                                     <a href="{{ route('addresses.index') }}" class="btn btn-link">Mis vehiculos</a>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <a href="#" class="btn btn-link">Hola que tal</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 

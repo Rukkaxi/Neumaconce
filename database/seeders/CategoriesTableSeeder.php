@@ -9,6 +9,19 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-        Category::factory()->count(10)->create();
+        $categories = [
+            'Partes',
+            'Ruedas',
+            'Luces',
+            'Exteriores',
+            'Interiores',
+            'Audio & Electrónica',
+            'Herramientas',
+            // Agrega aquí cualquier otra categoría que necesites
+        ];
+
+        foreach ($categories as $category) {
+            Category::create(['name' => $category]);
+        }
     }
 }

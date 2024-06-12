@@ -20,28 +20,28 @@
             <p class="text-muted">{{ $product->brand->name }}</p>
             <p>${{ $product->price }}</p>
             <p>Stock: {{ $product->stock }}</p>
-            <p>Categories:
+            <p>Categorías:
                 @foreach($product->categories as $category)
                     <span class="badge badge-secondary">{{ $category->name }}</span>
                 @endforeach
             </p>
-            <p>Tags:
+            <p>Etiquetas:
                 @foreach($product->tags as $tag)
                     <span class="badge badge-primary">{{ $tag->name }}</span>
                 @endforeach
             </p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
+            <a href="#" class="btn btn-primary">Añadir al Carro</a>
             
             @if($isInWishlist)
                 <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
+                    <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
                 </form>
             @else
                 <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
                     @csrf
-                    <button type="submit" class="btn btn-secondary">Add to Wishlist</button>
+                    <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
                 </form>
             @endif
         </div>
@@ -66,15 +66,20 @@
 <script>
     // Script to change main image when clicking on thumbnail images
     document.addEventListener('DOMContentLoaded', function() {
-        var mainImage = document.querySelector('.main-image');
-        var thumbnailImages = document.querySelectorAll('.thumbnail-image');
+            var mainImage = document.querySelector('.main-image');
+            var thumbnailImages = document.querySelectorAll('.thumbnail-image');
 
-        thumbnailImages.forEach(function(thumbnail) {
-            thumbnail.addEventListener('click', function() {
-                mainImage.src = thumbnail.src;
+            thumbnailImages.forEach(function(thumbnail) {
+                thumbnail.addEventListener('click', function() {
+                    mainImage.src = thumbnail.src;
+                });
             });
+
+            // Simulate a click on the first thumbnail image
+            if (thumbnailImages.length > 0) {
+                thumbnailImages[0].click();
+            }
         });
-    });
 </script>
 
 @endsection
