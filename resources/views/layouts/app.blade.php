@@ -59,6 +59,7 @@
     </div>
     <!-- Topbar End -->
 
+    @include('layouts.search')
 
     <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">

@@ -9,26 +9,20 @@
         <div class="col-lg-3 mb-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Search Filter</h5>
-                    <!-- Future search filter form goes here -->
-                    <form>
-                        <!-- Example filter fields -->
+                    <h5 class="card-title">Filtro de Búsqueda</h5>
+                    <form action="{{ route('shop.index') }}" method="GET">
                         <div class="form-group">
-                            <label for="search">Search</label>
-                            <input type="text" class="form-control" id="search" placeholder="Search products">
+                            <label for="query">Buscar</label>
+                            <input type="text" class="form-control" id="query" name="query" placeholder="Nombre, categoría o etiqueta" value="{{ $query ?? '' }}">
                         </div>
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <select class="form-control" id="category">
-                                <option>All Categories</option>
-                                <!-- Populate with categories -->
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                        <button type="submit" class="btn btn-primary">Aplicar filtro</button>
+                        <a href="{{ route('shop.index') }}" class="btn btn-secondary ml-2">Quitar Filtros</a>
                     </form>
                 </div>
             </div>
         </div>
+
+
 
         <!-- Products section -->
         <div class="col-lg-9">
@@ -53,10 +47,7 @@
     </div>
 </div>
 
-
 @endsection
-
-
 
 @section('styles')
 <style>
