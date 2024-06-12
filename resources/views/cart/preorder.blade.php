@@ -122,7 +122,7 @@
                                             <select id="address" name="address" class="form-control">
                                                 <option value="" disabled selected>Seleccione una dirección</option>
                                                 @foreach($addresses as $address)
-                                                    <option value="{{ $address->id }}">{{ $address->full_address }}</option>
+                                                    <option value="{{ $address->id }}">{{ $address->full_address}}</option>
                                                 @endforeach
                                             </select>
                                             <a href="javascript:void(0);" onclick="showNewAddressForm()">Añadir dirección</a>

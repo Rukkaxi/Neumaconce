@@ -99,6 +99,11 @@ class CartController extends Controller
         $communes = Commune::all();
         $regions = Region::all();
         $addresses = Address::where('user_id', auth()->id())->get();
+         // Concatenate the full address
+         foreach ($addresses as $address) {
+            $communeName = $address->commune ? $address->commune->name : '';
+            $address->full_address = "{$address->name}, {$address->address1} {$address->number}, {$address->address2}, {$communeName}";
+        }
         $paymentMethods = PaymentMethod::all();
 
         return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step' ));
