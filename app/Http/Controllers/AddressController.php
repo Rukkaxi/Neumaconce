@@ -11,6 +11,10 @@ class AddressController extends Controller
     public function index()
     {
         $addresses = Address::with('commune')->where('user_id', auth()->id())->get();
+        // Concatenate the full address
+        foreach ($addresses as $address) {
+            $address->full_address = "{$address->name}, {$address->address1} {$address->number}, {$address->address2}, {$address->commune->name}";
+        }
         return view('addresses.index', compact('addresses'));
     }
 

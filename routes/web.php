@@ -77,8 +77,11 @@ Route::get('/shop/product/{id}', [ProductController::class, 'show'])->name('shop
 // Ruta para categorias
 Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.index');
 
-// Galeria de imagenes
 
+//Direccion
+Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
+
+// Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');
 Route::get('/gallery/create', [PhotoController::class, 'create'])->name('gallery.create');
 Route::post('/gallery', [PhotoController::class, 'store'])->name('gallery.store');
@@ -109,8 +112,8 @@ Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add'); // Esta es la ruta que falta
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-
-
+Route::get('/cart/preorder', [CartController::class, 'showPreOrder'])->name('cart.showPreOrder');
+Route::get('/cart/preorder/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 
 
 // WEB PAY

@@ -282,6 +282,7 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 updateQuantity(id, 'increase');
+                updateCartModal(cart);
             });
 
             // Decrease quantity button click handler
@@ -289,6 +290,7 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 updateQuantity(id, 'decrease');
+                updateCartModal(cart);
             });
 
             // Function to update quantity
@@ -316,6 +318,7 @@
             }
 
         });
+            
     </script>
 
 
