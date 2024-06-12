@@ -28,6 +28,6 @@ class CotizacionController extends Controller
 
         // Notificar al admin (puedes usar un sistema de notificaciones)
 
-        return redirect()->route('cotizaciones.form')->with('success', 'Solicitud de cotización enviada.');
+        return redirect()->route('cotizaciones.form')->with('success', 'Cotización registrada exitósamente!');
     }
 }
