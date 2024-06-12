@@ -78,14 +78,14 @@
                         <a href="{{ route('gallery.index') }}" class="nav-item nav-link">Galeria</a>
 
                         {{-- Menu usuario registrado/noRegistrado --}}
-                        <div class="nav-item dropdown">
+                        <!-- <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="team" class="dropdown-item">Equipo</a>
                                 <a href="testimonial" class="dropdown-item">Testimonio</a>
                                 <a href="about" class="dropdown-item">Sobre nosotros</a>
                             </div>
-                        </div>
+                        </div> -->
                         <a href="contact" class="nav-item nav-link">Contacto</a>
 
 
@@ -122,6 +122,11 @@
                         @endif
                         @endauth
 
+                        <!-- Search Filter Icon -->
+                        <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#searchFilterModal">
+                            <i class="fa fa-car"></i>
+                        </a>
+
                         <!-- Cart Icon -->
                         <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#cartModal">
                             <i class="fa fa-shopping-cart"></i>
@@ -135,7 +140,7 @@
 
     @include('layouts.cart')
 
-    
+
 
     <main class="py-4">
         @yield('content')

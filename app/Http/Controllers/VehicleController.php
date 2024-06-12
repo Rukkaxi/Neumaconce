@@ -62,11 +62,24 @@ class VehicleController extends Controller
     }
 
     // Add methods for fetching years, brands, and models
-    public function getYears()
+    public function getYears(Request $request)
     {
-        $years = Vehicle::select('year')->distinct()->orderBy('year', 'desc')->get();
+        $brandId = $request->input('brandId');
+        $model = $request->input('model');
+
+        // Query the database to get unique years for the selected brand and model
+        $years = Vehicle::where('brand_id', $brandId)
+            ->where('model', $model)
+            ->distinct('year')
+            ->pluck('year')
+            ->toArray();
+
+        // Debugging: Log the years
+        \Log::info('Years:', $years);
+
         return response()->json($years);
     }
+
 
     public function getBrands()
     {

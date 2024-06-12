@@ -8,9 +8,11 @@ class AddDescriptionToPhotosTable extends Migration
 {
     public function up()
     {
-        Schema::table('photos', function (Blueprint $table) {
-            $table->text('description')->nullable();
-        });
+        if (!Schema::hasColumn('photos', 'description')) {
+            Schema::table('photos', function (Blueprint $table) {
+                $table->text('description')->nullable();
+            });
+        }
     }
 
     public function down()

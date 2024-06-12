@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             TagsTableSeeder::class, 
             ProductsTableSeeder::class,
             RegionSeeder::class,
-            CommunesTableSeeder::class
+            CommunesTableSeeder::class,
+            VehiclesTableSeeder::class
         ]);
     }
 }
