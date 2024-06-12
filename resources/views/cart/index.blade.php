@@ -44,7 +44,7 @@
     </div>
     <div class="mt-3">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
-        <a href="{{ route('cart.showPreOrder') }}" class="btn btn-primary">Comprar</a>
+        <a href="{{ route('cart.showPreOrder') }}" id="buy-button" class="btn btn-primary">Comprar</a>
     </div>
 </div>
 <script>
@@ -72,7 +72,17 @@
             });
         };
 
+        const isEmptyCart = () => {
+            const items = document.querySelectorAll('#cart-items tr');
+            return items.length === 0;
+        };
         
+        document.querySelector('#buy-button').addEventListener('click', function (event) {
+            if (isEmptyCart()) {
+                event.preventDefault();
+                alert('El carrito está vacío. Por favor, agregue productos antes de proceder con la compra.');
+            }
+        });
 
         document.querySelectorAll('.increase-quantity').forEach(button => {
             button.addEventListener('click', function () {
