@@ -431,7 +431,7 @@
               </a>
             </li>
             <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('gallery-show') ? ' active' : '' }}" href="{{url('gallery/show')}}">
+              <a class="nav-main-link{{ request()->is('gallery-show') ? ' active' : '' }}" href="{{url('gallery')}}">
                 <i class="nav-main-link-icon fa fa-credit-card"></i>
                 <span class="nav-main-link-name">Ver las imagenes</span>
               </a>

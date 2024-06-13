@@ -14,4 +14,18 @@ class Vehicle extends Model
     {
         return $this->belongsTo('App\Models\Brand', 'brandId');
     }
+    public static function getBrands()
+    {
+        return self::select('brand')->distinct()->get();
+    }
+
+    public static function getModels($brand)
+    {
+        return self::select('model')->where('brand', $brand)->distinct()->get();
+    }
+
+    public static function getYears($brand, $model)
+    {
+        return self::select('year')->where('brand', $brand)->where('model', $model)->distinct()->get();
+    }
 }

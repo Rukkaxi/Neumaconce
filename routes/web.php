@@ -135,8 +135,8 @@ Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.
 
 // cotizaciones
 
-Route::get('views/cotizaciones', [CotizacionController::class, 'create'])->name('cotizaciones.form');
-Route::post('views/cotizaciones', [CotizacionController::class, 'store'])->name('cotizaciones.store');
+Route::get('/cotizaciones', [CotizacionController::class, 'create'])->name('cotizaciones.form');
+Route::post('/cotizaciones', [CotizacionController::class, 'store'])->name('cotizaciones.store');
 
 
 Route::get('/xd', function () {

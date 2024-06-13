@@ -18,13 +18,14 @@ class DatabaseSeeder extends Seeder
             BrandsTableSeeder::class,
             CategoriesTableSeeder::class, 
             TagsTableSeeder::class, 
-            ProductsTableSeeder::class,
             RegionSeeder::class,
             CommunesTableSeeder::class,
             VehiclesTableSeeder::class,
             UserSeeder::class,
             PaymentMethodsTableSeeder::class,
-            BranchesTableSeeder::class
+            ProductsTableSeeder::class,
+            BranchesTableSeeder::class,
+            PhotosTableSeeder::class
         ]);
     }
 }

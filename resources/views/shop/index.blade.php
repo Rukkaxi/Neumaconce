@@ -22,8 +22,6 @@
             </div>
         </div>
 
-
-
         <!-- Products section -->
         <div class="col-lg-9">
             <div class="row">
@@ -47,14 +45,26 @@
     </div>
 </div>
 
-@endsection
-
-@section('styles')
 <style>
     .fixed-image {
         width: 100%;
-        height: 200px;
-        object-fit: cover;
+        height: 200px; /* Set a fixed height for all images */
+        object-fit: cover; /* This ensures the image covers the area without stretching */
+    }
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
 </style>
+
+@endsection
+
+@section('styles')
+
 @endsection
