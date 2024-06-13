@@ -4,7 +4,6 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
-
             @if (session('status'))
             <div class="alert alert-success">{{ session('status') }}</div>
             @endif
@@ -20,14 +19,16 @@
                     <form method="post" action="{{ $url }}">
                         @csrf
                         <input type="hidden" name="token_ws" value="{{ $token }}">
-                        <input type="submit" value="Haga clic aquí si no es redirigido automáticamente" class="btn btn-primary">
+                        <input type="submit" id="submit-button" value="Haga clic aquí si no es redirigido automáticamente" class="btn btn-primary">
                     </form>
                     <script type="text/javascript">
-                        document.forms[0].submit();
+                        /* console.log('Session ID:', '{{ session()->getId() }}');
+                        console.log('User:', @json(auth()->user())); */
+
+                        document.getElementById('submit-button').click();
                     </script>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

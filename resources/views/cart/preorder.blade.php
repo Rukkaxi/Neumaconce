@@ -20,7 +20,7 @@
             <div class="step {{ $step >= 3 ? 'active' : 'inactive' }}">3</div>
         @endif
         </div>
-        <div class="flex justify-between mt-2 text-sm font-medium text-zinc-700">
+        <div class="flex justify-between mt-2 mb-5 text-sm font-medium text-zinc-700">
             <div class="w-1/3 text-center">Inicio Sesión</div>
             <div class="w-1/3 text-center">Tipo de Envío</div>
             <div class="w-1/3 text-center">Pago</div>
@@ -99,7 +99,9 @@
                                 <label for="branch">Selecciona una sucursal</label>
                                 <select id="branch" name="branch" class="form-control">
                                     <option value="" disabled selected>Seleccione una sucursal</option>
-                                    <!-- Opciones de sucursales -->
+                                    @foreach($branches as $branch)
+                                        <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -170,8 +172,6 @@
                             
                         </div>
                         
-                        
-                        
                         <div class="form-group">
                             <label for="payment_method">Método de pago</label>
                             <select id="payment_method" name="payment_method" class="form-control">
@@ -180,7 +180,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Comprar</button>
+                        <button type="submit" class="btn btn-primary" onclick="checkPaymentMethod()">Comprar</button>
                     </form>
                 </div>
             </div>
@@ -243,7 +243,12 @@
 
 <script>
     function showNewAddressForm() {
-        document.getElementById('new-address-form').style.display = 'block';
+        var form = document.getElementById('new-address-form');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
     }
 
     function saveAddress() {
@@ -286,6 +291,13 @@
             document.getElementById('other-receive-name').style.display = 'block';
         } else {
             document.getElementById('other-receive-name').style.display = 'none';
+        }
+    }
+
+    function checkPaymentMethod() {
+        var paymentMethod = document.getElementById('payment_method').value;
+        if (paymentMethod == 1) { // Assuming 1 is the ID for WebPay
+            document.getElementById('purchase-form').action = "{{ route('webpay.init') }}";
         }
     }
 </script>

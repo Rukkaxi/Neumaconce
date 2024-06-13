@@ -13,7 +13,6 @@ class PaymentMethod extends Model
     
     protected $fillable = [
         'name',
-        'guard_name',
         'description',
         'photo',
         // Agrega aquí otros campos de la tabla payment_methods que deseas que sean asignables en masa

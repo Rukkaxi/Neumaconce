@@ -12,7 +12,6 @@ class PaymentMethodController extends Controller
     public function index()
     {
         $payment_methods = PaymentMethod::all();
-        //dd($payment_methods);  // Añade esto para depurar
         return view('payment-methods.index', compact('payment_methods'));
     }
 
@@ -36,7 +35,6 @@ class PaymentMethodController extends Controller
 
         PaymentMethod::create([
             'name' => $request->name,
-            'guard_name' => 'web',
             'description' => $request->description,
             'photo' => $request->$photoPath,
         ]);

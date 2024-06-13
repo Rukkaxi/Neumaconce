@@ -16,8 +16,7 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('guard_name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
             $table->unique(['id']);

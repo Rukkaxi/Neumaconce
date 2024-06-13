@@ -390,32 +390,39 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-main-item{{ request()->is('orders/*') || request()->is('regions') || request()->is('communes') ? ' open' : '' }}">
+            <li class="nav-main-item{{ request()->is('orders/*') || request()->is('regions') || request()->is('communes') || request()->is('branches') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                 <i class="nav-main-link-icon fa-solid fa-shopping-cart"></i>
                 <span class="nav-main-link-name">Pedidos y direcciones</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('regions') ? ' active' : '' }}" href="{{url('regions')}}">
+                  <a class="nav-main-link{{ request()->is('regions') ? ' active' : '' }}" href="{{ url('regions') }}">
                     <i class="nav-main-link-icon fa-solid fa-earth-americas"></i>
                     <span class="nav-main-link-name">Regiones</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('communes') ? ' active' : '' }}" href="{{url('communes')}}">
+                  <a class="nav-main-link{{ request()->is('communes') ? ' active' : '' }}" href="{{ url('communes') }}">
                     <i class="nav-main-link-icon fa-solid fa-map-location-dot"></i>
                     <span class="nav-main-link-name">Comunas</span>
                   </a>
                 </li>
                 <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('orders') ? ' active' : '' }}" ">
+                  <a class="nav-main-link{{ request()->is('orders') ? ' active' : '' }}" href="{{ url('orders') }}">
                     <i class="nav-main-link-icon fa fa-shopping-cart"></i>
-                    <span class="nav-main-link-name unactive">Pedidos</span>
+                    <span class="nav-main-link-name">Pedidos</span>
+                  </a>
+                </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link{{ request()->is('branches') ? ' active' : '' }}" href="{{ url('branches') }}">
+                    <i class="nav-main-link-icon fa-solid fa-building"></i>
+                    <span class="nav-main-link-name">Sucursales</span>
                   </a>
                 </li>
               </ul>
             </li>
+
             <li class="nav-main-heading">Galeria de Imagenes</li>
             <li class="nav-main-item">
               <a class="nav-main-link{{ request()->is('gallery-create') ? ' active' : '' }}" href="{{url('gallery/create')}}">

@@ -103,6 +103,8 @@
 
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
 
+                                <a class="dropdown-item" href="{{ url('orders') }}">Mis Compras</a>
+
                                 <a class="dropdown-item" href="{{ route('wishlist') }}">Mi lista de deseados</a>
 
                                 <a class="dropdown-item" href="{{ url('profiles') }}">Perfil</a>
@@ -148,7 +150,7 @@
 
 
 
-    <main class="py-4">
+    <main >
         @yield('content')
     </main>
 
@@ -188,22 +190,6 @@
             // Test if jQuery is working
             console.log("jQuery is loaded and working!");
 
-            // Test AJAX request
-            $('#test-button').click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "/test-ajax",
-                    method: "GET",
-                    success: function(response) {
-                        console.log("AJAX request successful!");
-                        console.log(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("AJAX request failed!");
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
 
             // Add to cart functionality
             $(document).on('click', '.add-to-cart', function(e) {

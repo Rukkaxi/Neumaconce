@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             CommunesTableSeeder::class,
             VehiclesTableSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            PaymentMethodsTableSeeder::class,
+            BranchesTableSeeder::class
         ]);
     }
 }

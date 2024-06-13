@@ -15,6 +15,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
+use App\Http\Controllers\OrderController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -40,6 +41,9 @@ Route::get('brands/{id}/delete', [App\Http\Controllers\BrandController::class, '
 // Vehiculos
 Route::resource('vehicles', App\Http\Controllers\VehicleController::class);
 Route::get('vehicles/{id}/delete', [App\Http\Controllers\VehicleController::class, 'destroy']);
+
+//Sucursales
+Route::resource('branches', App\Http\Controllers\BranchController::class);
 
 // Etiquetas
 Route::resource('tags', App\Http\Controllers\TagController::class);
@@ -96,8 +100,11 @@ Route::get('wishlist', [ProductController::class, 'wishlist'])->name('wishlist')
 Route::post('/wishlist/add/{productId}', [ProductController::class, 'addToWishlist'])->name('wishlist.add');
 Route::delete('/wishlist/remove/{id}', [ProductController::class, 'removeFromWishlist'])->name('wishlist.remove');
 
-
+//Direcciones
 Route::resource('addresses', AddressController::class);
+
+//Ordenes
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
 
 // Garaje
@@ -119,10 +126,12 @@ Route::get('/cart/preorder/purchase', [CartController::class, 'purchase'])->name
 
 // WEB PAY
 
-Route::get('/webpay/init', [WebpayController::class, 'initTransaction'])->name('webpay.init');
+Route::post('/webpay/init', [WebpayController::class, 'initTransaction'])->name('webpay.init');
 Route::match(['get', 'post'], '/webpay/response', [WebpayController::class, 'response'])->name('webpay.response');
 Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.finish');
-Route::resource('profile', App\Http\Controllers\UserController::class);
+
+//Perfil
+/* Route::resource('profile', App\Http\Controllers\UserController::class); */
 
 // cotizaciones
 

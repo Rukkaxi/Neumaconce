@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,12 +10,9 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'cart_id',
-        'payment_method',
-        'total_amount',
-        'name',
-        'address',
-        'transactionID',
+        'address_id',
+        'payment_method_id',
+        'total',
     ];
 
     public function user()
@@ -24,8 +20,18 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cart()
+    public function address()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Address::class);
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

@@ -52,8 +52,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <a href="{{ route('cart.show') }}" class="btn btn-primary">Ver Carrito</a>
-                <a href="{{ route('webpay.init') }}" class="btn btn-primary">Pagar con Webpay</a>
+                <a href="{{ route('cart.showPreOrder') }}" id="buy-button" class="btn btn-primary">Comprar</a>
+                <!-- <a href="{{ route('cart.show') }}" class="btn btn-primary">Ver Carrito</a> -->
+                <!-- <a href="{{ route('webpay.init') }}" class="btn btn-primary">Pagar con Webpay</a> -->
             </div>
         </div>
     </div>
