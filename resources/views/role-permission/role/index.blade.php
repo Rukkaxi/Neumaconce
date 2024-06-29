@@ -2,24 +2,32 @@
 
 @section('content')
 
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
 
             @if (session('status'))
-                <div class="alert alert-success"> {{ session('status') }}</div>
+            <div class="alert alert-success"> {{ session('status') }}</div>
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Roles
-                        <a href=" {{url('roles/create')}} " class="btn btn-primary float-end">Añadir Roles</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Roles</h4>
+                    <a href="{{ url('roles/create') }}" class="btn btn-primary float-end">Añadir Roles</a>
                 </div>
 
+
                 <div class="card-body">
-                        
+
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -30,15 +38,15 @@
                         </thead>
                         <tbody>
                             @foreach ($roles as $role)
-                                <tr>
-                                    <td> {{$role->id}} </td>
-                                    <td> {{$role->name}} </td>
-                                    <td> 
-                                        <a href=" {{url('roles/'.$role->id.'/give-permissions')}} " class="btn btn-warning" >Editar Permisos</a>
-                                        <a href=" {{url('roles/'.$role->id.'/edit')}} " class="btn btn-warning" >Editar</a>
-                                        <a href=" {{url('roles/'.$role->id.'/delete')}} " class="btn btn-danger" >Eliminar</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td> {{$role->id}} </td>
+                                <td> {{$role->name}} </td>
+                                <td>
+                                    <a href=" {{url('roles/'.$role->id.'/give-permissions')}} " class="btn btn-warning">Editar Permisos</a>
+                                    <a href=" {{url('roles/'.$role->id.'/edit')}} " class="btn btn-warning">Editar</a>
+                                    <a href=" {{url('roles/'.$role->id.'/delete')}} " class="btn btn-danger delete-button">Eliminar</a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

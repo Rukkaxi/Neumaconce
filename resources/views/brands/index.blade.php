@@ -1,6 +1,26 @@
 @extends('layouts.backend')
 
 @section('content')
+
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
+
+<!-- <script>
+    if (typeof Swal !== 'undefined') {
+        // SweetAlert is loaded, you can use it here
+        Swal.fire('SweetAlert is loaded!');
+    } else {
+        // SweetAlert is not loaded
+        console.error('SweetAlert is not loaded!');
+    }
+</script> -->
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
@@ -10,10 +30,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>Marcas
-                        <a href=" {{ url('brands/create') }} " class="btn btn-primary float-end">Añadir Marcas</a>
-                    </h4>
+                <div class="card-header d-flex justify-content-between align-items-center ">
+                    <h4 class="mb-0">Marcas</h4>
+                    <a href=" {{ url('brands/create') }} " class="btn btn-primary float-end">Añadir Marcas</a>
+
                 </div>
 
                 <div class="card-body">
@@ -24,6 +44,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Imagen</th>
+                                <th>Acciones</th> <!-- Add Actions column -->
                             </tr>
                         </thead>
                         <tbody>
@@ -39,16 +60,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                <a href="{{ route('brands.edit', $brand->id) }}" class="btn btn-warning">Editar</a>
-                                <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </td>
+                                    <a href="{{ route('brands.edit', $brand->id) }}" class="btn btn-warning">Editar</a>
+                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display:inline;" class="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger delete-button">Eliminar</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
 
@@ -57,4 +78,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

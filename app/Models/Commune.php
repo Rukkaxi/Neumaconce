@@ -11,14 +11,14 @@ class Commune extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'regionId'];
+    protected $fillable = ['name', 'region_id'];
 
     /**
      * Get the region that owns the commune.
      */
     public function region()
     {
-        return $this->belongsTo('App\Models\Region', 'regionId');
+        return $this->belongsTo('App\Models\Region', 'region_id');
         
     }
 }

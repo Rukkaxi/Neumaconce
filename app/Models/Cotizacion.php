@@ -9,6 +9,8 @@ class Cotizacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'cotizaciones';
+
     protected $fillable = [
         'nombre', 'telefono', 'email', 'product_id', 'descripcion',
     ];

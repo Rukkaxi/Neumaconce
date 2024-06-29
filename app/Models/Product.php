@@ -17,7 +17,13 @@ class Product extends Model
         'price',
         'brandId',
         'stock',
-        'image'
+        'description',
+        'available',
+        'image1',
+        'image2',
+        'image3',
+        'image4',
+        'image5',
     ];
 
     public function brand()
@@ -32,5 +38,4 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
-
 }

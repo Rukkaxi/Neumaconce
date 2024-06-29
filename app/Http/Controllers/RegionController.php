@@ -44,8 +44,8 @@ class RegionController extends Controller
         return redirect('regions')->with('status', 'Región actualizada exitósamente!');
     }
 
-    public function destroy($tagId){
-        $region = Region::findOrFail($tagId);
+    public function destroy($id){
+        $region = Region::findOrFail($id);
         $region->delete();
         return redirect('regions')->with('status', 'Región eliminada exitósamente!');
     }

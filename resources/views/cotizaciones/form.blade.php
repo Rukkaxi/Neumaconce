@@ -1,9 +1,21 @@
 <!-- resources/views/cotizaciones/form.blade.php -->
 @extends('layouts.app')
 
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
+
 @section('content')
 <div class="container">
     <h2>Cotiza con nosotros</h2>
+    @if (session('status'))
+    <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
     <form action="{{ route('cotizaciones.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -22,7 +34,7 @@
             <label for="product_id">Producto a cotizar</label>
             <select class="form-control" id="product_id" name="product_id" required>
                 @foreach($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                <option value="{{ $product->id }}">{{ $product->name }}</option>
                 @endforeach
             </select>
         </div>

@@ -1,6 +1,16 @@
-@extends('layouts.backend')
+@extends('layouts.app')
 
 @section('content')
+
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
@@ -10,40 +20,45 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h4>User Profile</h4>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="w-75">
+                        <h4>Perfil de Usuario</h4>
+                    </div>
                 </div>
 
                 <div class="card-body">
-                    <h5>Update Password</h5>
-                    <form method="POST" action="{{ route('update-password') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="current_password" class="form-label">Current Password</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password" required>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Opciones</h5>
                         </div>
-                        <div class="mb-3">
-                            <label for="new_password" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="new_password" name="new_password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Password</button>
-                    </form>
 
-                    <hr>
+                        <div class="row">
+                            <!-- User Image -->
+                            <div class="py-3 px-3 col-md-3 d-flex justify-content-center align-items-center">
+                                <img src="{{ asset('media/avatars/avatar0.jpg') }}" alt="User Image" class="rounded-circle" style="max-width: 250px; max-height: 250px;">
+                            </div>
+                            <div class="py-3 col-md-9 d-flex flex-column">
+                                <div>
+                                    <a href="{{ route('profiles.edit') }}" class="btn btn-link">Cambiar Contraseña</a>
+                                </div>
+                                <div>
+                                    <a href="{{ route('addresses.index') }}" class="btn btn-link">Añadir Dirección</a>
+                                </div>
+                                <div>
+                                    <a href="{{ route('addresses.index') }}" class="btn btn-link">Mis vehiculos</a>
+                                </div>
+                                <!-- <div>
+                                    <a href="#" class="btn btn-link">Hola que tal</a>
+                                </div> -->
+                            </div>
+                        </div>
 
-                    <h5>Add Address</h5>
-                    <form method="POST" action="{{ route('add-address') }}">
-                        @csrf
-                        <!-- Include form fields for adding address -->
-                        <button type="submit" class="btn btn-primary">Add Address</button>
-                    </form>
+                        <hr>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> <!-- Added missing closing div for the container -->
 @endsection
