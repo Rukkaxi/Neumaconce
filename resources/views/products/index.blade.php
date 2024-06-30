@@ -49,9 +49,9 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center justify-content-between" style="width: 100px;">
                                         <button class="btn btn-sm btn-primary change-stock" data-id="{{ $product->id }}" data-action="decrease">-</button>
-                                        <span class="mx-2">{{ $product->stock }}</span>
+                                        <span class="mx-2 text-center" style="flex: 1; display: inline-block; width: 30px;">{{ $product->stock }}</span>
                                         <button class="btn btn-sm btn-primary change-stock" data-id="{{ $product->id }}" data-action="increase">+</button>
                                     </div>
                                 </td>
