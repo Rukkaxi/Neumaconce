@@ -14,18 +14,20 @@
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
-                    <p><strong>Estado:</strong>  
-                        <form action="{{ route('orders.admin_index.update', $order->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('PUT')
-                            <select class="form-control form-control-sm" name="status" onchange="this.form.submit()">
-                                <option value="EN ESPERA" {{ $order->status === 'EN ESPERA' ? 'selected' : '' }}>EN ESPERA</option>
-                                <option value="DESPACHADA" {{ $order->status === 'DESPACHADA' ? 'selected' : '' }}>DESPACHADA</option>
-                                <option value="RETIRADA" {{ $order->status === 'RETIRADA' ? 'selected' : '' }}>RETIRADA</option>
-                                <option value="TERMINADA" {{ $order->status === 'TERMINADA' ? 'selected' : '' }}>TERMINADA</option>
-                            </select>
-                            
-                        </form>
+                    <p>
+                        <div class="d-flex align-items-center">
+                            <strong>Estado:</strong>  
+                            <form action="{{ route('orders.admin_index.update', $order->id) }}" method="POST" style="margin-left: 15px;">
+                                @csrf
+                                @method('PUT')
+                                <select class="form-control form-control-sm" name="status" onchange="this.form.submit()">
+                                    <option value="EN ESPERA" {{ $order->status === 'EN ESPERA' ? 'selected' : '' }}>EN ESPERA</option>
+                                    <option value="DESPACHADA" {{ $order->status === 'DESPACHADA' ? 'selected' : '' }}>DESPACHADA</option>
+                                    <option value="RETIRADA" {{ $order->status === 'RETIRADA' ? 'selected' : '' }}>RETIRADA</option>
+                                    <option value="TERMINADA" {{ $order->status === 'TERMINADA' ? 'selected' : '' }}>TERMINADA</option>
+                                </select>
+                            </form>
+                        </div>
                     </p>  
                     <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>
                     <p><strong>Código de Autorización:</strong> {{ $order->authorization_code }}</p>
