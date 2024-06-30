@@ -104,8 +104,10 @@ Route::delete('/wishlist/remove/{id}', [ProductController::class, 'removeFromWis
 Route::resource('addresses', AddressController::class);
 
 //Ordenes
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-
+Route::get('/my_orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/my_orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('/orders', [OrderController::class, 'admin'])->name('orders.admin_index');
+Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.admin_index');
 
 // Garaje
 // Define the routes

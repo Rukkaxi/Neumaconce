@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
 <div class="container">
-    <h1>Mis Pedidos</h1>
+    <h1>Lista de Pedidos</h1>
     <div class="row mt-5">
         @foreach($orders as $order)
         <div class="col-md-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    Pedido #{{ $order->id }}
+                    Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}
                 </div>
                 <div class="card-body">
                     <p><strong>Total:</strong> ${{ $order->total }}</p>
@@ -33,7 +33,20 @@
                         @endforeach
                     </ul>
                     <h5 class="mt-3">Precio Total del Pedido: ${{ $order->items->sum(function($item) { return $item->price * $item->quantity; }) }}</h5>
-                    <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary mt-3">Ver Pedido</a>
+                    <form action="{{ route('orders.admin_index', $order->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="status">Estado:</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="EN ESPERA" {{ $order->status === 'EN ESPERA' ? 'selected' : '' }}>EN ESPERA</option>
+                                <option value="DESPACHADA" {{ $order->status === 'DESPACHADA' ? 'selected' : '' }}>DESPACHADA</option>
+                                <option value="RETIRADA" {{ $order->status === 'RETIRADA' ? 'selected' : '' }}>RETIRADA</option>
+                                <option value="TERMINADA" {{ $order->status === 'TERMINADA' ? 'selected' : '' }}>TERMINADA</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Actualizar Estado</button>
+                    </form>
                 </div>
             </div>
         </div>

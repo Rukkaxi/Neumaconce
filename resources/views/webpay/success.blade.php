@@ -23,6 +23,7 @@
                         <li>Monto: {{ $result->getAmount() }}</li>
                         <li>Código de Autorización: {{ $result->getAuthorizationCode() }}</li>
                     </ul>
+                    <a href="{{ route('orders.show', session('order_id')) }}" class="btn btn-primary mt-3">Ver Pedido</a>
                 </div>
             </div>
 

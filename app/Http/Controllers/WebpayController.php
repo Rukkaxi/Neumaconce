@@ -12,7 +12,7 @@ class WebpayController extends Controller
 {
     public function initTransaction()
     {
-        $buyOrder = 'ordenCompra' . rand(1000, 9999);
+        $buyOrder = rand(1000, 9999);
         $sessionId = session()->getId();
         $amount = round(Cart::getTotal());
         $returnUrl = route('webpay.response');

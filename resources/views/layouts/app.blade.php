@@ -103,7 +103,7 @@
 
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
 
-                                <a class="dropdown-item" href="{{ url('orders') }}">Mis Compras</a>
+                                <a class="dropdown-item" href="{{ url('my_orders') }}">Mis Compras</a>
 
                                 <a class="dropdown-item" href="{{ route('wishlist') }}">Mi lista de deseados</a>
 
