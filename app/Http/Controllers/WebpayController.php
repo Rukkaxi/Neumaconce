@@ -59,7 +59,13 @@ class WebpayController extends Controller
                     'payment_method_id' => 1, // Assuming 1 is the WebPay payment method ID
                     'transactionID' => $response->getAuthorizationCode(),
                     'address_id' => session('address_id'), // Assume address_id is stored in session
+                    'status' => 'EN ESPERA',
+                    'buy_order' => $response->getBuyOrder(), // Guardar Orden de Compra
+                    'authorization_code' => $response->getAuthorizationCode(), // Guardar Código de Autorización
                 ]);
+
+                // Store order in session to access in success.blade.php
+                session(['order' => $order]);
 
                 // Add order items
                 $cartItems = Cart::getContent();

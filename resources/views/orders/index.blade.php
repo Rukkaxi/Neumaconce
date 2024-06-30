@@ -15,6 +15,7 @@
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
                     <p><strong>Estado:</strong> {{ $order->status }}</p>
+                    
                     <h5>Productos:</h5>
                     <ul class="list-group">
                         @foreach($order->items as $item)
