@@ -9,7 +9,7 @@
         <div class="row mt-5">
             @foreach($orders as $order)
             <div class="col-md-12">
-                <div class="card mb-3">
+                <div class="card mb-3 rounded-lg">
                     <div class="card-header">
                         Pedido #{{ $order->id }}
                     </div>
