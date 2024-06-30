@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <h1>Lista de Pedidos</h1>
     <div class="row mt-5">
         @foreach($orders as $order)
