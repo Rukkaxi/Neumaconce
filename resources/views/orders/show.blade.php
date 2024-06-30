@@ -11,7 +11,6 @@
             Pedido #{{ $order->id }} - Estado: {{ $order->status }}
         </div>
         <div class="card-body">
-            <p><strong>Total:</strong> ${{ $order->total }}</p>
             <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
             <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
             <p><strong>Dirección:</strong> {{ $order->address }}</p>

@@ -11,14 +11,11 @@
                     Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}
                 </div>
                 <div class="card-body">
-                    <p><strong>Total:</strong> ${{ $order->total }}</p>
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
-                    <p><strong>Estado:</strong>
-                    <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>
-                    <p><strong>Código de Autorización:</strong> {{ $order->authorization_code }}</p>
-                        <form action="{{ route('orders.admin_index', $order->id) }}" method="POST" class="d-inline">
+                    <p><strong>Estado:</strong>  
+                        <form action="{{ route('orders.admin_index.update', $order->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('PUT')
                             <select class="form-control form-control-sm" name="status" onchange="this.form.submit()">
@@ -27,8 +24,12 @@
                                 <option value="RETIRADA" {{ $order->status === 'RETIRADA' ? 'selected' : '' }}>RETIRADA</option>
                                 <option value="TERMINADA" {{ $order->status === 'TERMINADA' ? 'selected' : '' }}>TERMINADA</option>
                             </select>
+                            
                         </form>
-                    </p>
+                    </p>  
+                    <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>
+                    <p><strong>Código de Autorización:</strong> {{ $order->authorization_code }}</p>
+                    <h5>Productos:</h5>
                     <ul class="list-group mt-3">
                         @foreach($order->items as $item)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
