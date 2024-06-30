@@ -191,7 +191,7 @@ class ProductController extends Controller
         Wishlist::where('user_id', $userId)->where('id', $id)->delete();
         return redirect()->back()->with('status', 'Product removed from wishlist successfully.');
     }
-    public function changeStock(Request $request, Product $product)
+    /* public function changeStock(Request $request, Product $product)
     {
         $action = $request->input('action');
         $stockChange = $action === 'increase' ? 1 : -1;
@@ -212,5 +212,49 @@ class ProductController extends Controller
             'success' => true,
             'new_stock' => $product->stock
         ]);
+    } */
+
+    public function changeStock(Request $request, Product $product)
+    {
+        $action = $request->input('action');
+
+        if ($action === 'set') {
+            $newStock = (int) $request->input('new_stock');
+
+            if ($newStock < 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'El stock no puede ser negativo.'
+                ]);
+            }
+
+            $product->stock = $newStock;
+            $product->save();
+
+            return response()->json([
+                'success' => true,
+                'new_stock' => $product->stock
+            ]);
+        } else {
+            $stockChange = $action === 'increase' ? 1 : -1;
+
+            $newStock = $product->stock + $stockChange;
+
+            if ($newStock < 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'El stock no puede ser negativo.'
+                ]);
+            }
+
+            $product->stock = $newStock;
+            $product->save();
+
+            return response()->json([
+                'success' => true,
+                'new_stock' => $product->stock
+            ]);
+        }
     }
+
 }

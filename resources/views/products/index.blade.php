@@ -49,10 +49,22 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>
-                                    <div class="d-flex align-items-center justify-content-between" style="width: 100px;">
-                                        <button class="btn btn-sm btn-primary change-stock" data-id="{{ $product->id }}" data-action="decrease">-</button>
-                                        <span class="mx-2 text-center" style="flex: 1; display: inline-block; width: 30px;">{{ $product->stock }}</span>
-                                        <button class="btn btn-sm btn-primary change-stock" data-id="{{ $product->id }}" data-action="increase">+</button>
+                                    <div class="d-flex align-items-center justify-content-between stock-control" style="width: 150px;">
+                                        <!-- Botón de disminuir stock -->
+                                        <button class="btn btn-sm btn-primary change-stock d-none" data-id="{{ $product->id }}" data-action="decrease">-</button>
+                                        <!-- Input de stock -->
+                                        <input type="number" class="form-control text-center stock-input" data-id="{{ $product->id }}" value="{{ $product->stock }}" readonly style="width: 80px; margin: 0 5px;">
+                                        <!-- Botón de aumentar stock -->
+                                        <button class="btn btn-sm btn-primary change-stock d-none" data-id="{{ $product->id }}" data-action="increase">+</button>
+                                        <!-- Botón de editar stock -->
+                                        <button class="btn btn-sm btn-secondary edit-stock" data-id="{{ $product->id }}">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <!-- Botón de guardar stock -->
+                                        <button class="btn btn-sm btn-success save-stock d-none" data-id="{{ $product->id }}">
+                                            <i class="fas fa-save"></i>
+                                        </button>
+                                        
                                     </div>
                                 </td>
                                 <td>{{ $product->description }}</td>
@@ -94,19 +106,69 @@
         </div>
     </div>
 </div>
+<style>
+    .save-stock-container {
+        display: block;
+        margin-top: 10px; /* Ajusta el margen según tu diseño */
+    }
+</style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.change-stock');
         buttons.forEach(button => {
-            button.addEventListener('click', function() {
+            let timer;
+            button.addEventListener('mousedown', function() {
                 const productId = this.dataset.id;
                 const action = this.dataset.action;
-                const stockElement = this.parentElement.querySelector('span');
+                const stockElement = this.parentElement.querySelector('.stock-input');
+
+                // Update stock number continuously while holding the button
+                timer = setInterval(() => {
+                    let currentStock = parseInt(stockElement.value);
+                    if (action === 'increase') {
+                        stockElement.value = currentStock + 1;
+                    } else if (action === 'decrease' && currentStock > 0) {
+                        stockElement.value = currentStock - 1;
+                    }
+                }, 100);
+            });
+
+            button.addEventListener('mouseup', function() {
+                clearInterval(timer);
+            });
+
+            button.addEventListener('mouseleave', function() {
+                clearInterval(timer);
+            });
+        });
+
+        const editButtons = document.querySelectorAll('.edit-stock');
+        editButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                const stockElement = this.parentElement.querySelector('.stock-input');
+                const saveButton = this.parentElement.querySelector('.save-stock');
+                const changeButtons = this.parentElement.querySelectorAll('.change-stock');
+
+                stockElement.removeAttribute('readonly');
+                this.classList.add('d-none');
+                saveButton.classList.remove('d-none');
+                changeButtons.forEach(btn => btn.classList.remove('d-none'));
+            });
+        });
+
+        const saveButtons = document.querySelectorAll('.save-stock');
+        saveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                const stockElement = this.parentElement.querySelector('.stock-input');
+                const editButton = this.parentElement.querySelector('.edit-stock');
+                const changeButtons = this.parentElement.querySelectorAll('.change-stock');
 
                 // Confirm the action
                 Swal.fire({
                     title: '¿Estás seguro?',
-                    text: `¿Deseas ${action === 'increase' ? 'aumentar' : 'disminuir'} el stock?`,
+                    text: `¿Deseas actualizar el stock a ${stockElement.value}?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -122,18 +184,21 @@
                                 'Content-Type': 'application/json',
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
-                            body: JSON.stringify({ action: action })
+                            body: JSON.stringify({ action: 'set', new_stock: stockElement.value })
                         })
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
                                 Swal.fire(
                                     'Actualizado',
-                                    `El stock ha sido ${action === 'increase' ? 'aumentado' : 'disminuido'}.`,
+                                    `El stock ha sido actualizado.`,
                                     'success'
                                 );
-                                // Update the stock element
-                                stockElement.textContent = data.new_stock;
+                                // Set the stock element as read-only again
+                                stockElement.setAttribute('readonly', true);
+                                this.classList.add('d-none');
+                                editButton.classList.remove('d-none');
+                                changeButtons.forEach(btn => btn.classList.add('d-none'));
                             } else {
                                 Swal.fire(
                                     'Error',
