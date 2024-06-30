@@ -115,7 +115,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
-                    <a href="cotizar.html" class="service-item-link">
+                    <a href="cotizaciones" class="service-item-link">
                         <div class="service-item active d-flex flex-column justify-content-center px-4 mb-4">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
