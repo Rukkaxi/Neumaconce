@@ -64,6 +64,7 @@ Route::get('categories/{id}/delete', [App\Http\Controllers\CategoryController::c
 // Products
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
+Route::post('products/{product}/change-stock', [ProductController::class, 'changeStock'])->name('products.changeStock');
 
 // Profile
 //Route::resource('profiles', App\Http\Controllers\UserController::class);

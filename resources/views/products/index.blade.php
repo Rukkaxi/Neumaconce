@@ -48,7 +48,13 @@
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
-                                <td>{{ $product->stock }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <button class="btn btn-sm btn-primary change-stock" data-id="{{ $product->id }}" data-action="decrease">-</button>
+                                        <span class="mx-2">{{ $product->stock }}</span>
+                                        <button class="btn btn-sm btn-primary change-stock" data-id="{{ $product->id }}" data-action="increase">+</button>
+                                    </div>
+                                </td>
                                 <td>{{ $product->description }}</td>
                                 <td>{{ $product->available ? 'Sí' : 'No' }}</td>
                                 <td>
@@ -69,12 +75,14 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Editar</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger delete-button">Eliminar</button>
-                                    </form>
+                                    <div class="button-group" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" style="flex-grow: 1; margin-right: 5px;">Editar</a>
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="flex-grow: 1; margin-left: 5px;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger delete-button" style="width: 100%;">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -86,4 +94,65 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.change-stock');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                const action = this.dataset.action;
+                const stockElement = this.parentElement.querySelector('span');
+
+                // Confirm the action
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: `¿Deseas ${action === 'increase' ? 'aumentar' : 'disminuir'} el stock?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, confirmar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send AJAX request to update the stock
+                        fetch(`/products/${productId}/change-stock`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ action: action })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire(
+                                    'Actualizado',
+                                    `El stock ha sido ${action === 'increase' ? 'aumentado' : 'disminuido'}.`,
+                                    'success'
+                                );
+                                // Update the stock element
+                                stockElement.textContent = data.new_stock;
+                            } else {
+                                Swal.fire(
+                                    'Error',
+                                    data.message,
+                                    'error'
+                                );
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire(
+                                'Error',
+                                'Ocurrió un error al actualizar el stock.',
+                                'error'
+                            );
+                        });
+                    }
+                });
+            });
+        });
+    });
+</script>
 @endsection
