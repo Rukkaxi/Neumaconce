@@ -64,8 +64,11 @@ class WebpayController extends Controller
                     'authorization_code' => $response->getAuthorizationCode(), // Guardar Código de Autorización
                 ]);
 
+                // Update $step to 3
+                $step = 3;
+
                 // Store order in session to access in success.blade.php
-                session(['order' => $order]);
+                session(['order' => $order, 'step' => $step]);
 
                 // Add order items
                 $cartItems = Cart::getContent();
@@ -81,7 +84,7 @@ class WebpayController extends Controller
                 Cart::clear();
             }
 
-            return view('webpay.success', ['result' => $response]);
+            return view('webpay.success', ['result' => $response, 'step' => $step]);
         }
 
         return view('webpay.failure', ['result' => $response]);
