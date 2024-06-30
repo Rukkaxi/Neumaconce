@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Mis Pedidos</h1>
+    <h1>Mis Compras</h1>
     <div class="row mt-5">
         @foreach($orders as $order)
         <div class="col-md-12">

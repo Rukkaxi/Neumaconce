@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-end mt-3">
-        <a href="{{ route('orders.index') }}" class="btn btn-primary mt-3">Ver Mis Pedidos</a>
+        <a href="{{ route('orders.index') }}" class="btn btn-primary mt-3">Ver Mis Compras</a>
     </div>
         <h1>Detalles del Pedido #{{ $order->id }}</h1>
     <div class="card mb-3">
