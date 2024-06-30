@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
+    <h1>Detalles de compra</h1>
     <div class="d-flex justify-content-end mt-3">
         <a href="{{ route('orders.index') }}" class="btn btn-primary mt-3">Ver Mis Compras</a>
-    </div>
-        <h1>Detalles del Pedido #{{ $order->id }}</h1>
+    </div><hr>
     <div class="card mb-3">
         <div class="card-header">
-            Pedido #{{ $order->id }}
+            <h1>Pedido #{{ $order->id }}</h1>
         </div>
         <div class="card-body">
             <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
