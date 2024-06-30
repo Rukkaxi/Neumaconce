@@ -5,8 +5,8 @@
     <h1>Lista de Pedidos</h1>
     <div class="row mt-5">
         @foreach($orders as $order)
-        <div class="col-md-12">
-            <div class="card mb-3">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
                 <div class="card-header">
                     Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}
                 </div>
@@ -15,38 +15,33 @@
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
-                    <p><strong>Estado:</strong> {{ $order->status }}</p>
-                    <h5>Productos:</h5>
-                    <ul class="list-group">
-                        @foreach($order->items as $item)
-                        <li class="list-group-item d-flex align-items-center">
-                            @php
-                                $image = $item->product->image1 ?? $item->product->image2 ?? $item->product->image3 ?? $item->product->image4 ?? $item->product->image5 ?? null;
-                            @endphp
-                            @if($image)
-                            <img src="{{ asset($image) }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
-                            @endif
-                            <div>
-                                {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                    <h5 class="mt-3">Precio Total del Pedido: ${{ $order->items->sum(function($item) { return $item->price * $item->quantity; }) }}</h5>
-                    <form action="{{ route('orders.admin_index', $order->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="status">Estado:</label>
-                            <select class="form-control" id="status" name="status">
+                    <p><strong>Estado:</strong>
+                    <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>
+                    <p><strong>Código de Autorización:</strong> {{ $order->authorization_code }}</p>
+                        <form action="{{ route('orders.admin_index', $order->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('PUT')
+                            <select class="form-control form-control-sm" name="status" onchange="this.form.submit()">
                                 <option value="EN ESPERA" {{ $order->status === 'EN ESPERA' ? 'selected' : '' }}>EN ESPERA</option>
                                 <option value="DESPACHADA" {{ $order->status === 'DESPACHADA' ? 'selected' : '' }}>DESPACHADA</option>
                                 <option value="RETIRADA" {{ $order->status === 'RETIRADA' ? 'selected' : '' }}>RETIRADA</option>
                                 <option value="TERMINADA" {{ $order->status === 'TERMINADA' ? 'selected' : '' }}>TERMINADA</option>
                             </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Actualizar Estado</button>
-                    </form>
+                        </form>
+                    </p>
+                    <ul class="list-group mt-3">
+                        @foreach($order->items as $item)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <img src="{{ asset($item->product->image ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
+                                {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <h5 class="text-right">Total: ${{ $order->total }}</h5>
                 </div>
             </div>
         </div>
