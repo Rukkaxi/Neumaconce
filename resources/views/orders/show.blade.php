@@ -8,7 +8,7 @@
         <h1>Detalles del Pedido #{{ $order->id }}</h1>
     <div class="card mb-3">
         <div class="card-header">
-            Pedido #{{ $order->id }} - Estado: {{ $order->status }}
+            Pedido #{{ $order->id }}
         </div>
         <div class="card-body">
             <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
