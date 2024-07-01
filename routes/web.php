@@ -16,6 +16,7 @@ use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SalesController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -85,6 +86,9 @@ Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.in
 
 //Direccion
 Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
+
+// Gráfico de ventas
+Route::get('/graphics', [SalesController::class, 'index'])->name('graphics.index');
 
 // Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');

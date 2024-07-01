@@ -423,11 +423,12 @@
               </ul>
             </li>
 
-            <li class="nav-main-heading">Gráficos de Tienda</li>
+            <!-- GRAFICOS DE VENTAS/ETC -->
+            <li class="nav-main-heading">Despliegue Gráfico</li>
             <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('gallery-create') ? ' active' : '' }}" href="{{url('gallery/create')}}">
+              <a class="nav-main-link{{ request()->is('graphics') ? ' active' : '' }}" href="{{ route('graphics.index') }}">
                 <i class="nav-main-link-icon fa fa-bar-chart"></i>
-                <span class="nav-main-link-name">Gráfico ventas</span>
+                <span class="nav-main-link-name">Información Gráfica</span>
               </a>
             </li>
 
