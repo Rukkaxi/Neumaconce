@@ -109,6 +109,9 @@ Route::get('/my_orders', [OrderController::class, 'index'])->name('orders.index'
 Route::get('/my_orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 Route::get('/orders', [OrderController::class, 'admin'])->name('orders.admin_index');
 Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.admin_index.update');
+//Route::get('/my_orders/{order}/tracking', [OrderController::class, 'showTracking'])->name('orders.showTracking');
+//Route::post('/my_orders/{order}/tracking', [OrderController::class, 'storeTracking'])->name('orders.storeTracking');
+
 
 // Garaje
 // Define the routes

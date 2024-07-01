@@ -35,6 +35,8 @@
                 @endforeach
             </ul>
             <h5 class="mt-3">Precio Total del Pedido: ${{ $order->items->sum(function($item) { return $item->price * $item->quantity; }) }}</h5>
+            
+            <a href="" class="btn btn-primary mt-3 ml-3">Ver Seguimiento</a>
         </div>
     </div>
 </div>
