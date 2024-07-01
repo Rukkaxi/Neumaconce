@@ -114,36 +114,6 @@ class CartController extends Controller
         return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step', 'branches', 'deliveryType'));
     }
 
-
-    /* public function purchase(Request $request)
-    {
-        $user = Auth::user();
-        $cartItems = Cart::getContent();
-        $total = Cart::getTotal();
-
-        // Create order
-        $order = Order::create([
-            'user_id' => $user->id,
-            'address_id' => $request->address,
-            'payment_method_id' => $request->payment_method,
-            'total' => $total,
-        ]);
-
-        // Create order items
-        foreach ($cartItems as $item) {
-            $order->items()->create([
-                'product_id' => $item->id,
-                'quantity' => $item->quantity,
-                'price' => $item->price,
-            ]);
-        }
-
-        // Clear the cart
-        Cart::clear();
-
-        // Redirect to orders index with success message
-        return redirect()->route('orders.index')->with('success', 'Compra realizada con éxito');
-    } */
     public function purchase(Request $request)
     {
         // Validar y procesar la solicitud
@@ -158,11 +128,8 @@ class CartController extends Controller
             'total' => $amount, // Ajusta según cómo obtengas el total
             'delivery_type' => $request->input('delivery_type'), // Guardar el tipo de entrega seleccionado
             // Otros campos del pedido
-        ]);
-
-        // Procesar el resto de la compra y redirigir o mostrar la confirmación
-
-        return redirect()->route('checkout.success'); // Ejemplo de redirección después de la compra
+        ]);      
+        
     }
 
 }
