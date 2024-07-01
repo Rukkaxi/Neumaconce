@@ -10,7 +10,7 @@ use App\Models\OrderItem;
 
 class WebpayController extends Controller
 {
-    public function initTransaction()
+    public function initTransaction(Request $request)
     {
         $buyOrder = rand(1000, 9999);
         $sessionId = session()->getId();
@@ -21,6 +21,8 @@ class WebpayController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'total' => $amount,
+            'address_id' => $request->address_id,
+            'delivery_type' => $request->delivery_type,
         ]);
 
         $transaction = new Transaction();

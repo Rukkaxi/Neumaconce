@@ -85,15 +85,15 @@
                     <h2>Dirección y Método de Pago</h2>
                     <form action="{{ route('cart.purchase') }}" method="POST" id="purchase-form">
                         @csrf
-                        
-                        <div class="form-group">
+                        <!-- Selección del tipo de entrega -->
+                        <div id="delivery_type" class="form-group">
                             <label for="delivery_type">Seleccionar tipo de entrega</label><br>
-                            <input type="radio" id="store_pickup" name="delivery_type" value="store_pickup" onclick="toggleDeliveryOptions()">
+                            <input type="radio" id="store_pickup" name="delivery_type" value="Retiro en tienda" onclick="toggleDeliveryOptions()">
                             <label for="store_pickup">Retiro en tienda</label><br>
-                            <input type="radio" id="home_delivery" name="delivery_type" value="home_delivery" onclick="toggleDeliveryOptions()">
+                            <input type="radio" id="home_delivery" name="delivery_type" value="Despacho a domicilio" onclick="toggleDeliveryOptions()">
                             <label for="home_delivery">Despacho a domicilio</label>
                         </div>
-                        
+                        <!-- Opciones de retiro en tienda -->
                         <div id="store-pickup-options" style="display: none;">
                             <div class="form-group">
                                 <label for="branch">Selecciona una sucursal</label>
@@ -116,12 +116,12 @@
                                 <input type="text" id="pickup_name" name="pickup_name" class="form-control">
                             </div>
                         </div>
-                        
+                        <!-- Opciones de despacho a domicilio -->
                         <div id="home-delivery-options" style="display: none;">
                             <div class="form-group">
                                 <label for="address">Direcciones de despacho</label><br>
                                         <div class="form-group">
-                                            <select id="address" name="address" class="form-control">
+                                            <select id="address" name="address_id" class="form-control">
                                                 <option value="" disabled selected>Seleccione una dirección</option>
                                                 @foreach($addresses as $address)
                                                     <option value="{{ $address->id }}">{{ $address->full_address}}</option>

@@ -99,7 +99,7 @@ class CartController extends Controller
     {
         // Establecer el paso actual en la sesión del usuario
         $step = $request->session()->get('checkout_step', 1);
-
+        $deliveryType = $request->session()->get('delivery_type');
         $communes = Commune::all();
         $regions = Region::all();
         $addresses = Address::where('user_id', auth()->id())->get();
@@ -111,7 +111,7 @@ class CartController extends Controller
         $paymentMethods = PaymentMethod::all();
         $branches = Branch::all(); // Fetch branches
 
-        return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step', 'branches'));
+        return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step', 'branches', 'deliveryType'));
     }
 
 
@@ -144,4 +144,25 @@ class CartController extends Controller
         // Redirect to orders index with success message
         return redirect()->route('orders.index')->with('success', 'Compra realizada con éxito');
     } */
+    public function purchase(Request $request)
+    {
+        // Validar y procesar la solicitud
+        $request->validate([
+            // Otros campos validados
+            'delivery_type' => 'required|in:store_pickup,home_delivery',
+        ]);
+
+        // Crear el pedido en la base de datos
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'total' => $amount, // Ajusta según cómo obtengas el total
+            'delivery_type' => $request->input('delivery_type'), // Guardar el tipo de entrega seleccionado
+            // Otros campos del pedido
+        ]);
+
+        // Procesar el resto de la compra y redirigir o mostrar la confirmación
+
+        return redirect()->route('checkout.success'); // Ejemplo de redirección después de la compra
+    }
+
 }

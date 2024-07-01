@@ -13,6 +13,7 @@
                 <div class="card-body">
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
+                    <p><strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
                     <p>
                         <div class="d-flex align-items-center">

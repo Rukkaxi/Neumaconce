@@ -13,6 +13,7 @@ class Order extends Model
         'address_id',
         'payment_method_id',
         'status',
+        'delivery_type',
         'total',
         'buy_order',
         'authorization_code',
