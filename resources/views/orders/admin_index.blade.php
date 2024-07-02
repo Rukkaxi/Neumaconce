@@ -26,7 +26,12 @@
                             @foreach($order->items as $item)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img src="{{ asset($item->product->image ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
+                                @php
+                                    $image = $item->product->image1 ?? $item->product->image2 ?? $item->product->image3 ?? $item->product->image4 ?? $item->product->image5 ?? null;
+                                @endphp
+                                    @if($image)
+                                    <img src="{{ asset($image) }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
+                                    @endif
                                     {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
                                 </div>
                             </li>
