@@ -36,7 +36,7 @@
             </ul>
             <h5 class="mt-3">Precio Total del Pedido: ${{ $order->items->sum(function($item) { return $item->price * $item->quantity; }) }}</h5>
             
-            <a href="" class="btn btn-primary mt-3 ml-3">Ver Seguimiento</a>
+            <a href="{{ url('/tracking/'.$order->buy_order) }}" class="btn btn-primary">Seguimiento</a>
         </div>
     </div>
 </div>

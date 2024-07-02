@@ -41,4 +41,31 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Estado del pedido actualizado correctamente.');
     }
+    // Método para mostrar la vista de seguimiento de pedidos en la vista de administrador
+    public function adminTracking(Order $order)
+    {
+        return view('orders.admin_tracking', compact('order'));
+    }
+    public function tracking($buyOrder)
+{
+    // Busca la orden por el número de pedido
+    $order = Order::where('buy_order', $buyOrder)->first();
+
+    // Verifica si la orden existe
+    if (!$order) {
+        abort(404);
+    }
+
+    // Verifica si el usuario está logueado y si es el dueño de la orden
+    $isOwner = Auth::check() && $order->user_id === Auth::id();
+
+    // Si no es el dueño y la orden no está en estado "TERMINADA", redirige o muestra un mensaje según lo necesites
+    if (!$isOwner && $order->status !== 'TERMINADA') {
+        return redirect()->route('home')->with('error', 'No tienes permiso para ver este pedido.');
+    }
+
+    // Si es el dueño o la orden está en estado "TERMINADA", muestra la vista de seguimiento
+    return view('orders.tracking', compact('order'));
+}
+
 }
