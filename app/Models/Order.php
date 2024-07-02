@@ -38,4 +38,11 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    // En el modelo Order.php
+
+    public function tracking_updates()
+    {
+        return $this->hasMany(TrackingUpdate::class);
+    }
+
 }

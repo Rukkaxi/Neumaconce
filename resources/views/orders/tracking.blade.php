@@ -42,12 +42,11 @@
                     <h1>Actualizaciones del Pedido</h1>
                 </div>
                 <div class="card-body">
-                    @if($order->orderUpdates && $order->orderUpdates->count() > 0)
-                        @foreach($order->orderUpdates as $update)
+                    @if($order->tracking_updates && $order->tracking_updates->count() > 0)
+                        @foreach($order->tracking_updates as $update)
                         <div class="alert alert-info">
                             <p><strong>Fecha y Hora:</strong> {{ $update->created_at }}</p>
-                            <p><strong>Estado Actualizado:</strong> {{ $update->status }}</p>
-                            <p>{{ $update->description }}</p>
+                            <p><strong>Descripción:</strong> {{ $update->description }}</p>
                         </div>
                         @endforeach
                     @else
@@ -61,8 +60,8 @@
             </div>
             
         </div>
-        <!-- Botón de Volver -->
-        <a href="{{ back()->getTargetUrl() }}" class="btn btn-primary mt-3">Volver</a>
     </div>
+    <!-- Botón de Volver -->
+    <a href="{{ url()->previous() }}" class="btn btn-primary mt-3">Volver</a>
 </div>
 @endsection

@@ -68,4 +68,19 @@ class OrderController extends Controller
     return view('orders.tracking', compact('order'));
 }
 
+public function updateTracking(Request $request, Order $order)
+{
+    $request->validate([
+        'update_description' => 'required|string|max:255',
+    ]);
+
+    // Actualizar la descripción de seguimiento del pedido
+    $order->tracking_updates()->create([
+        'description' => $request->update_description,
+        'user_id' => auth()->id(), 
+    ]);
+
+    return back()->with('status', 'Se ha actualizado el seguimiento correctamente.');
+}
+
 }

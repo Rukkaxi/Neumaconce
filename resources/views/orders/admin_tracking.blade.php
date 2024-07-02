@@ -1,7 +1,19 @@
 @extends('layouts.backend')
 
 @section('content')
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
+@if (session('status'))
+<meta name="status-message" content="{{ session('status') }}">
+@endif
+
 <div class="container mt-5">
+    @if (session('status'))
+        <div class="alert alert-success"> {{ session('status') }}</div>
+    @endif
     <h1>Seguimiento de Pedido - Administrador</h1>
     <div class="d-flex justify-content-end mt-3">
         <a href="{{ route('orders.admin_index') }}" class="btn btn-primary mt-3">Volver a la Lista de Pedidos</a>
@@ -22,7 +34,7 @@
                             <strong>Estado:</strong>
                             <form action="{{ route('orders.admin_index.update', $order->id) }}" method="POST" style="margin-left: 15px;">
                                 @csrf
-                                @method('PUT')
+                                @method('PUT') <!-- Aquí se indica el método PUT -->
                                 <select class="form-control form-control-sm" name="status" onchange="this.form.submit()">
                                     <option value="EN ESPERA" {{ $order->status === 'EN ESPERA' ? 'selected' : '' }}>EN ESPERA</option>
                                     <option value="DESPACHADA" {{ $order->status === 'DESPACHADA' ? 'selected' : '' }}>DESPACHADA</option>
@@ -58,11 +70,12 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4>Actualizaciones del Pedido</h4>
+                    <h4>Actualizaciones de seguimiento</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('orders.admin_tracking.update', $order->id) }}" method="POST">
                         @csrf
+                        @method('PUT') <!-- Aquí se indica el método PUT -->
                         <div class="form-group">
                             <label for="update_description">Nueva Actualización</label>
                             <textarea class="form-control" id="update_description" name="update_description" rows="3" required></textarea>
