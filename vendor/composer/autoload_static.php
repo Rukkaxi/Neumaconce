@@ -592,6 +592,7 @@ class ComposerStaticInit7bed13d6ffbdf7bb0adf1d7dc5828bc9
         'App\\Models\\Region' => __DIR__ . '/../..' . '/app/Models/Region.php',
         'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',
         'App\\Models\\Tag' => __DIR__ . '/../..' . '/app/Models/Tag.php',
+        'App\\Models\\TrackingUpdate' => __DIR__ . '/../..' . '/app/Models/TrackingUpdate.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Vehicle' => __DIR__ . '/../..' . '/app/Models/Vehicle.php',
         'App\\Models\\Wishlist' => __DIR__ . '/../..' . '/app/Models/Wishlist.php',
