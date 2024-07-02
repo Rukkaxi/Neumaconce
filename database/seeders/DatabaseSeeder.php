@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             PaymentMethodsTableSeeder::class,
             ProductsTableSeeder::class,
             BranchesTableSeeder::class,
-            PhotosTableSeeder::class
+            PhotosTableSeeder::class,
+            RolesAndPermissionsSeeder::class,
         ]);
     }
 }

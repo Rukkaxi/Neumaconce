@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price', 10, 2)->nullable(); // Make price nullable
+            $table->integer('price')->nullable();
             $table->unsignedBigInteger('brandId'); // Foreign key for brand (assuming it's linked to another table)
             $table->integer('stock')->default(0); // Default stock to 0
             $table->text('description'); // Add description column
