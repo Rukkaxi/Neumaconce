@@ -37,6 +37,10 @@ class FullCalendarController extends Controller
 
                 return response()->json($event);
             }
+            if($request->type == 'delete'){
+                $event = Event::find($request->id)->delete();
+                return response()->json($event);
+            }
         }
     }
 }
