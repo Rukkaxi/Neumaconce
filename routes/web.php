@@ -16,26 +16,8 @@ use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Mail;
-
-/* Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/home'); // Redirect to desired page after verification
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('status', 'verification-link-sent');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); */
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\FullCalendarController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -110,6 +92,13 @@ Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.in
 
 //Direccion
 Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
+
+// Gráfico de ventas
+Route::get('/graphics', [SalesController::class, 'index'])->name('graphics.index');
+
+// CALENDARIO
+Route::get('full-calendar', [FullCalendarController::class, 'index'])->name('calendar');
+Route::post('full-calendar/action', [FullCalendarController::class, 'action'])->name('action');
 
 // Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');
