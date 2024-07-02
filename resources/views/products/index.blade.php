@@ -6,7 +6,7 @@
         <div class="col-md-12">
 
             @if (session('status'))
-            <div class="alert alert-success"> {{ session('status') }}</div>
+                <div class="alert alert-success"> {{ session('status') }}</div>
             @endif
 
             <div class="card">
@@ -29,44 +29,57 @@
                                 <th>Imágenes</th>
                                 <th>Categorías</th>
                                 <th>Tags</th>
+                                <th>Vistas</th>
                                 <th>Acciones</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
-                            <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>{{ $product->stock }}</td>
-                                <td>{{ $product->description }}</td>
-                                <td>{{ $product->available ? 'Sí' : 'No' }}</td>
-                                <td>
-                                    @if (!empty($product->image1))
-                                    <img src="{{ asset($product->image1) }}" alt="{{ $product->name }} Image 1" width="100" height="100">
-                                    @else
-                                    No Image Available
-                                    @endif
-                                </td>
-                                <td>
-                                    @foreach ($product->categories as $category)
-                                    <span class="badge bg-primary">{{ $category->name }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach ($product->tags as $tag)
-                                    <span class="badge bg-secondary">{{ $tag->name }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Editar</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->stock }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->available ? 'Sí' : 'No' }}</td>
+                                    <td>
+                                        @if (!empty($product->image1))
+                                            <img src="{{ asset($product->image1) }}" alt="{{ $product->name }} Image 1"
+                                                width="100" height="100">
+                                        @else
+                                            No Image Available
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @foreach ($product->categories as $category)
+                                            <span class="badge bg-primary">{{ $category->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($product->tags as $tag)
+                                            <span class="badge bg-secondary">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td> {{ $product->views }}</p>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('products.edit', $product->id) }}"
+                                            class="btn btn-warning">Editar</a>
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                        <form action="{{ route('products.promote', $product->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-warning">Promocionar</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

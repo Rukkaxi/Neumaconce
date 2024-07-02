@@ -24,6 +24,7 @@ class Product extends Model
         'image3',
         'image4',
         'image5',
+        'views', 
     ];
 
     public function brand()
@@ -41,3 +42,4 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 }
+

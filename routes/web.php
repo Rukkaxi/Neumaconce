@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\MailController;
 
 /* Route::group(['middleware' => ['role:Admin|Moderador']], function(){
  */
@@ -20,6 +21,24 @@ use App\Http\Controllers\PhotoController;
 
 /* }
 ); */
+
+// Prueba Email
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestEmail;
+
+Route::get('/send-test-email', function () {
+    $details = [
+        'title' => 'Correo de prueba desde Laravel',
+        'body' => 'Este es un correo de prueba enviado desde Laravel utilizando la configuración de Gmail.'
+    ];
+
+    Mail::to('sr.bastii@gmail.com')->send(new TestEmail($details));
+
+    return 'Correo enviado';
+});
+
+
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
 Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
@@ -90,6 +109,11 @@ Route::post('/gallery', [PhotoController::class, 'store'])->name('gallery.store'
 Route::delete('/gallery/{photo}', [PhotoController::class, 'destroy'])->name('gallery.destroy');
 
 Route::get('/dashboard/gallery', [PhotoController::class, 'dashboardIndex'])->name('dashboard.gallery.index');
+
+// Email
+
+Route::get('/send-promotion', [MailController::class, 'sendPromotion']);
+Route::post('/products/{id}/promote', [ProductController::class, 'promote'])->name('products.promote');
 
 // Lista de Deseos
 

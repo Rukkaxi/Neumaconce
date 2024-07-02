@@ -147,9 +147,28 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('brand', 'categories', 'tags')->findOrFail($id);
+        
+        $product->increment('views');
+
         return view('shop.show', compact('product'));
     }
 
+    public function promote($id)
+    {
+        $product = Product::findOrFail($id);
+        
+        // Aquí puedes obtener los correos a los que deseas enviar la promoción
+        $emails = ['correo1@example.com', 'correo2@example.com']; // Reemplaza con tus correos
+
+        foreach ($emails as $email) {
+            Mail::send('emails.promotion', ['product' => $product], function($message) use ($email, $product) {
+                $message->to($email)
+                        ->subject('¡Oferta especial solo por hoy! ' . $product->name);
+            });
+        }
+
+        return redirect()->route('products.index')->with('success', 'El producto ha sido promocionado.');
+    }
     public function wishlist()
     {
         $userId = auth()->id();
