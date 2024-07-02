@@ -17,6 +17,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\FullCalendarController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -89,6 +90,10 @@ Route::post('/address/store', [AddressController::class, 'store'])->name('addres
 
 // Gráfico de ventas
 Route::get('/graphics', [SalesController::class, 'index'])->name('graphics.index');
+
+// CALENDARIO
+Route::get('full-calendar',[FullCalendarController::class, 'index'])->name('calendar');
+Route::post('full-calendar/action', [FullCalendarController::class, 'action'])->name('action');
 
 // Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');
