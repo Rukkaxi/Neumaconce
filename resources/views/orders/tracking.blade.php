@@ -10,6 +10,7 @@
                 </div>
                 <div class="card-body">
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
+                    <p><strong>Correo Electrónico:</strong> {{ $order->user->email }}</p>
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
                     <p><strong>Estado:</strong> {{ $order->status }}</p>
