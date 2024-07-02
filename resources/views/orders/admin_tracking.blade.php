@@ -24,9 +24,12 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <h1>Pedido #{{ $order->id }}</h1>
+                    <strong>Nombre:</strong> {{ $order->user->name }}<br>
+                    <strong>Correo Electrónico:</strong> {{ $order->user->email }}<br>
                 </div>
                 <div class="card-body">
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
+                    
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
                     <p><strong>Dirección:</strong> {{ $order->address }}</p>
                     <p>

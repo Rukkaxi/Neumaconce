@@ -18,6 +18,7 @@ use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
 
 //Permisos y Roles
+
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
 Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
 
@@ -110,6 +111,8 @@ Route::get('/my_orders/{order}', [OrderController::class, 'show'])->name('orders
 Route::get('/orders', [OrderController::class, 'admin'])->name('orders.admin_index');
 Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.admin_index.update');
 // seguimiento de pedidos
+Route::get('/tracking', [OrderController::class, 'showTrackingForm'])->name('orders.tracking.form');
+Route::post('/tracking/search', [OrderController::class, 'searchOrder'])->name('orders.tracking.search');
 Route::get('/tracking/{buyOrder}', [OrderController::class, 'tracking'])->name('orders.tracking');
 // Ruta para el seguimiento de pedidos en la vista de administrador
 Route::get('/orders/{order}', [OrderController::class, 'adminTracking'])->name('orders.admin_tracking');

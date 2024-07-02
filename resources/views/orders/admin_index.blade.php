@@ -10,17 +10,17 @@
             <div class="col-md-12 mb-4">
                 <div class="card h-100">
                     <div class="card-header">
-                        Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}
+                        Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}<br>
+                        Correo Electrónico: {{ $order->user->email }}
                     </div>
                     <div class="card-body">
-                        <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
-                        <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
-                        <p><strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}</p>
-                        <p><strong>Dirección:</strong> {{ $order->address }}</p>
-                        <p><strong>Estado:</strong> {{ $order->status }}</p>
-                        
-                        <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>
-                        <p><strong>Código de Autorización:</strong> {{ $order->authorization_code }}</p>
+                        <strong>Fecha:</strong> {{ $order->created_at }}<br>
+                        <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br><br>
+                        <strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}<br>
+                        <strong>Dirección:</strong> {{ $order->address }}<br>
+                        <strong>Estado:</strong> {{ $order->status }}<br>
+                        <strong>Orden de Compra:</strong> {{ $order->buy_order }}<br>
+                        <strong>Código de Autorización:</strong> {{ $order->authorization_code }}<br><br>
                         <h5>Productos:</h5>
                         <ul class="list-group mt-3">
                             @foreach($order->items as $item)
@@ -47,16 +47,17 @@
             <div class="col-md-12 mb-4">
                 <div class="card h-100">
                     <div class="card-header">
-                        Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}
+                        Pedido #{{ $order->id }} - Cliente: {{ $order->user->name }}<br>
+                        Correo Electrónico: {{ $order->user->email }}
                     </div>
                     <div class="card-body">
-                        <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
-                        <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
-                        <p><strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}</p>
-                        <p><strong>Dirección:</strong> {{ $order->address }}</p>
-                        <p><strong>Estado:</strong> {{ $order->status }}</p>
-                        <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>
-                        <p><strong>Código de Autorización:</strong> {{ $order->authorization_code }}</p>
+                        <strong>Fecha:</strong> {{ $order->created_at }}<br>
+                        <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br><br>
+                        <strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}<br>
+                        <strong>Dirección:</strong> {{ $order->address }}<br>
+                        <strong>Estado:</strong> {{ $order->status }}<br>
+                        <strong>Orden de Compra:</strong> {{ $order->buy_order }}<br>
+                        <strong>Código de Autorización:</strong> {{ $order->authorization_code }}<br><br>
                         <h5>Productos:</h5>
                         <ul class="list-group mt-3">
                             @foreach($order->items as $item)
