@@ -52,6 +52,8 @@ class UserController extends Controller
 
         $user->syncRoles([$request->roles]);
 
+        /* $user->sendEmailVerificationNotification(); */
+
         return redirect('/users')->with('status', 'Usuario creado exitósamente con roles');
     }
 

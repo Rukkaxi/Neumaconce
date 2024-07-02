@@ -16,10 +16,30 @@ use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Mail;
+
+/* Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home'); // Redirect to desired page after verification
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'verification-link-sent');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); */
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
-Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
+//Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
 
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
@@ -77,7 +97,11 @@ Route::middleware(['auth'])->group(function () {
 // TIENDA Y PRODUCTOS POR SI SOLOs
 
 //Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-Route::get('/shop/product/{id}', [ProductController::class, 'show'])->name('shop.product.show');
+Route::get('/shop/product/{id}', [ShopController::class, 'show'])->name('shop.product.show');
+Route::post('/shop/product/{id}/question', [ShopController::class, 'storeQuestion'])->name('shop.product.question.store');
+Route::post('/shop/question/{id}/answer', [ShopController::class, 'answerQuestion'])->name('shop.product.question.answer');
+Route::post('/shop/question/{id}/toggle', [ShopController::class, 'toggleVisibility'])->name('shop.product.question.toggle');
+Route::post('/shop/product/{id}/review', [ShopController::class, 'storeReview'])->name('shop.product.review.store');
 
 // Ruta para categorias
 Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.index');
@@ -143,7 +167,11 @@ Route::get('/xd', function () {
     return view('welcome');
 });
 
-Auth::routes();
+
+
+Auth::routes([
+    #'verify' => 'true'
+]);
 
 // DashMix Example Routes
 Route::view('/landing', 'landing');
