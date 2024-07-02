@@ -119,6 +119,11 @@ Route::delete('/gallery/{photo}', [PhotoController::class, 'destroy'])->name('ga
 
 Route::get('/dashboard/gallery', [PhotoController::class, 'dashboardIndex'])->name('dashboard.gallery.index');
 
+// Email
+
+Route::get('/send-promotion', [MailController::class, 'sendPromotion']);
+Route::post('/products/{id}/promote', [ProductController::class, 'promote'])->name('products.promote');
+
 // Lista de Deseos
 
 Route::get('wishlist', [ProductController::class, 'wishlist'])->name('wishlist');

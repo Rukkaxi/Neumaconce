@@ -31,7 +31,7 @@
 @endsection
 
 @if (session('status'))
-<meta name="status-message" content="{{ session('status') }}">
+    <meta name="status-message" content="{{ session('status') }}">
 @endif
 
 @section('content')
@@ -40,7 +40,7 @@
         <div class="col-md-12">
 
             @if (session('status'))
-            <div class="alert alert-success"> {{ session('status') }}</div>
+                <div class="alert alert-success"> {{ session('status') }}</div>
             @endif
 
             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -64,64 +64,80 @@
                                 <th>Imágenes</th>
                                 <th>Categorías</th>
                                 <th>Tags</th>
+                                <th>Vistas</th>
                                 <th class="accion-column" style="width: 20%;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
-                            <tr>
-                                <td class="text-center">{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-between stock-control" style="width: 150px;">
-                                        <!-- Botón de disminuir stock -->
-                                        <button class="btn btn-sm btn-primary change-stock d-none" data-id="{{ $product->id }}" data-action="decrease">-</button>
-                                        <!-- Input de stock -->
-                                        <input type="number" class="form-control text-center stock-input" data-id="{{ $product->id }}" value="{{ $product->stock }}" readonly style="width: 80px; margin: 0 5px;">
-                                        <!-- Botón de aumentar stock -->
-                                        <button class="btn btn-sm btn-primary change-stock d-none" data-id="{{ $product->id }}" data-action="increase">+</button>
-                                        <!-- Botón de editar stock -->
-                                        <button class="btn btn-sm btn-secondary edit-stock" data-id="{{ $product->id }}">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-                                        <!-- Botón de guardar stock -->
-                                        <button class="btn btn-sm btn-success save-stock d-none" data-id="{{ $product->id }}">
-                                            <i class="fas fa-save"></i>
-                                        </button>
-                                        
-                                    </div>
-                                </td>
-                                <td>{{ $product->description }}</td>
-                                <td>{{ $product->available ? 'Sí' : 'No' }}</td>
-                                <td>
-                                    @if (!empty($product->image1))
-                                    <img src="{{ asset($product->image1) }}" alt="{{ $product->name }} Image 1" width="100" height="100">
-                                    @else
-                                    No Image Available
-                                    @endif
-                                </td>
-                                <td>
-                                    @foreach ($product->categories as $category)
-                                    <span class="badge bg-primary">{{ $category->name }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach ($product->tags as $tag)
-                                    <span class="badge bg-secondary">{{ $tag->name }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    <div class="button-group accion-column" style="display: flex; justify-content: space-between; align-items: center;">
-                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" style="flex-grow: 1; margin-right: 5px;">Editar</a>
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="flex-grow: 1; margin-left: 5px;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger delete-button" style="width: 100%;">Eliminar</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-center">{{ $product->id }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-between stock-control"
+                                            style="width: 150px;">
+                                            <!-- Botón de disminuir stock -->
+                                            <button class="btn btn-sm btn-primary change-stock d-none"
+                                                data-id="{{ $product->id }}" data-action="decrease">-</button>
+                                            <!-- Input de stock -->
+                                            <input type="number" class="form-control text-center stock-input"
+                                                data-id="{{ $product->id }}" value="{{ $product->stock }}" readonly
+                                                style="width: 80px; margin: 0 5px;">
+                                            <!-- Botón de aumentar stock -->
+                                            <button class="btn btn-sm btn-primary change-stock d-none"
+                                                data-id="{{ $product->id }}" data-action="increase">+</button>
+                                            <!-- Botón de editar stock -->
+                                            <button class="btn btn-sm btn-secondary edit-stock"
+                                                data-id="{{ $product->id }}">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <!-- Botón de guardar stock -->
+                                            <button class="btn btn-sm btn-success save-stock d-none"
+                                                data-id="{{ $product->id }}">
+                                                <i class="fas fa-save"></i>
+                                            </button>
+
+                                        </div>
+                                    </td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->available ? 'Sí' : 'No' }}</td>
+                                    <td>
+                                        @if (!empty($product->image1))
+                                            <img src="{{ asset($product->image1) }}" alt="{{ $product->name }} Image 1"
+                                                width="100" height="100">
+                                        @else
+                                            No Image Available
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @foreach ($product->categories as $category)
+                                            <span class="badge bg-primary">{{ $category->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($product->tags as $tag)
+                                            <span class="badge bg-secondary">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    </td>
+                                    <td> {{ $product->views }}</p>
+                                    </td>
+                                    <td>
+                                        <div class="button-group accion-column"
+                                            style="display: flex; justify-content: space-between; align-items: center;">
+                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning"
+                                                style="flex-grow: 1; margin-right: 5px;">Editar</a>
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                                style="flex-grow: 1; margin-left: 5px;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger delete-button"
+                                                    style="width: 100%;">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -134,15 +150,16 @@
 <style>
     .save-stock-container {
         display: block;
-        margin-top: 10px; /* Ajusta el margen según tu diseño */
+        margin-top: 10px;
+        /* Ajusta el margen según tu diseño */
     }
 </style>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const buttons = document.querySelectorAll('.change-stock');
         buttons.forEach(button => {
             let timer;
-            button.addEventListener('mousedown', function() {
+            button.addEventListener('mousedown', function () {
                 const productId = this.dataset.id;
                 const action = this.dataset.action;
                 const stockElement = this.parentElement.querySelector('.stock-input');
@@ -158,18 +175,18 @@
                 }, 100);
             });
 
-            button.addEventListener('mouseup', function() {
+            button.addEventListener('mouseup', function () {
                 clearInterval(timer);
             });
 
-            button.addEventListener('mouseleave', function() {
+            button.addEventListener('mouseleave', function () {
                 clearInterval(timer);
             });
         });
 
         const editButtons = document.querySelectorAll('.edit-stock');
         editButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const productId = this.dataset.id;
                 const stockElement = this.parentElement.querySelector('.stock-input');
                 const saveButton = this.parentElement.querySelector('.save-stock');
@@ -184,7 +201,7 @@
 
         const saveButtons = document.querySelectorAll('.save-stock');
         saveButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const productId = this.dataset.id;
                 const stockElement = this.parentElement.querySelector('.stock-input');
                 const editButton = this.parentElement.querySelector('.edit-stock');
@@ -211,34 +228,34 @@
                             },
                             body: JSON.stringify({ action: 'set', new_stock: stockElement.value })
                         })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                Swal.fire(
-                                    'Actualizado',
-                                    `El stock ha sido actualizado.`,
-                                    'success'
-                                );
-                                // Set the stock element as read-only again
-                                stockElement.setAttribute('readonly', true);
-                                this.classList.add('d-none');
-                                editButton.classList.remove('d-none');
-                                changeButtons.forEach(btn => btn.classList.add('d-none'));
-                            } else {
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire(
+                                        'Actualizado',
+                                        `El stock ha sido actualizado.`,
+                                        'success'
+                                    );
+                                    // Set the stock element as read-only again
+                                    stockElement.setAttribute('readonly', true);
+                                    this.classList.add('d-none');
+                                    editButton.classList.remove('d-none');
+                                    changeButtons.forEach(btn => btn.classList.add('d-none'));
+                                } else {
+                                    Swal.fire(
+                                        'Error',
+                                        data.message,
+                                        'error'
+                                    );
+                                }
+                            })
+                            .catch(error => {
                                 Swal.fire(
                                     'Error',
-                                    data.message,
+                                    'Ocurrió un error al actualizar el stock.',
                                     'error'
                                 );
-                            }
-                        })
-                        .catch(error => {
-                            Swal.fire(
-                                'Error',
-                                'Ocurrió un error al actualizar el stock.',
-                                'error'
-                            );
-                        });
+                            });
                     }
                 });
             });
