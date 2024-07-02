@@ -11,11 +11,10 @@
             </div>
             <!-- Thumbnails -->
             <div id="thumbnailContainer" class="mt-3">
-                @for ($i = 1; $i <= 5; $i++) 
-                    @if (!empty($product->{'image'.$i}))
-                        <img src="{{ asset($product->{'image'.$i}) }}" class="img-thumbnail thumbnail-image" alt="{{ $product->name }} Image">
+                @for ($i = 1; $i <= 5; $i++) @if (!empty($product->{'image'.$i}))
+                    <img src="{{ asset($product->{'image'.$i}) }}" class="img-thumbnail thumbnail-image" alt="{{ $product->name }} Image">
                     @endif
-                @endfor
+                    @endfor
             </div>
         </div>
         <!-- Product Info -->
@@ -26,27 +25,27 @@
             <p>Stock: {{ $product->stock }}</p>
             <p>Categorías:
                 @foreach($product->categories as $category)
-                    <span class="badge badge-secondary">{{ $category->name }}</span>
+                <span class="badge badge-secondary">{{ $category->name }}</span>
                 @endforeach
             </p>
             <p>Etiquetas:
                 @foreach($product->tags as $tag)
-                    <span class="badge badge-primary">{{ $tag->name }}</span>
+                <span class="badge badge-primary">{{ $tag->name }}</span>
                 @endforeach
             </p>
             <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Añadir al carro</button>
-            
+
             @if($isInWishlist)
-                <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
-                </form>
+            <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
+            </form>
             @else
-                <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
-                </form>
+            <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
+            </form>
             @endif
         </div>
     </div>
@@ -57,34 +56,34 @@
             <div class="questions-answers">
                 <h3>Preguntas y Respuestas</h3>
                 @foreach($product->questions as $question)
-                    <div class="my-3">
-                        <strong>Pregunta:</strong> {{ $question->question }}
-                        @foreach($question->answers as $answer)
-                            @if($answer->is_visible)
-                                <div class="mt-2 ms-3">
-                                    <strong>Respuesta:</strong> {{ $answer->answer }}
-                                </div>
-                            @endif
-                        @endforeach
-                        @can('answer questions')
-                            <form action="{{ route('shop.product.question.answer', $question->id) }}" method="POST" class="my-3">
-                                @csrf
-                                <textarea name="answer" class="form-control" placeholder="Responder"></textarea>
-                                <button type="submit" class="btn btn-primary mt-2">Responder</button>
-                            </form>
-                            <form action="{{ route('shop.product.question.toggle', $question->id) }}" method="POST" class="my-3">
-                                @csrf
-                                <button type="submit" class="btn btn-secondary">{{ $question->is_visible ? 'Ocultar' : 'Mostrar' }}</button>
-                            </form>
-                        @endcan
+                <div class="my-3">
+                    <strong>Pregunta:</strong> {{ $question->question }}
+                    @foreach($question->answers as $answer)
+                    @if($answer->is_visible)
+                    <div class="mt-2 ms-3">
+                        <strong>Respuesta:</strong> {{ $answer->answer }}
                     </div>
+                    @endif
+                    @endforeach
+                    @can('answer questions')
+                    <form action="{{ route('shop.product.question.answer', $question->id) }}" method="POST" class="my-3">
+                        @csrf
+                        <textarea name="answer" class="form-control" placeholder="Responder"></textarea>
+                        <button type="submit" class="btn btn-primary mt-2">Responder</button>
+                    </form>
+                    <form action="{{ route('shop.product.question.toggle', $question->id) }}" method="POST" class="my-3">
+                        @csrf
+                        <button type="submit" class="btn btn-secondary">{{ $question->is_visible ? 'Ocultar' : 'Mostrar' }}</button>
+                    </form>
+                    @endcan
+                </div>
                 @endforeach
                 @auth
-                    <form action="{{ route('shop.product.question.store', $product->id) }}" method="POST" class="my-3">
-                        @csrf
-                        <textarea name="question" class="form-control" placeholder="Haz una pregunta sobre este producto"></textarea>
-                        <button type="submit" class="btn btn-primary my-3">Enviar Pregunta</button>
-                    </form>
+                <form action="{{ route('shop.product.question.store', $product->id) }}" method="POST" class="my-3">
+                    @csrf
+                    <textarea name="question" class="form-control" placeholder="Haz una pregunta sobre este producto"></textarea>
+                    <button type="submit" class="btn btn-primary my-3">Enviar Pregunta</button>
+                </form>
                 @endauth
             </div>
         </div>
@@ -96,50 +95,55 @@
             <div class="reviews">
                 <h3>Reseñas</h3>
                 @foreach($product->reviews as $review)
-                    <div class="my-3">
-                        @if ($review->user)
-                            <strong>{{ $review->user->name }}</strong> 
-                            <span class="text-muted">- {{ $review->created_at->format('d/m/Y') }}</span>
-                        @else
-                            <strong>Usuario desconocido</strong>
-                            <span class="text-muted">- {{ $review->created_at->format('d/m/Y') }}</span>
-                        @endif
-                        <div>
-                            @for ($i = 0; $i < $review->rating; $i++)
-                                <span class="fa fa-star checked"></span>
+                <div class="my-3">
+                    @if ($review->user)
+                    <strong>{{ $review->user->name }}</strong>
+                    <span class="text-muted">- {{ $review->created_at->format('d/m/Y') }}</span>
+                    @else
+                    <strong>Usuario desconocido</strong>
+                    <span class="text-muted">- {{ $review->created_at->format('d/m/Y') }}</span>
+                    @endif
+                    <div>
+                        @for ($i = 0; $i < $review->rating; $i++)
+                            <span class="fa fa-star checked"></span>
                             @endfor
-                            @for ($i = $review->rating; $i < 5; $i++)
-                                <span class="fa fa-star"></span>
-                            @endfor
-                        </div>
-                        @if ($review->comment)
-                            <div class="mt-2">{{ $review->comment }}</div>
-                        @endif
+                            @for ($i = $review->rating; $i < 5; $i++) <span class="fa fa-star"></span>
+                                @endfor
                     </div>
+                    @if ($review->comment)
+                    <div class="mt-2">{{ $review->comment }}</div>
+                    @endif
+                </div>
                 @endforeach
 
                 @auth
-                    @if ($userHasPurchased)
-                        <form action="{{ route('shop.product.review.store', $product->id) }}" method="POST" class="my-3">
-                            @csrf
-                            <div class="form-group">
-                                <label for="rating">Calificación:</label>
-                                <select name="rating" id="rating" class="form-control">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <option value="{{ $i }}">{{ $i }} estrella{{ $i > 1 ? 's' : '' }}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="comment">Comentario (opcional):</label>
-                                <textarea name="comment" id="comment" class="form-control" placeholder="Escribe tu comentario aquí..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Enviar Reseña</button>
-                        </form>
-                    @endif
+                @if ($userHasPurchased)
+                <form action="{{ route('shop.product.review.store', $product->id) }}" method="POST" class="my-3">
+                    @csrf
+                    <div class="form-group">
+                        <label for="rating">Calificación:</label>
+                        <select name="rating" id="rating" class="form-control">
+                            @for ($i = 1; $i <= 5; $i++) <option value="{{ $i }}">{{ $i }} estrella{{ $i > 1 ? 's' : '' }}</option>
+                                @endfor
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="comment">Comentario (opcional):</label>
+                        <textarea name="comment" id="comment" class="form-control" placeholder="Escribe tu comentario aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Enviar Reseña</button>
+                </form>
+                @endif
                 @endauth
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Include the recommended products section -->
+<div class="container-fluid d-flex justify-content-center">
+    <div class="col-lg-9 d-flex align-items-center justify-content-center">
+        <div id="recommended-products-section" class="my-3"></div>
     </div>
 </div>
 
@@ -164,13 +168,15 @@
     }
 
     .questions-answers .ms-3 {
-        margin-left: 1rem; /* Adjust as necessary */
+        margin-left: 1rem;
+        /* Adjust as necessary */
     }
 
     /* Style for stars */
     .fa-star {
         color: #ddd;
     }
+
     .fa-star.checked {
         color: #ffc107;
     }

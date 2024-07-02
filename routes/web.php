@@ -16,6 +16,7 @@ use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RecommendedProductController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -86,7 +87,7 @@ Route::get('categories/{id}/delete', [App\Http\Controllers\CategoryController::c
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('products/{product}/change-stock', [ProductController::class, 'changeStock'])->name('products.changeStock');
-
+Route::get('/recommended-products', [RecommendedProductController::class, 'show'])->name('recommended-products');
 // Profile
 //Route::resource('profiles', App\Http\Controllers\UserController::class);
 Route::middleware(['auth'])->group(function () {
@@ -122,7 +123,7 @@ Route::get('/dashboard/gallery', [PhotoController::class, 'dashboardIndex'])->na
 
 // Email
 
-Route::get('/send-promotion', [MailController::class, 'sendPromotion']);
+/* Route::get('/send-promotion', [MailController::class, 'sendPromotion']); */
 Route::post('/products/{id}/promote', [ProductController::class, 'promote'])->name('products.promote');
 
 // Lista de Deseos

@@ -26,7 +26,7 @@
                             @foreach($order->items as $item)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img src="{{ asset($item->product->image ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
+                                    <img src="{{ asset($item->product->image1 ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
                                     {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
                                 </div>
                             </li>
@@ -63,7 +63,7 @@
                             @foreach($order->items as $item)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img src="{{ asset($item->product->image ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
+                                    <img src="{{ asset($item->product->image1 ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
                                     {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
                                 </div>
                             </li>
