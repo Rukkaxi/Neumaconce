@@ -12,7 +12,7 @@
 
 <div class="container mt-5">
     @if (session('status'))
-        <div class="alert alert-success"> {{ session('status') }}</div>
+        <div class="alert alert-success">{{ session('status') }}</div>
     @endif
     <h1>Seguimiento de Pedido - Administrador</h1>
     <div class="d-flex justify-content-end mt-3">
@@ -32,7 +32,7 @@
                     <p>
                         <div class="d-flex align-items-center">
                             <strong>Estado:</strong>
-                            <form action="{{ route('orders.admin_index.update', $order->id) }}" method="POST" style="margin-left: 15px;">
+                            <form id="statusForm" action="{{ route('orders.admin_index.update', $order->id) }}" method="POST" style="margin-left: 15px;">
                                 @csrf
                                 @method('PUT') <!-- Aquí se indica el método PUT -->
                                 <select class="form-control form-control-sm" name="status" onchange="this.form.submit()">
@@ -73,7 +73,7 @@
                     <h4>Actualizaciones de seguimiento</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('orders.admin_tracking.update', $order->id) }}" method="POST">
+                    <form id="updateForm" action="{{ route('orders.admin_tracking.update', $order->id) }}" method="POST">
                         @csrf
                         @method('PUT') <!-- Aquí se indica el método PUT -->
                         <div class="form-group">
@@ -84,7 +84,69 @@
                     </form>
                 </div>
             </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Historial de Actualizaciones</h4>
+                </div>
+                <div class="card-body">
+                    @if($order->tracking_updates && $order->tracking_updates->count() > 0)
+                        @foreach($order->tracking_updates as $update)
+                        <div class="alert alert-info">
+                            <p><strong>Fecha y Hora:</strong> {{ $update->created_at }}</p>
+                            <p><strong>Descripción:</strong> {{ $update->description }}</p>
+                        </div>
+                        @endforeach
+                    @else
+                        <div class="alert alert-warning">
+                            No hay actualizaciones disponibles para este pedido.
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Escuchar el evento submit del formulario de estado y mostrar SweetAlert si la actualización fue exitosa
+    document.getElementById('statusForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir el envío normal del formulario
+        let form = this;
+
+        fetch(form.action, {
+            method: form.method,
+            body: new FormData(form)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Mostrar SweetAlert de éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Estado del pedido actualizado correctamente.',
+                    timer: 3000, // Ocultar automáticamente después de 3 segundos
+                    timerProgressBar: true
+                }).then(() => {
+                    window.location.reload(); // Recargar la página después de mostrar el mensaje
+                });
+            } else {
+                throw new Error('Error en la solicitud');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Mostrar SweetAlert de error si algo salió mal
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema al actualizar el estado del pedido. Por favor, inténtalo de nuevo.',
+                timer: 3000, // Ocultar automáticamente después de 3 segundos
+                timerProgressBar: true
+            });
+        });
+    });
+
+    // Opcional: Puedes hacer lo mismo para el formulario de actualización de seguimiento si lo necesitas
+</script>
+
 @endsection
