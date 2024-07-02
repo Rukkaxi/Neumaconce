@@ -29,7 +29,7 @@ class ProductsTableSeeder extends Seeder
                 'stock' => 45,
                 'description' => 'Alerón aerodinámico para un mejor rendimiento a altas velocidades.',
                 'available' => true,
-                'image1' => 'storage/products/aleron2.png',
+                'image1' => 'storage/products/aleron2.jpg',
                 'category' => 'Exteriores',
                 'tags' => ['spoiler', 'exteriores']
             ],
@@ -73,7 +73,7 @@ class ProductsTableSeeder extends Seeder
                 'stock' => 100,
                 'description' => 'Filtro de aire para mejorar la eficiencia del motor.',
                 'available' => true,
-                'image1' => 'storage/products/filtro.jpg',
+                'image1' => 'storage/products/filtro2.jpg',
                 'category' => 'Partes',
                 'tags' => ['filtro', 'motor']
             ],
