@@ -15,9 +15,9 @@
                     </div>
                     <div class="card-body">
                         <strong>Fecha:</strong> {{ $order->created_at }}<br>
-                        <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br><br>
+                        <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br>
                         <strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}<br>
-                        <strong>Dirección:</strong> {{ $order->address }}<br>
+                        <strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}<br>
                         <strong>Estado:</strong> {{ $order->status }}<br>
                         <strong>Orden de Compra:</strong> {{ $order->buy_order }}<br>
                         <strong>Código de Autorización:</strong> {{ $order->authorization_code }}<br><br>
@@ -54,7 +54,7 @@
                         <strong>Fecha:</strong> {{ $order->created_at }}<br>
                         <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br><br>
                         <strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}<br>
-                        <strong>Dirección:</strong> {{ $order->address }}<br>
+                        <p><strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}</p><br>
                         <strong>Estado:</strong> {{ $order->status }}<br>
                         <strong>Orden de Compra:</strong> {{ $order->buy_order }}<br>
                         <strong>Código de Autorización:</strong> {{ $order->authorization_code }}<br><br>

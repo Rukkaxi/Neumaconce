@@ -31,7 +31,7 @@
                     <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
                     
                     <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
-                    <p><strong>Dirección:</strong> {{ $order->address }}</p>
+                    <p><strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}</p>
                     <p>
                         <div class="d-flex align-items-center">
                             <strong>Estado:</strong>

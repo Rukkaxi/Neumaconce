@@ -25,7 +25,7 @@ class WebpayController extends Controller
             'user_id' => Auth::id(),
             'total' => $amount,
             'address_id' => $request->address_id,
-            'delivery_type' => $request->delivery_type,
+            'delivery_type' => $request->delivery_type ?? 1,
         ]);
 
         $transaction = new Transaction();
@@ -61,7 +61,7 @@ class WebpayController extends Controller
                 $order->update([
                     'payment_method_id' => 1, // Assuming 1 is the WebPay payment method ID
                     'transactionID' => $response->getAuthorizationCode(),
-                    'address_id' => session('address_id'), // Assume address_id is stored in session
+                    //'address_id' => session('address_id'), // Assume address_id is stored in session
                     'status' => 'EN ESPERA',
                     'buy_order' => $response->getBuyOrder(), // Guardar Orden de Compra
                     'authorization_code' => $response->getAuthorizationCode(), // Guardar Código de Autorización

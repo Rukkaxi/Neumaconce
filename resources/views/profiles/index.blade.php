@@ -37,10 +37,13 @@
                                 <a href="{{ route('profiles.edit') }}" class="btn btn-link">Cambiar Contraseña</a>
                             </div>
                             <div>
+                                <a href="{{ url('my_orders') }}" class="btn btn-link">Mis Compras</a>
+                            </div>
+                            <div>
                                 <a href="{{ route('addresses.index') }}" class="btn btn-link">Añadir Dirección</a>
                             </div>
                             <div>
-                                <a href="{{ route('addresses.index') }}" class="btn btn-link">Mis vehiculos</a>
+                                <a href="{{ route('addresses.index') }}" class="btn btn-link">Mis Vehículos</a>
                             </div>
                         </div>
                     </div>

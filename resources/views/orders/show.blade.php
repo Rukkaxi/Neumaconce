@@ -14,7 +14,7 @@
             <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
             <p><strong>Correo Electrónico:</strong> {{ $order->user->email }}</p>
             <p><strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}</p>
-            <p><strong>Dirección:</strong> {{ $order->address }}</p>
+            <p><strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}</p>
             <p><strong>Estado:</strong> {{ $order->status }}</p>
             <p><strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}</p>
             <p><strong>Orden de Compra:</strong> {{ $order->buy_order }}</p>

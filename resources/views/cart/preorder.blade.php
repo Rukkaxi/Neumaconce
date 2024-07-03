@@ -126,7 +126,7 @@
                             <div class="form-group">
                                 <label for="address">Direcciones de despacho</label><br>
                                         <div class="form-group">
-                                            <select id="address" name="address_id" class="form-control">
+                                            <select id="address_id" name="address_id" class="form-control">
                                                 <option value="" disabled selected>Seleccione una dirección</option>
                                                 @foreach($addresses as $address)
                                                     <option value="{{ $address->id }}">{{ $address->full_address}}</option>
