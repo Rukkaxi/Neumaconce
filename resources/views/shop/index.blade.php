@@ -15,6 +15,39 @@
                             <label for="query">Buscar</label>
                             <input type="text" class="form-control" id="query" name="query" placeholder="Nombre, categoría o etiqueta" value="{{ $query ?? '' }}">
                         </div>
+                        <div class="form-group">
+                            <label for="brand">Marca</label>
+                            <select class="form-control" id="brand" name="brand">
+                                <option value="" selected>Marca</option>
+                                @foreach($tags as $tag)
+                                    @if(in_array($tag->name, $uniqueBrandTags->toArray()))
+                                        <option value="{{ $tag->name }}" {{ (request('brand') == $tag->name) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Modelo</label>
+                            <select class="form-control" id="model" name="model">
+                                <option value="" selected>Modelo</option>
+                                @foreach($tags as $tag)
+                                    @if(in_array($tag->name, $uniqueModelTags->toArray()))
+                                        <option value="{{ $tag->name }}" {{ (request('model') == $tag->name) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Año</label>
+                            <select class="form-control" id="year" name="year">
+                                <option value="" selected>Año</option>
+                                @foreach($tags as $tag)
+                                    @if(in_array($tag->name, $uniqueYearTags->toArray()))
+                                        <option value="{{ $tag->name }}" {{ (request('year') == $tag->name) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Aplicar filtro</button>
                         <a href="{{ route('shop.index') }}" class="btn btn-secondary ml-2">Quitar Filtros</a>
                     </form>

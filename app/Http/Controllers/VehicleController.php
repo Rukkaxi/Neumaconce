@@ -61,25 +61,19 @@ class VehicleController extends Controller
         return redirect('vehicles')->with('status', 'Vehículo eliminado exitósamente!');
     }
 
-    // Add methods for fetching years, brands, and models
     public function getYears(Request $request)
     {
         $brandId = $request->input('brandId');
         $model = $request->input('model');
 
-        // Query the database to get unique years for the selected brand and model
-        $years = Vehicle::where('brand_id', $brandId)
+        $years = Vehicle::where('brandId', $brandId)
             ->where('model', $model)
-            ->distinct('year')
+            ->distinct()
             ->pluck('year')
             ->toArray();
 
-        // Debugging: Log the years
-        \Log::info('Years:', $years);
-
         return response()->json($years);
     }
-
 
     public function getBrands()
     {
@@ -90,15 +84,12 @@ class VehicleController extends Controller
     public function getModels(Request $request)
     {
         $brandId = $request->brandId;
-        // Ensure brandId is provided
-        if (!$brandId) {
-            return response()->json([], 400);
-        }
-        // Fetch models based on brandId
+
         $models = Vehicle::select('model')
             ->where('brandId', $brandId)
             ->distinct()
             ->get();
+
         return response()->json($models);
     }
 }

@@ -11,6 +11,7 @@ use App\Models\Answer;
 use App\Models\Wishlist;
 use App\Models\OrderItem;
 use App\Models\Review;
+use App\Models\Vehicle;
 
 class ShopController extends Controller
 {
@@ -19,17 +20,57 @@ class ShopController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $query = $request->input('query');
+        $brand = $request->input('brand');
+        $model = $request->input('model');
+        $year = $request->input('year');
+
+        // Obtener etiquetas únicas de marcas, modelos y años
+        $vehicles = Vehicle::with('brand:id,name')->get();
+
+        $brandTags = collect();
+        $modelTags = collect();
+        $yearTags = collect();
+
+        foreach ($vehicles as $vehicle) {
+            $brandTags->push($vehicle->brand->name);
+            $modelTags->push($vehicle->model);
+            $yearTags->push($vehicle->year);
+        }
+
+        $uniqueBrandTags = $brandTags->unique();
+        $uniqueModelTags = $modelTags->unique();
+        $uniqueYearTags = $yearTags->unique();
+
+        $productsQuery = Product::query();
 
         if ($query) {
-            $productsQuery = Product::where('name', 'like', "%$query%")
-                ->orWhereHas('categories', function ($categoryQuery) use ($query) {
-                    $categoryQuery->where('name', 'like', "%$query%");
-                })
-                ->orWhereHas('tags', function ($tagQuery) use ($query) {
-                    $tagQuery->where('name', 'like', "%$query%");
-                });
-        } else {
-            $productsQuery = Product::query();
+            $productsQuery->where(function ($q) use ($query) {
+                $q->where('name', 'like', "%$query%")
+                    ->orWhereHas('categories', function ($categoryQuery) use ($query) {
+                        $categoryQuery->where('name', 'like', "%$query%");
+                    })
+                    ->orWhereHas('tags', function ($tagQuery) use ($query) {
+                        $tagQuery->where('name', 'like', "%$query%");
+                    });
+            });
+        }
+
+        if ($brand) {
+            $productsQuery->whereHas('tags', function ($tagQuery) use ($brand) {
+                $tagQuery->where('name', $brand);
+            });
+        }
+
+        if ($model) {
+            $productsQuery->whereHas('tags', function ($tagQuery) use ($model) {
+                $tagQuery->where('name', $model);
+            });
+        }
+
+        if ($year) {
+            $productsQuery->whereHas('tags', function ($tagQuery) use ($year) {
+                $tagQuery->where('name', $year);
+            });
         }
 
         if ($category) {
@@ -40,8 +81,21 @@ class ShopController extends Controller
 
         $products = $productsQuery->with('categories', 'tags')->get();
 
-        return view('shop.index', compact('products', 'categories', 'query', 'category', 'tags'));
+        return view('shop.index', compact(
+            'products',
+            'categories',
+            'query',
+            'category',
+            'tags',
+            'brand',
+            'model',
+            'year',
+            'uniqueBrandTags',
+            'uniqueModelTags',
+            'uniqueYearTags'
+        ));
     }
+
 
     private function userHasPurchasedProduct($userId, $productId)
     {
