@@ -90,7 +90,7 @@
                             </div>
                         </div> -->
                         <a href="contact" class="nav-item nav-link">Contacto</a>
-                            
+
 
                         <a class="nav-item nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
 
@@ -151,7 +151,7 @@
 
 
     <main>
-    @yield('content')
+        @yield('content')
     </main>
 
 
@@ -183,6 +183,20 @@
             console.log("jQuery is working!");
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch("{{ route('recommended-products')}}")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('recommended-products-section').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading recommended products:', error);
+                });
+        });
+    </script>
+
 
 
     <script>
@@ -309,7 +323,6 @@
             }
 
         });
-            
     </script>
 
 

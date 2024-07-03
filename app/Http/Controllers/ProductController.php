@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -257,4 +258,9 @@ class ProductController extends Controller
         }
     }
 
+    public function randomProducts()
+    {
+        $products = Product::inRandomOrder()->take(4)->get(); // Cambia 4 por 5 si deseas 5 productos
+        return view('partials.recommended-products', compact('products'));
+    }
 }

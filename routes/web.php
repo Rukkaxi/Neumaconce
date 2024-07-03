@@ -21,6 +21,7 @@ use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\NotificationsController;
 
 //Permisos y Roles
+
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
 //Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermisionController::class, 'destroy']);
 
@@ -68,7 +69,7 @@ Route::get('categories/{id}/delete', [App\Http\Controllers\CategoryController::c
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('products/{product}/change-stock', [ProductController::class, 'changeStock'])->name('products.changeStock');
-
+Route::get('/recommended-products', [RecommendedProductController::class, 'show'])->name('recommended-products');
 // Profile
 //Route::resource('profiles', App\Http\Controllers\UserController::class);
 Route::middleware(['auth'])->group(function () {
@@ -117,6 +118,11 @@ Route::delete('/gallery/{photo}', [PhotoController::class, 'destroy'])->name('ga
 
 Route::get('/dashboard/gallery', [PhotoController::class, 'dashboardIndex'])->name('dashboard.gallery.index');
 
+// Email
+
+/* Route::get('/send-promotion', [MailController::class, 'sendPromotion']); */
+Route::post('/products/{id}/promote', [ProductController::class, 'promote'])->name('products.promote');
+
 // Lista de Deseos
 
 Route::get('wishlist', [ProductController::class, 'wishlist'])->name('wishlist');
@@ -131,8 +137,14 @@ Route::get('/my_orders', [OrderController::class, 'index'])->name('orders.index'
 Route::get('/my_orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 Route::get('/orders', [OrderController::class, 'admin'])->name('orders.admin_index');
 Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.admin_index.update');
-//Route::get('/my_orders/{order}/tracking', [OrderController::class, 'showTracking'])->name('orders.showTracking');
-//Route::post('/my_orders/{order}/tracking', [OrderController::class, 'storeTracking'])->name('orders.storeTracking');
+// seguimiento de pedidos
+Route::get('/tracking', [OrderController::class, 'showTrackingForm'])->name('orders.tracking.form');
+Route::post('/tracking/search', [OrderController::class, 'searchOrder'])->name('orders.tracking.search');
+Route::get('/tracking/{buyOrder}', [OrderController::class, 'tracking'])->name('orders.tracking');
+// Ruta para el seguimiento de pedidos en la vista de administrador
+Route::get('/orders/{order}', [OrderController::class, 'adminTracking'])->name('orders.admin_tracking');
+
+Route::put('/orders/{order}/update-tracking', [OrderController::class, 'updateTracking'])->name('orders.admin_tracking.update');
 
 
 // Garaje
