@@ -334,6 +334,15 @@
               </a>
             </li>
 
+            <!-- CALENDARIO -->
+            <li class="nav-main-heading">Agenda Visitas/Reuniones</li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('calendar') ? ' active' : '' }}" href="{{ route('calendar') }}">
+                <i class="nav-main-link-icon fa fa-calendar"></i>
+                <span class="nav-main-link-name">Calendario</span>
+              </a>
+            </li>
+
             <li class="nav-main-heading">Administración de Página</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
@@ -444,14 +453,6 @@
 
 
 
-            <!-- CALENDARIO -->
-            <li class="nav-main-heading">Agenda Visitas/Reuniones</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('calendar') ? ' active' : '' }}" href="{{ route('calendar') }}">
-                <i class="nav-main-link-icon fa fa-calendar"></i>
-                <span class="nav-main-link-name">Calendario</span>
-              </a>
-            </li>
 
             <li class="nav-main-heading">Galeria de Imagenes</li>
             <li class="nav-main-item">

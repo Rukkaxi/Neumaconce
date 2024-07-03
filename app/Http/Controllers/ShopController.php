@@ -113,8 +113,6 @@ class ShopController extends Controller
         $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $id)->first();
         $isInWishlist = $wishlistItem ? true : false;
         $product->increment('views');
-
-
         // Cambia el nombre de la variable para evitar posibles conflictos
         $userHasPurchased = false;
 
