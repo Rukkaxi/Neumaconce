@@ -392,8 +392,9 @@
             </li>
             <li class="nav-main-item{{ request()->is('orders/*') || request()->is('regions') || request()->is('communes') || request()->is('branches') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                <i class="nav-main-link-icon fa-solid fa-shopping-cart"></i>
-                <span class="nav-main-link-name">Pedidos y direcciones</span>
+                <i class="nav-main-link-icon fa-solid fa-map-marker-alt"></i>
+
+                <span class="nav-main-link-name">Ubicaciones y direcciones</span>
               </a>
               <ul class="nav-main-submenu">
                 <li class="nav-main-item">
@@ -408,12 +409,7 @@
                     <span class="nav-main-link-name">Comunas</span>
                   </a>
                 </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link{{ request()->is('orders') ? ' active' : '' }}" href="{{ url('orders') }}">
-                    <i class="nav-main-link-icon fa fa-shopping-cart"></i>
-                    <span class="nav-main-link-name">Pedidos</span>
-                  </a>
-                </li>
+
                 <li class="nav-main-item">
                   <a class="nav-main-link{{ request()->is('branches') ? ' active' : '' }}" href="{{ url('branches') }}">
                     <i class="nav-main-link-icon fa-solid fa-building"></i>
@@ -421,6 +417,20 @@
                   </a>
                 </li>
               </ul>
+            </li>
+
+            <li class="nav-main-heading">Módulo de Ventas</li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('orders') ? ' active' : '' }}" href="{{ url('orders') }}">
+                <i class="nav-main-link-icon fa fa-shopping-cart"></i>
+                <span class="nav-main-link-name">Pedidos</span>
+              </a>
+            </li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('payment-methods') ? ' active' : '' }}" href="{{url('payment-methods')}}">
+                <i class="nav-main-link-icon fa fa-credit-card"></i>
+                <span class="nav-main-link-name">Métodos de Pago</span>
+              </a>
             </li>
 
             <!-- GRAFICOS DE VENTAS/ETC -->
@@ -454,19 +464,7 @@
                 <span class="nav-main-link-name">Ver las imagenes</span>
               </a>
             </li>
-            <li class="nav-main-heading">Módulo de Ventas</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('payment-methods') ? ' active' : '' }}" href="{{url('payment-methods')}}">
-                <i class="nav-main-link-icon fa fa-credit-card"></i>
-                <span class="nav-main-link-name">Métodos de Pago</span>
-              </a>
-            </li>
-            <!-- <li class="nav-main-item">
-              <a class="nav-main-link" href="#">
-                <i class="nav-main-link-icon fa fa-cubes"></i>
-                <span class="nav-main-link-name">Inventario</span>
-              </a>
-            </li> -->
+
           </ul>
         </div>
         <!-- END Side Navigation -->

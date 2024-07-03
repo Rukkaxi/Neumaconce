@@ -17,9 +17,11 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RecommendedProductController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\FullCalendarController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Mail;
 
  Route::get('/email/verify', function () {
@@ -37,9 +39,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('status', 'verification-link-sent');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-use App\Http\Controllers\SalesController;
-use App\Http\Controllers\FullCalendarController;
-use App\Http\Controllers\NotificationsController;
+
 
 //Permisos y Roles
 
