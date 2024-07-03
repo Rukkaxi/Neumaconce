@@ -12,7 +12,11 @@ class Order extends Model
         'user_id',
         'address_id',
         'payment_method_id',
+        'status',
+        'delivery_type',
         'total',
+        'buy_order',
+        'authorization_code',
     ];
 
     public function user()
@@ -34,4 +38,11 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    // En el modelo Order.php
+
+    public function tracking_updates()
+    {
+        return $this->hasMany(TrackingUpdate::class);
+    }
+
 }

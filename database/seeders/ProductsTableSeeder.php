@@ -13,7 +13,7 @@ class ProductsTableSeeder extends Seeder
         $products = [
             [
                 'name' => 'Alerón Deportivo',
-                'price' => 120.99,
+                'price' => 120990,
                 'brandId' => 1,
                 'stock' => 50,
                 'description' => 'Alerón deportivo de alta calidad para mejorar la aerodinámica del vehículo.',
@@ -24,18 +24,18 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Alerón Aerodinámico',
-                'price' => 130.99,
+                'price' => 130990,
                 'brandId' => 1,
                 'stock' => 45,
                 'description' => 'Alerón aerodinámico para un mejor rendimiento a altas velocidades.',
                 'available' => true,
-                'image1' => 'storage/products/aleron2.png',
+                'image1' => 'storage/products/aleron2.jpg',
                 'category' => 'Exteriores',
                 'tags' => ['spoiler', 'exteriores']
             ],
             [
                 'name' => 'Dados para Ruedas',
-                'price' => 9.99,
+                'price' => 9990,
                 'brandId' => 2,
                 'stock' => 150,
                 'description' => 'Juego de dados para ruedas, ideal para cualquier tipo de vehículo.',
@@ -46,7 +46,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Dados de Aleación',
-                'price' => 12.99,
+                'price' => 12990,
                 'brandId' => 2,
                 'stock' => 120,
                 'description' => 'Dados de aleación para ruedas, alta resistencia y durabilidad.',
@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Filtro de Aceite',
-                'price' => 19.99,
+                'price' => 19990,
                 'brandId' => 3,
                 'stock' => 100,
                 'description' => 'Filtro de aceite de alta calidad para un rendimiento óptimo del motor.',
@@ -68,18 +68,18 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Filtro de Aire',
-                'price' => 14.99,
+                'price' => 14990,
                 'brandId' => 3,
                 'stock' => 100,
                 'description' => 'Filtro de aire para mejorar la eficiencia del motor.',
                 'available' => true,
-                'image1' => 'storage/products/filtro.jpg',
+                'image1' => 'storage/products/filtro2.jpg',
                 'category' => 'Partes',
                 'tags' => ['filtro', 'motor']
             ],
             [
                 'name' => 'Juego de Focos LED',
-                'price' => 29.99,
+                'price' => 29990,
                 'brandId' => 4,
                 'stock' => 80,
                 'description' => 'Juego de focos LED para mejor visibilidad en carretera.',
@@ -92,7 +92,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Gata Hidráulica',
-                'price' => 39.99,
+                'price' => 39990,
                 'brandId' => 5,
                 'stock' => 60,
                 'description' => 'Gata hidráulica para levantar vehículos con facilidad.',
@@ -102,8 +102,8 @@ class ProductsTableSeeder extends Seeder
                 'tags' => ['herramientas', '4x4']
             ],
             [
-                'name' => 'Gata Mecánica',
-                'price' => 34.99,
+                'name' => 'Gata Only',
+                'price' => 34990,
                 'brandId' => 5,
                 'stock' => 55,
                 'description' => 'Gata mecánica robusta y duradera.',
@@ -114,7 +114,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Llanta Todo Terreno',
-                'price' => 89.99,
+                'price' => 89990,
                 'brandId' => 6,
                 'stock' => 100,
                 'description' => 'Llanta todo terreno para máxima tracción en cualquier superficie.',
@@ -125,7 +125,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Llanta de Verano',
-                'price' => 79.99,
+                'price' => 79990,
                 'brandId' => 6,
                 'stock' => 90,
                 'description' => 'Llanta de verano para mejor rendimiento en condiciones secas.',
@@ -136,7 +136,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Llanta de Invierno',
-                'price' => 99.99,
+                'price' => 99900,
                 'brandId' => 6,
                 'stock' => 80,
                 'description' => 'Llanta de invierno diseñada para condiciones climáticas frías.',
@@ -147,7 +147,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Llanta de Oro',
-                'price' => 199.99,
+                'price' => 199000,
                 'brandId' => 6,
                 'stock' => 70,
                 'description' => 'Llanta dorada para un toque de lujo y elegancia.',
@@ -158,7 +158,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Palanca de Cambios',
-                'price' => 24.99,
+                'price' => 24990,
                 'brandId' => 7,
                 'stock' => 100,
                 'description' => 'Palanca de cambios ergonómica y duradera.',
@@ -169,7 +169,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Palanca de Cambios Deportiva',
-                'price' => 29.99,
+                'price' => 29990,
                 'brandId' => 7,
                 'stock' => 95,
                 'description' => 'Palanca de cambios deportiva para una experiencia de conducción mejorada.',
@@ -180,7 +180,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Palanca de Cambios de Lujo',
-                'price' => 34.99,
+                'price' => 39990,
                 'brandId' => 7,
                 'stock' => 90,
                 'description' => 'Palanca de cambios de lujo con acabados premium.',
@@ -191,7 +191,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Parabrisas Frontal',
-                'price' => 149.99,
+                'price' => 149990,
                 'brandId' => 8,
                 'stock' => 40,
                 'description' => 'Parabrisas frontal resistente y duradero.',
@@ -202,7 +202,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Parlante para Auto',
-                'price' => 49.99,
+                'price' => 4990,
                 'brandId' => 9,
                 'stock' => 60,
                 'description' => 'Parlante de alta calidad para un sonido nítido y claro.',
@@ -213,7 +213,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Parlante Potente',
-                'price' => 59.99,
+                'price' => 59990,
                 'brandId' => 9,
                 'stock' => 55,
                 'description' => 'Parlante potente para un sonido envolvente.',
@@ -224,7 +224,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Parlante Bluetooth',
-                'price' => 69.99,
+                'price' => 69990,
                 'brandId' => 9,
                 'stock' => 50,
                 'description' => 'Parlante con conexión Bluetooth para mayor comodidad.',
@@ -235,7 +235,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Pedales Deportivos',
-                'price' => 34.99,
+                'price' => 34990,
                 'brandId' => 10,
                 'stock' => 80,
                 'description' => 'Juego de pedales deportivos para un mejor agarre y control.',
@@ -246,7 +246,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Pedales de Aluminio',
-                'price' => 39.99,
+                'price' => 39900,
                 'brandId' => 10,
                 'stock' => 75,
                 'description' => 'Pedales de aluminio de alta resistencia.',
@@ -257,7 +257,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Pedales Ajustables',
-                'price' => 44.99,
+                'price' => 44990,
                 'brandId' => 10,
                 'stock' => 70,
                 'description' => 'Pedales ajustables para una conducción más cómoda.',
@@ -268,7 +268,7 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name' => 'Motor V6',
-                'price' => 599.99,
+                'price' => 599990,
                 'brandId' => 11,
                 'stock' => 20,
                 'description' => 'Motor V6 de alto rendimiento para una experiencia de conducción superior.',

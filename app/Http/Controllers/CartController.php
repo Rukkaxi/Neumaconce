@@ -99,7 +99,7 @@ class CartController extends Controller
     {
         // Establecer el paso actual en la sesión del usuario
         $step = $request->session()->get('checkout_step', 1);
-
+        $deliveryType = $request->session()->get('delivery_type');
         $communes = Commune::all();
         $regions = Region::all();
         $addresses = Address::where('user_id', auth()->id())->get();
@@ -111,37 +111,25 @@ class CartController extends Controller
         $paymentMethods = PaymentMethod::all();
         $branches = Branch::all(); // Fetch branches
 
-        return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step', 'branches'));
+        return view('cart.preorder', compact('addresses', 'paymentMethods', 'communes', 'step', 'branches', 'deliveryType'));
     }
 
-
-    /* public function purchase(Request $request)
+    public function purchase(Request $request)
     {
-        $user = Auth::user();
-        $cartItems = Cart::getContent();
-        $total = Cart::getTotal();
-
-        // Create order
-        $order = Order::create([
-            'user_id' => $user->id,
-            'address_id' => $request->address,
-            'payment_method_id' => $request->payment_method,
-            'total' => $total,
+        // Validar y procesar la solicitud
+        $request->validate([
+            // Otros campos validados
+            'delivery_type' => 'required|in:store_pickup,home_delivery',
         ]);
 
-        // Create order items
-        foreach ($cartItems as $item) {
-            $order->items()->create([
-                'product_id' => $item->id,
-                'quantity' => $item->quantity,
-                'price' => $item->price,
-            ]);
-        }
+        // Crear el pedido en la base de datos
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'total' => $amount, // Ajusta según cómo obtengas el total
+            'delivery_type' => $request->input('delivery_type'), // Guardar el tipo de entrega seleccionado
+            // Otros campos del pedido
+        ]);      
+        
+    }
 
-        // Clear the cart
-        Cart::clear();
-
-        // Redirect to orders index with success message
-        return redirect()->route('orders.index')->with('success', 'Compra realizada con éxito');
-    } */
 }
