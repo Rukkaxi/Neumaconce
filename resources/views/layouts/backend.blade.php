@@ -325,6 +325,14 @@
                 <span class="nav-main-link-badge badge rounded-pill bg-primary">5</span>
               </a>
             </li> -->
+            <!-- GRAFICOS DE VENTAS/ETC -->
+            <li class="nav-main-heading">Inicio</li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('graphics') ? ' active' : '' }}" href="{{ route('graphics.index') }}">
+                <i class="nav-main-link-icon fa fa-bar-chart"></i>
+                <span class="nav-main-link-name">Registros diarios</span>
+              </a>
+            </li>
             <li class="nav-main-heading">Administración de Página</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
@@ -433,14 +441,7 @@
               </a>
             </li>
 
-            <!-- GRAFICOS DE VENTAS/ETC -->
-            <li class="nav-main-heading">Despliegue Gráfico</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('graphics') ? ' active' : '' }}" href="{{ route('graphics.index') }}">
-                <i class="nav-main-link-icon fa fa-bar-chart"></i>
-                <span class="nav-main-link-name">Información Gráfica</span>
-              </a>
-            </li>
+
 
             <!-- CALENDARIO -->
             <li class="nav-main-heading">Agenda Visitas/Reuniones</li>
