@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <!-- Main Image -->
             <div id="mainImageContainer">
-                <img src="{{ asset($product->image) }}" class="img-fluid main-image" alt="{{ $product->name }}">
+                <img src="{{ asset($product->image1) }}" class="img-fluid main-image" alt="{{ $product->name }}">
             </div>
             <!-- Thumbnails -->
             <div id="thumbnailContainer" class="mt-3">
@@ -18,37 +18,42 @@
             </div>
         </div>
         <!-- Product Info -->
-        <div class="col-md-6">
-            <h1>{{ $product->name }}</h1>
-            <p class="text-muted">{{ $product->brand->name }}</p>
-            <p>${{ $product->price }}</p>
-            <p>Stock: {{ $product->stock }}</p>
-            <p>Categorías:
-                @foreach($product->categories as $category)
-                <span class="badge badge-secondary">{{ $category->name }}</span>
-                @endforeach
-            </p>
-            <p>Etiquetas:
-                @foreach($product->tags as $tag)
-                <span class="badge badge-primary">{{ $tag->name }}</span>
-                @endforeach
-            </p>
-            <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Añadir al carro</button>
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <div>
+                <h1>{{ $product->name }}</h1>
+                <p class="text-muted">{{ $product->brand->name }}</p>
+                <p>${{ $product->price }}</p>
+                <p>Stock: {{ $product->stock }}</p>
 
-            @if($isInWishlist)
-            <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
-            </form>
-            @else
-            <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
-            </form>
-            @endif
+                <p>Categorías:
+                    @foreach($product->categories as $category)
+                    <span class="badge badge-secondary">{{ $category->name }}</span>
+                    @endforeach
+                </p>
+                <p>Etiquetas:
+                    @foreach($product->tags as $tag)
+                    <span class="badge badge-primary">{{ $tag->name }}</span>
+                    @endforeach
+                </p>
+                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Añadir al carro</button>
+
+                @if($isInWishlist)
+                <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
+                </form>
+                @else
+                <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
+                </form>
+                @endif
+                <p class="mt-3">{{ $product->description }}</p>
+            </div>
         </div>
     </div>
+
 
     <!-- Questions and Answers Section -->
     <div class="row mt-5">

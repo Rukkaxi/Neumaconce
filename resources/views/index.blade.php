@@ -119,7 +119,7 @@
                                 <h1 class="display-2 text-white mt-n2 m-0">01</h1>
                             </div>
                             <h4 class="text-uppercase mb-3">Agendar Visitas</h4>
-                            <p class="m-0">Agenda visitas para compatibilidad de piezas, revisión técnica, reparación y/o mantenimiento</p>
+                            <p class="m-0">Agenda visitas para compatibilidad de piezas, revisión técnica, reparación y/o mantenimiento.</p>
                         </div>
                     </a>
                 </div>
@@ -133,7 +133,7 @@
                                 <h1 class="display-2 text-white mt-n2 m-0">02</h1>
                             </div>
                             <h4 class="text-uppercase mb-3">Cotiza con Nosotros</h4>
-                            <p class="m-0">Cotiza algún producto que buscas y te respondemos si lo proveemos</p>
+                            <p class="m-0">Cotiza algún producto que buscas y te respondemos si lo proveemos.</p>
                         </div>
                     </a>
                 </div>
@@ -170,7 +170,7 @@
                     <h1 class="display-1 text-uppercase text-primary mb-4">20% DE DESCUENTO</h1>
                     <h1 class="text-uppercase text-light mb-4">Descuento especial para nuevos miembros</h1>
                     <p class="mb-4">Solo disponible de Lunes a viernes</p>
-                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Regístrate Ahora</a>
+                    <a class="btn btn-primary mt-2 py-3 px-5" href="{{ url('register') }}">Regístrate Ahora</a>
                 </div>
             </div>
         </div>
@@ -322,11 +322,14 @@
                 <p class="mb-4">Recibe ofertas de tu auto o de los productos que no tenemos en stock a tiempo real una vez que nos llegue a tu correo </p>
                 <div class="w-100 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-dark border-dark" style="padding: 25px;" placeholder="Tu Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary text-uppercase px-3">Regístrate</button>
-                        </div>
+                        <form action="{{ route('register') }}" method="get">
+                            <div class="input-group-append">
+                                <input type="text" class="form-control bg-dark border-dark" style="padding: 25px;" placeholder="Tu Email">
+                                <button class="btn btn-primary text-uppercase px-3">Regístrate</button>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
 
             </div>

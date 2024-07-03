@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
 
-/* Route::get('/email/verify', function () {
+ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
@@ -36,7 +36,7 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
     return back()->with('status', 'verification-link-sent');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); */
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 //Permisos y Roles
 
