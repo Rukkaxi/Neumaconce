@@ -37,6 +37,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('status', 'verification-link-sent');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\FullCalendarController;
+use App\Http\Controllers\NotificationsController;
 
 //Permisos y Roles
 
@@ -88,6 +91,8 @@ Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('products/{product}/change-stock', [ProductController::class, 'changeStock'])->name('products.changeStock');
 Route::get('/recommended-products', [RecommendedProductController::class, 'show'])->name('recommended-products');
+
+
 // Profile
 //Route::resource('profiles', App\Http\Controllers\UserController::class);
 Route::middleware(['auth'])->group(function () {
@@ -112,6 +117,21 @@ Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.in
 
 //Direccion
 Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
+
+// Gráfico de ventas
+Route::get('/graphics', [SalesController::class, 'index'])->name('graphics.index');
+
+// CALENDARIO
+Route::get('full-calendar', [FullCalendarController::class, 'index'])->name('calendar');
+Route::post('full-calendar/action', [FullCalendarController::class, 'action'])->name('action');
+
+// NOTIFICACIONES
+Route::get('/notifications', [NotificationsController::class, 'index']);
+Route::get('/notifications/fetch', [NotificationsController::class, 'fetch']);
+Route::get('/notifications/count', [NotificationsController::class, 'count']);
+Route::post('/notifications/mark-read', [NotificationsController::class, 'markRead']);
+Route::post('/notifications/clear', [NotificationsController::class, 'clear']);
+
 
 // Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');

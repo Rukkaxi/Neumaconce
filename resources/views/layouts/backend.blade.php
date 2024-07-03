@@ -423,6 +423,24 @@
               </ul>
             </li>
 
+            <!-- GRAFICOS DE VENTAS/ETC -->
+            <li class="nav-main-heading">Despliegue Gráfico</li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('graphics') ? ' active' : '' }}" href="{{ route('graphics.index') }}">
+                <i class="nav-main-link-icon fa fa-bar-chart"></i>
+                <span class="nav-main-link-name">Información Gráfica</span>
+              </a>
+            </li>
+
+            <!-- CALENDARIO -->
+            <li class="nav-main-heading">Agenda Visitas/Reuniones</li>
+            <li class="nav-main-item">
+              <a class="nav-main-link{{ request()->is('calendar') ? ' active' : '' }}" href="{{ route('calendar') }}">
+                <i class="nav-main-link-icon fa fa-calendar"></i>
+                <span class="nav-main-link-name">Calendario</span>
+              </a>
+            </li>
+
             <li class="nav-main-heading">Galeria de Imagenes</li>
             <li class="nav-main-item">
               <a class="nav-main-link{{ request()->is('gallery-create') ? ' active' : '' }}" href="{{url('gallery/create')}}">
@@ -488,7 +506,9 @@
             <button type="button" class="btn btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-fw fa-user d-sm-none"></i>
               <span class="d-none d-sm-inline-block">Administración</span>
+              <span id="notificationCount" class="badge bg-primary rounded-pill" style="display:none;">0</span>
               <i class="fa fa-fw fa-angle-down opacity-50 ms-1 d-none d-sm-inline-block"></i>
+
             </button>
             <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
               <div class="bg-primary-dark rounded-top fw-semibold text-white text-center p-3">
@@ -498,12 +518,17 @@
                 <a class="dropdown-item" href="{{ url('/') }}">
                   <i class="fas fa-home me-1"></i> Inicio
                 </a>
-                <a class="dropdown-item" href="{{ url('shop') }}">
-                  <i class="fas fa-store me-1"></i> Tienda
-                </a>
                 <a class="dropdown-item" href="{{ url('profiles') }}">
                   <i class="fas fa-user me-1"></i> Perfil
                 </a>
+                <a class="dropdown-item" href="{{ url('notifications') }}">
+                  <i class="fas fa-bell me-1"></i> Notificaciones
+                </a>
+                <a class="dropdown-item" href="{{ url('shop') }}">
+                  <i class="fas fa-store me-1"></i> Tienda
+                </a>
+
+
 
                 <!-- <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                   <span><i class="far fa-fw fa-envelope me-1"></i> Inbox</span>
@@ -532,6 +557,31 @@
               </div>
             </div>
           </div>
+
+          <!-- SCRIPT NOTIFICACIONES -->
+          <script>
+            $(document).ready(function() {
+              function updateNotificationCount() {
+                $.ajax({
+                  url: '/notifications/count',
+                  type: 'GET',
+                  success: function(response) {
+                    if (response.count > 0) {
+                      $('#notification-count').text(response.count).removeClass('d-none');
+                    } else {
+                      $('#notification-count').addClass('d-none');
+                    }
+                  },
+                  error: function(err) {
+                    console.error('Error:', err);
+                  }
+                });
+              }
+
+              updateNotificationCount();
+              setInterval(updateNotificationCount, 60000); // Actualizar cada minuto
+            });
+          </script>
           <!-- END User Dropdown -->
 
           <!-- Notifications Dropdown -->
