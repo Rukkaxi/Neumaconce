@@ -18,6 +18,7 @@ use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\FullCalendarController;
+use App\Http\Controllers\NotificationsController;
 
 //Permisos y Roles
 Route::resource('permissions', App\Http\Controllers\PermisionController::class);
@@ -94,6 +95,14 @@ Route::get('/graphics', [SalesController::class, 'index'])->name('graphics.index
 // CALENDARIO
 Route::get('full-calendar',[FullCalendarController::class, 'index'])->name('calendar');
 Route::post('full-calendar/action', [FullCalendarController::class, 'action'])->name('action');
+
+// NOTIFICACIONES
+Route::get('/notifications', [NotificationsController::class, 'index']);
+Route::get('/notifications/fetch', [NotificationsController::class, 'fetch']);
+Route::get('/notifications/count', [NotificationsController::class, 'count']);
+Route::post('/notifications/mark-read', [NotificationsController::class, 'markRead']);
+Route::post('/notifications/clear', [NotificationsController::class, 'clear']);
+
 
 // Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');
