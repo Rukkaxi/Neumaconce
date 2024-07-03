@@ -118,9 +118,6 @@ Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.in
 //Direccion
 Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
 
-// Gráfico de ventas
-Route::get('/graphics', [SalesController::class, 'index'])->name('graphics.index');
-
 // CALENDARIO
 Route::get('full-calendar', [FullCalendarController::class, 'index'])->name('calendar');
 Route::post('full-calendar/action', [FullCalendarController::class, 'action'])->name('action');
@@ -216,9 +213,7 @@ Auth::routes([
 
 // DashMix Example Routes
 Route::view('/landing', 'landing');
-Route::match(['get', 'post'], '/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [SalesController::class, 'index'])->name('dashboard');
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
