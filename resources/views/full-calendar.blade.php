@@ -59,11 +59,12 @@
     </div>
 </div>
 
+
 <!-- Toast Notification -->
-<div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+<div aria-live="polite" aria-atomic="true" class="position-fixed end-0 pt-3" style="z-index: 11;">
     <div class="toast" id="eventToast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <i class="fa fa-flag-o me-2" aria-hidden="true"></i>
+        <i class="fa fa-flag-o me-2" aria-hidden="true"></i>
             <strong class="me-auto">Nueva Notificación</strong>
             <small class="text-muted">ahora</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -73,6 +74,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     $(document).ready(function() {
@@ -162,7 +164,16 @@
                 $('#ingresar').modal('show');
             }
         });
+       // Ajustar la posición del toast después de que el documento esté listo
+       var headerHeight = $('header').outerHeight(); // Obtener la altura del header
+        $('.position-fixed').css('top', headerHeight + 'px'); // Ajustar la posición del toast
 
+        // Función para mostrar el toast
+        function showToast() {
+            $('#eventToast').toast('show');
+        }
+
+        // Muestra el toast cuando se guarda un evento
         $('#saveEvent').click(function() {
             var id = $('#eventId').val();
             var title = $('#eventTitle').val();
@@ -187,7 +198,7 @@
                         Swal.fire('¡Éxito!', 'El evento ha sido guardado exitosamente.', 'success');
 
                         // Mostrar notificación toast
-                        $('#eventToast').toast('show');
+                        showToast();
 
                         // Actualizar el contador de notificaciones
                         updateNotificationCount();
