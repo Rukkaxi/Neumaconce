@@ -23,11 +23,15 @@ class CotizacionController extends Controller
             'product_id' => 'required|integer',
             'descripcion' => 'required|string|max:1000',
         ]);
-
+    
         Cotizacion::create($validated);
+    
+        return redirect()->route('cotizaciones.create')->with('success', 'Cotización registrada exitosamente!');
+    }
 
-        // Notificar al admin (puedes usar un sistema de notificaciones)
-
-        return redirect()->route('cotizaciones.form')->with('success', 'Cotización registrada exitósamente!');
+    public function index()
+    {
+        $cotizaciones = Cotizacion::with('product')->get();
+        return view('cotizaciones.index', compact('cotizaciones'));
     }
 }

@@ -332,6 +332,10 @@
                 <i class="nav-main-link-icon fa fa-home"></i>
                 <span class="nav-main-link-name">Inicio</span>
               </a>
+              <a class="nav-main-link{{ request()->is('cotizaciones') ? ' active' : '' }}" href="{{ route('cotizaciones.index') }}">
+                <i class="nav-main-link-icon fa fa-file-text"></i>
+                <span class="nav-main-link-name">Cotizaciones</span>
+              </a>
             </li>
 
             <!-- CALENDARIO -->
