@@ -16,7 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card w-100"> 
-                <div class="card-header text-center">AGENDA DE VISITA/RETIRO</div>
+                <div class="card-header text-center">Calendario de visitas</div>
                 <div id="calendar" class="card-body w-100"></div> 
             </div>
         </div>
@@ -28,7 +28,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Agregar/Editar</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Agregar/Editar Evento</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,7 +36,7 @@
             <div class="modal-body">
                 <form id="eventForm">
                     <div class="form-group">
-                        <label for="eventTitle">Motivo</label>
+                        <label for="eventTitle">Título del evento</label>
                         <input type="text" class="form-control" id="eventTitle" name="title" required>
                     </div>
                     <div class="form-group">
@@ -59,6 +59,20 @@
     </div>
 </div>
 
+<!-- Toast Notification -->
+<div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div class="toast" id="eventToast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="fa fa-flag-o me-2" aria-hidden="true"></i>
+            <strong class="me-auto">Nueva Notificación</strong>
+            <small class="text-muted">ahora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Se ha agregado un nuevo evento.
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -171,6 +185,12 @@
                         calendar.fullCalendar('refetchEvents');
                         $('#ingresar').modal('hide');
                         Swal.fire('¡Éxito!', 'El evento ha sido guardado exitosamente.', 'success');
+
+                        // Mostrar notificación toast
+                        $('#eventToast').toast('show');
+
+                        // Actualizar el contador de notificaciones
+                        updateNotificationCount();
                     },
                     error: function(err) {
                         console.error('Error:', err);
@@ -203,10 +223,13 @@
                             id: id,
                             type: 'delete'
                         },
-                        success: function(data) {
+                        success: function(response) {
                             calendar.fullCalendar('refetchEvents');
                             $('#ingresar').modal('hide');
                             Swal.fire('¡Eliminado!', 'El evento ha sido eliminado.', 'success');
+
+                            // Actualizar el contador de notificaciones
+                            updateNotificationCount();
                         },
                         error: function(err) {
                             console.error('Error:', err);
@@ -214,8 +237,34 @@
                         }
                     });
                 }
-            });
+            })
         });
+
+        function updateNotificationCount() {
+            $.ajax({
+                url: "/notifications/count",
+                type: "GET",
+                success: function(data) {
+                    if (data.count > 0) {
+                        $('#notificationCount').text(data.count).show();
+                    } else {
+                        $('#notificationCount').hide();
+                    }
+                },
+                error: function(err) {
+                    console.error('Error:', err);
+                }
+            });
+        }
+
+        // Inicializar el toast con autohide y duración de 2 segundos
+        $('.toast').toast({
+            autohide: true,
+            delay: 2000
+        });
+
+        // Cargar el contador de notificaciones al cargar la página
+        updateNotificationCount();
     });
 </script>
 
