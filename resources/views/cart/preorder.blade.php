@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- SweetAlert Script -->
+<script src="{{ asset('js/sweetAlert.js') }}"></script>
+
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 <div class="container">
@@ -180,7 +185,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary" onclick="checkPaymentMethod()">Comprar</button>
+                        <button type="submit" class="btn btn-primary" id="purchase-button" onclick="checkPaymentMethod()">Comprar</button>
                     </form>
                 </div>
             </div>
