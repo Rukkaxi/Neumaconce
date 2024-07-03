@@ -92,7 +92,7 @@
                         <a href="contact" class="nav-item nav-link">Contacto</a>
 
 
-                        <a class="nav-item nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
+                        <a class="nav-item nav-link" href="{{ route('cotizaciones.create') }}">Cotizaciones</a>
 
 
                         {{-- Dropdown de admin --}}

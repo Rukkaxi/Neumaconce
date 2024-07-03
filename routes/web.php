@@ -193,17 +193,14 @@ Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.
 //Perfil
 /* Route::resource('profile', App\Http\Controllers\UserController::class); */
 
-// cotizaciones
+//COTIZACIÓN
+//COTIZACIÓN
+//COTIZACIÓN
+//COTIZACIÓN
 
-Route::get('/cotizaciones', [CotizacionController::class, 'create'])->name('cotizaciones.form');
-Route::post('/cotizaciones', [CotizacionController::class, 'store'])->name('cotizaciones.store');
-
-
-Route::get('/xd', function () {
-    return view('welcome');
-});
-
-
+Route::get('/cotizaciones/create', [CotizacionController::class, 'create'])->name('cotizaciones.create');
+Route::post('/cotizaciones/store', [CotizacionController::class, 'store'])->name('cotizaciones.store');
+Route::get('/cotizaciones', [CotizacionController::class, 'index'])->name('cotizaciones.index');
 
 Auth::routes([
     #'verify' => 'true'
