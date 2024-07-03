@@ -328,11 +328,12 @@
             <!-- GRAFICOS DE VENTAS/ETC -->
             <li class="nav-main-heading">Inicio</li>
             <li class="nav-main-item">
-              <a class="nav-main-link{{ request()->is('graphics') ? ' active' : '' }}" href="{{ route('graphics.index') }}">
-                <i class="nav-main-link-icon fa fa-bar-chart"></i>
-                <span class="nav-main-link-name">Registros diarios</span>
+              <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="{{ route('dashboard') }}">
+                <i class="nav-main-link-icon fa fa-home"></i>
+                <span class="nav-main-link-name">Inicio</span>
               </a>
             </li>
+
             <li class="nav-main-heading">Administración de Página</li>
             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
