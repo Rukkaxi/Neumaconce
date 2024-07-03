@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,6 +8,7 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class WebpayController extends Controller
 {
@@ -79,7 +81,7 @@ class WebpayController extends Controller
                 Cart::clear();
             }
 
-            return view('webpay.success', ['result' => $response]);
+            return view('webpay.success', ['result' => $response, 'order' => $order]);
         }
 
         return view('webpay.failure', ['result' => $response]);
@@ -88,5 +90,13 @@ class WebpayController extends Controller
     public function finish()
     {
         return view('webpay.finish');
+    }
+
+    public function downloadInvoice($orderId)
+    {
+        $order = Order::with('items.product')->findOrFail($orderId);
+
+        $pdf = Pdf::loadView('webpay.receipt', compact('order'));
+        return $pdf->download('receipt_' . $order->id . '.pdf');
     }
 }

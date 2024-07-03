@@ -169,6 +169,8 @@ Route::get('/orders/{order}', [OrderController::class, 'adminTracking'])->name('
 
 Route::put('/orders/{order}/update-tracking', [OrderController::class, 'updateTracking'])->name('orders.admin_tracking.update');
 
+//Boleta
+Route::get('/webpay/download-invoice/{orderId}', [WebpayController::class, 'downloadInvoice'])->name('webpay.downloadInvoice');
 
 // Garaje
 // Define the routes

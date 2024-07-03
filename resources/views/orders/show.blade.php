@@ -5,11 +5,20 @@
     <h1>Detalles de compra</h1>
     <div class="d-flex justify-content-end mt-3">
         <a href="{{ route('orders.index') }}" class="btn btn-primary mt-3">Ver Mis Compras</a>
-    </div><hr>
+    </div>
+    <hr>
     <div class="card mb-3">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <h1>Pedido #{{ $order->id }}</h1>
+            <a href="{{ route('webpay.downloadInvoice', $order->id) }}" class="btn btn-secondary">Descargar PDF</a>
         </div>
+        <style>
+            .btn-secondary {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
         <div class="card-body">
             <p><strong>Fecha:</strong> {{ $order->created_at }}</p>
             <p><strong>Correo Electrónico:</strong> {{ $order->user->email }}</p>
@@ -24,7 +33,7 @@
                 @foreach($order->items as $item)
                 <li class="list-group-item d-flex align-items-center">
                     @php
-                        $image = $item->product->image1 ?? $item->product->image2 ?? $item->product->image3 ?? $item->product->image4 ?? $item->product->image5 ?? null;
+                    $image = $item->product->image1 ?? $item->product->image2 ?? $item->product->image3 ?? $item->product->image4 ?? $item->product->image5 ?? null;
                     @endphp
                     @if($image)
                     <img src="{{ asset($image) }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
@@ -36,7 +45,7 @@
                 @endforeach
             </ul>
             <h5 class="mt-3">Precio Total del Pedido: ${{ $order->items->sum(function($item) { return $item->price * $item->quantity; }) }}</h5>
-            
+
             <a href="{{ url('/tracking/'.$order->buy_order) }}" class="btn btn-primary">Seguimiento</a>
         </div>
     </div>

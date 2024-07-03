@@ -165,6 +165,7 @@ class ProductController extends Controller
         $userId = auth()->id();
         $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $id)->first();
         $isInWishlist = $wishlistItem ? true : false;
+        $product->increment('views');
 
         return view('shop.show', compact('product', 'isInWishlist', 'wishlistItem'));
     }
