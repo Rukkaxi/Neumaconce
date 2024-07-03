@@ -518,15 +518,16 @@
                 <a class="dropdown-item" href="{{ url('/') }}">
                   <i class="fas fa-home me-1"></i> Inicio
                 </a>
+                <a class="dropdown-item" href="{{ url('profiles') }}">
+                  <i class="fas fa-user me-1"></i> Perfil
+                </a>
                 <a class="dropdown-item" href="{{ url('notifications') }}">
                   <i class="fas fa-bell me-1"></i> Notificaciones
                 </a>
                 <a class="dropdown-item" href="{{ url('shop') }}">
                   <i class="fas fa-store me-1"></i> Tienda
                 </a>
-                <a class="dropdown-item" href="{{ url('profiles') }}">
-                  <i class="fas fa-user me-1"></i> Perfil
-                </a>
+
 
 
                 <!-- <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">

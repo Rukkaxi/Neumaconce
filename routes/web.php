@@ -70,6 +70,8 @@ Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('products/{product}/change-stock', [ProductController::class, 'changeStock'])->name('products.changeStock');
 Route::get('/recommended-products', [RecommendedProductController::class, 'show'])->name('recommended-products');
+
+
 // Profile
 //Route::resource('profiles', App\Http\Controllers\UserController::class);
 Route::middleware(['auth'])->group(function () {
