@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <p><strong>Fecha:</strong> {{ $order->created_at->format('d/m/Y H:i:s') }}</p>
                         <p><strong>Método de Pago:</strong> {{ optional($order->paymentMethod)->name }}</p>
-                        <p><strong>Dirección:</strong> {{ $order->address }}</p>
+                        <p><strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}</p>
                         <p><strong>Estado:</strong> {{ __($order->status) }}</p>
                         <p><strong>Tipo de Entrega:</strong> {{ __($order->delivery_type) }}</p>
                         <h5>Productos:</h5>

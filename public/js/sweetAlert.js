@@ -17,19 +17,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Después de confirmar la eliminación, envía el formulario
                     form.submit();
                 }
             });
         });
     });
 
-    // Escucha el evento submit del formulario
     document.querySelectorAll('.delete-form').forEach(form => {
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita el envío del formulario por defecto
+            event.preventDefault();
 
-            // Puedes agregar un código aquí para mostrar un mensaje de éxito después de la eliminación
             Swal.fire({
                 title: '¡Éxito!',
                 text: 'El elemento ha sido eliminado correctamente.',
@@ -38,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Muestra el mensaje de sesión utilizando SweetAlert si existe
     if (document.querySelector('meta[name="status-message"]')) {
         let statusMessage = document.querySelector('meta[name="status-message"]').getAttribute('content');
         Swal.fire({
@@ -46,7 +42,29 @@ document.addEventListener('DOMContentLoaded', function () {
             text: statusMessage,
             icon: 'success',
             showConfirmButton: false,
-            timer: 2000 // Cierra automáticamente el mensaje después de 2 segundos
+            timer: 2000
         });
     }
+
+    // Confirmación para el botón Comprar
+    var purchaseButton = document.getElementById('purchase-button');
+    purchaseButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        var form = document.getElementById('purchase-form');
+
+        Swal.fire({
+            title: '¿Confirmar compra?',
+            text: "¿Estás seguro de que deseas realizar esta compra?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, comprar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
 });

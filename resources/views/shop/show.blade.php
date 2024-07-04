@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <!-- Main Image -->
             <div id="mainImageContainer">
-                <img src="{{ asset($product->image) }}" class="img-fluid main-image" alt="{{ $product->name }}">
+                <img src="{{ asset($product->image1) }}" class="img-fluid main-image" alt="{{ $product->name }}">
             </div>
             <!-- Thumbnails -->
             <div id="thumbnailContainer" class="mt-3">
@@ -19,35 +19,39 @@
             </div>
         </div>
         <!-- Product Info -->
-        <div class="col-md-6">
-            <h1>{{ $product->name }}</h1>
-            <p class="text-muted">{{ $product->brand->name }}</p>
-            <p>${{ $product->price }}</p>
-            <p>Stock: {{ $product->stock }}</p>
-            <p>Categorías:
-                @foreach($product->categories as $category)
-                    <span class="badge badge-secondary">{{ $category->name }}</span>
-                @endforeach
-            </p>
-            <p>Etiquetas:
-                @foreach($product->tags as $tag)
-                    <span class="badge badge-primary">{{ $tag->name }}</span>
-                @endforeach
-            </p>
-            <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Añadir al carro</button>
-            
-            @if($isInWishlist)
-                <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
-                </form>
-            @else
-                <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
-                </form>
-            @endif
+        <div class="col-md-6 d-flex justify-content-center">
+            <div>
+                <h1>{{ $product->name }}</h1>
+                <p class="text-muted">{{ $product->brand->name }}</p>
+                <p>${{ $product->price }}</p>
+                <p>Stock: {{ $product->stock }}</p>
+
+                <p>Categorías:
+                    @foreach($product->categories as $category)
+                        <span class="badge badge-secondary">{{ $category->name }}</span>
+                    @endforeach
+                </p>
+                <p>Etiquetas:
+                    @foreach($product->tags as $tag)
+                        <span class="badge badge-primary">{{ $tag->name }}</span>
+                    @endforeach
+                </p>
+                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Añadir al carro</button>
+
+                @if($isInWishlist)
+                    <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Quitar de Deseados</button>
+                    </form>
+                @else
+                    <form action="{{ route('wishlist.add', $product->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-secondary">Añadir a Deseados</button>
+                    </form>
+                @endif
+                <p class="mt-3">{{ $product->description }}</p>
+            </div>
         </div>
     </div>
 
@@ -98,7 +102,7 @@
                 @foreach($product->reviews as $review)
                     <div class="my-3">
                         @if ($review->user)
-                            <strong>{{ $review->user->name }}</strong> 
+                            <strong>{{ $review->user->name }}</strong>
                             <span class="text-muted">- {{ $review->created_at->format('d/m/Y') }}</span>
                         @else
                             <strong>Usuario desconocido</strong>
@@ -143,6 +147,13 @@
     </div>
 </div>
 
+<!-- Include the recommended products section -->
+<div class="container-fluid d-flex justify-content-center">
+    <div class="col-lg-9 d-flex align-items-center justify-content-center">
+        <div id="recommended-products-section" class="my-3"></div>
+    </div>
+</div>
+
 <style>
     /* Style for thumbnail images */
     .thumbnail-image {
@@ -157,6 +168,19 @@
         /* Highlight border color on hover */
     }
 
+    /* Style for main image */
+    #mainImageContainer {
+        width: 100%;
+        max-width: 500px; /* Set the max-width as per your requirement */
+        height: 500px; /* Set the height as per your requirement */
+    }
+
+    .main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* This will make sure the image covers the container, preserving aspect ratio */
+    }
+
     /* Style for questions and answers */
     .questions-answers {
         border-top: 1px solid #ddd;
@@ -164,13 +188,15 @@
     }
 
     .questions-answers .ms-3 {
-        margin-left: 1rem; /* Adjust as necessary */
+        margin-left: 1rem;
+        /* Adjust as necessary */
     }
 
     /* Style for stars */
     .fa-star {
         color: #ddd;
     }
+
     .fa-star.checked {
         color: #ffc107;
     }

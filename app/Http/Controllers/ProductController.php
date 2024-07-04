@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\Vehicle;
 use App\Models\Wishlist;
 
 class ProductController extends Controller
@@ -24,11 +26,46 @@ class ProductController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $tags = Tag::all();
-        return view('products.create', compact('brands', 'categories', 'tags'));
+
+        // Obtener modelos y años de la tabla vehicles junto con los nombres de las marcas
+        $vehicles = Vehicle::with('brand:id,name')->get();
+
+        $brandTags = collect();
+        $modelTags = collect();
+        $yearTags = collect();
+
+        foreach ($vehicles as $vehicle) {
+            $brandTags->push($vehicle->brand->name);
+            $modelTags->push($vehicle->model);
+            $yearTags->push($vehicle->year);
+        }
+
+        // Filtrar etiquetas únicas
+        $uniqueBrandTags = $brandTags->unique();
+        $uniqueModelTags = $modelTags->unique();
+        $uniqueYearTags = $yearTags->unique();
+
+        // Crear etiquetas si no existen
+        foreach ($uniqueBrandTags as $tagName) {
+            Tag::firstOrCreate(['name' => $tagName]);
+        }
+        foreach ($uniqueModelTags as $tagName) {
+            Tag::firstOrCreate(['name' => $tagName]);
+        }
+        foreach ($uniqueYearTags as $tagName) {
+            Tag::firstOrCreate(['name' => $tagName]);
+        }
+
+        // Recargar las etiquetas después de la creación
+        $tags = Tag::all();
+
+        return view('products.create', compact('brands', 'categories', 'tags', 'uniqueBrandTags', 'uniqueModelTags', 'uniqueYearTags'));
     }
+
 
     public function store(Request $request)
     {
+        // Validar los campos
         $request->validate([
             'name' => 'required|string',
             'price' => 'nullable|numeric',
@@ -44,9 +81,10 @@ class ProductController extends Controller
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'nullable|array',
-            'tags.*' => 'exists:tags,id',
+            'tags.*' => 'string|max:255',
         ]);
 
+        // Manejar las imágenes
         $images = [];
         for ($i = 1; $i <= 5; $i++) {
             if ($request->hasFile('image' . $i)) {
@@ -61,16 +99,23 @@ class ProductController extends Controller
             }
         }
 
+        // Crear el producto
         $productData = $request->only(['name', 'price', 'brandId', 'stock', 'description']);
-        $productData['available'] = $request->has('available') ? true : false; // Ensure it's a boolean value
+        $productData['available'] = $request->has('available') ? true : false;
         $product = Product::create(array_merge($productData, $images));
 
-
+        // Asociar categorías
         if ($request->categories) {
             $product->categories()->attach($request->categories);
         }
+
+        // Asociar etiquetas
         if ($request->tags) {
-            $product->tags()->attach($request->tags);
+            $tagNames = $request->tags;
+            foreach ($tagNames as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $product->tags()->attach($tag);
+            }
         }
 
         return redirect('products')->with('status', 'Producto creado exitósamente');
@@ -82,12 +127,31 @@ class ProductController extends Controller
         $brands = Brand::all();
         $tags = Tag::all();
         $product = Product::findOrFail($id);
-        return view('products.edit', compact('product', 'brands', 'categories', 'tags'));
+
+        // Obtener modelos y años de la tabla vehicles junto con los nombres de las marcas
+        $vehicles = Vehicle::with('brand:id,name')->get();
+
+        $brandTags = collect();
+        $modelTags = collect();
+        $yearTags = collect();
+
+        foreach ($vehicles as $vehicle) {
+            $brandTags->push($vehicle->brand->name);
+            $modelTags->push($vehicle->model);
+            $yearTags->push($vehicle->year);
+        }
+
+        // Filtrar etiquetas únicas
+        $uniqueBrandTags = $brandTags->unique();
+        $uniqueModelTags = $modelTags->unique();
+        $uniqueYearTags = $yearTags->unique();
+
+        return view('products.edit', compact('product', 'brands', 'categories', 'tags', 'uniqueBrandTags', 'uniqueModelTags', 'uniqueYearTags'));
     }
+
 
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'name' => 'required|string',
             'price' => 'nullable|numeric',
@@ -102,7 +166,7 @@ class ProductController extends Controller
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'nullable|array',
-            'tags.*' => 'exists:tags,id',
+            'tags.*' => 'string|max:255',
         ]);
 
         $product = Product::findOrFail($id);
@@ -135,16 +199,22 @@ class ProductController extends Controller
         } else {
             $product->categories()->detach();
         }
+
         if ($request->tags) {
-            $product->tags()->sync($request->tags);
+            $tagNames = $request->tags;
+            $tagIds = collect();
+            foreach ($tagNames as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $tagIds->push($tag->id);
+            }
+            $product->tags()->sync($tagIds);
         } else {
             $product->tags()->detach();
         }
 
-
-
         return redirect('products')->with('status', 'Producto actualizado exitósamente!');
     }
+
 
     public function destroy($productId)
     {
@@ -164,6 +234,7 @@ class ProductController extends Controller
         $userId = auth()->id();
         $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $id)->first();
         $isInWishlist = $wishlistItem ? true : false;
+        $product->increment('views');
 
         return view('shop.show', compact('product', 'isInWishlist', 'wishlistItem'));
     }
@@ -257,4 +328,9 @@ class ProductController extends Controller
         }
     }
 
+    public function randomProducts()
+    {
+        $products = Product::inRandomOrder()->take(4)->get(); // Cambia 4 por 5 si deseas 5 productos
+        return view('partials.recommended-products', compact('products'));
+    }
 }

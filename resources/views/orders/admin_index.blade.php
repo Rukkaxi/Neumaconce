@@ -15,9 +15,9 @@
                     </div>
                     <div class="card-body">
                         <strong>Fecha:</strong> {{ $order->created_at }}<br>
-                        <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br><br>
+                        <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br>
                         <strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}<br>
-                        <strong>Dirección:</strong> {{ $order->address }}<br>
+                        <strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}<br>
                         <strong>Estado:</strong> {{ $order->status }}<br>
                         <strong>Orden de Compra:</strong> {{ $order->buy_order }}<br>
                         <strong>Código de Autorización:</strong> {{ $order->authorization_code }}<br><br>
@@ -26,12 +26,7 @@
                             @foreach($order->items as $item)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                @php
-                                    $image = $item->product->image1 ?? $item->product->image2 ?? $item->product->image3 ?? $item->product->image4 ?? $item->product->image5 ?? null;
-                                @endphp
-                                    @if($image)
-                                    <img src="{{ asset($image) }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
-                                    @endif
+                                    <img src="{{ asset($item->product->image1 ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
                                     {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
                                 </div>
                             </li>
@@ -59,7 +54,7 @@
                         <strong>Fecha:</strong> {{ $order->created_at }}<br>
                         <strong>Método de Pago:</strong> {{ $order->paymentMethod->name }}<br><br>
                         <strong>Tipo de Entrega:</strong> {{ $order->delivery_type }}<br>
-                        <strong>Dirección:</strong> {{ $order->address }}<br>
+                        <p><strong>Dirección:</strong> {{ $order->address->address1 ?? 'Freire #82' }}</p><br>
                         <strong>Estado:</strong> {{ $order->status }}<br>
                         <strong>Orden de Compra:</strong> {{ $order->buy_order }}<br>
                         <strong>Código de Autorización:</strong> {{ $order->authorization_code }}<br><br>
@@ -68,7 +63,7 @@
                             @foreach($order->items as $item)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img src="{{ asset($item->product->image ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
+                                    <img src="{{ asset($item->product->image1 ?? 'placeholder.jpg') }}" alt="{{ $item->product->name }}" style="width: 50px; height: 50px; margin-right: 15px;">
                                     {{ $item->product->name }} - ${{ $item->price }} x {{ $item->quantity }}
                                 </div>
                             </li>

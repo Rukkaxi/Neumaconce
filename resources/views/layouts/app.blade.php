@@ -78,7 +78,7 @@
                         <a href='/' class="nav-item nav-link">Inicio</a>
 
                         <a href="{{ route('shop.index') }}" class="nav-item nav-link">Tienda</a>
-                        <a href="{{ route('gallery.index') }}" class="nav-item nav-link">Galeria</a>
+                        <a href="{{ route('gallery.index') }}" class="nav-item nav-link">Galería</a>
 
                         {{-- Menu usuario registrado/noRegistrado --}}
                         <!-- <div class="nav-item dropdown">
@@ -90,9 +90,9 @@
                             </div>
                         </div> -->
                         <a href="contact" class="nav-item nav-link">Contacto</a>
-                            
 
-                        <a class="nav-item nav-link" href="{{ route('cotizaciones.form') }}">Cotizaciones</a>
+
+                        <a class="nav-item nav-link" href="{{ route('cotizaciones.create') }}">Cotizaciones</a>
 
 
                         {{-- Dropdown de admin --}}
@@ -101,8 +101,11 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hola, {{Auth::user()->name }}</a>
                             <div class="dropdown-menu rounded-0 m-0">
 
-                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                                @if(Auth::user()->hasRole('admin'))
+                                
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
 
+                                @endif
                                 <a class="dropdown-item" href="{{ url('my_orders') }}">Mis Compras</a>
 
                                 <a class="dropdown-item" href="{{ route('wishlist') }}">Mi lista de deseados</a>
@@ -151,7 +154,7 @@
 
 
     <main>
-    @yield('content')
+        @yield('content')
     </main>
 
 
@@ -183,6 +186,20 @@
             console.log("jQuery is working!");
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch("{{ route('recommended-products')}}")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('recommended-products-section').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading recommended products:', error);
+                });
+        });
+    </script>
+
 
 
     <script>
@@ -309,7 +326,6 @@
             }
 
         });
-            
     </script>
 
 

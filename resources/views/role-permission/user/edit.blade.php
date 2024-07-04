@@ -11,6 +11,7 @@
                     <a href="{{ url('users') }}" class="btn btn-success float-end">Volver</a>
                 </div>
 
+
                 <div class="card-body">
                     <form action="{{ url('users/'.$user->id) }}" method="post">
                         @csrf

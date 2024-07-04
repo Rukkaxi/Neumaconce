@@ -27,38 +27,30 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Opciones</h5>
+                    <div class="row">
+                        <!-- User Image -->
+                        <div class="py-3 px-3 col-md-3 d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('media/avatars/avatar0.jpg') }}" alt="User Image" class="rounded-circle" style="max-width: 250px; max-height: 250px;">
                         </div>
-
-                        <div class="row">
-                            <!-- User Image -->
-                            <div class="py-3 px-3 col-md-3 d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('media/avatars/avatar0.jpg') }}" alt="User Image" class="rounded-circle" style="max-width: 250px; max-height: 250px;">
+                        <div class="py-3 col-md-9 d-flex flex-column">
+                            <div>
+                                <a href="{{ route('profiles.edit') }}" class="btn btn-link">Cambiar Contraseña</a>
                             </div>
-                            <div class="py-3 col-md-9 d-flex flex-column">
-                                <div>
-                                    <a href="{{ route('profiles.edit') }}" class="btn btn-link">Cambiar Contraseña</a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('addresses.index') }}" class="btn btn-link">Añadir Dirección</a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('addresses.index') }}" class="btn btn-link">Mis vehiculos</a>
-                                </div>
-                                <!-- <div>
-                                    <a href="#" class="btn btn-link">Hola que tal</a>
-                                </div> -->
+                            <div>
+                                <a href="{{ url('my_orders') }}" class="btn btn-link">Mis Compras</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('addresses.index') }}" class="btn btn-link">Añadir Dirección</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('addresses.index') }}" class="btn btn-link">Mis Vehículos</a>
                             </div>
                         </div>
-
-                        <hr>
-
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-</div> <!-- Added missing closing div for the container -->
+</div>
 @endsection

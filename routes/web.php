@@ -16,12 +16,15 @@ use App\Http\Controllers\WebpayController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RecommendedProductController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\FullCalendarController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Mail;
 
-/* Route::get('/email/verify', function () {
+ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
@@ -35,7 +38,8 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
     return back()->with('status', 'verification-link-sent');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); */
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 
 //Permisos y Roles
 
@@ -86,6 +90,8 @@ Route::get('categories/{id}/delete', [App\Http\Controllers\CategoryController::c
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('products/{product}/change-stock', [ProductController::class, 'changeStock'])->name('products.changeStock');
+Route::get('/recommended-products', [RecommendedProductController::class, 'show'])->name('recommended-products');
+
 
 // Profile
 //Route::resource('profiles', App\Http\Controllers\UserController::class);
@@ -112,6 +118,18 @@ Route::get('/shop/{category?}', [ShopController::class, 'index'])->name('shop.in
 //Direccion
 Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
 
+// CALENDARIO
+Route::get('full-calendar', [FullCalendarController::class, 'index'])->name('calendar');
+Route::post('full-calendar/action', [FullCalendarController::class, 'action'])->name('action');
+
+// NOTIFICACIONES
+Route::get('/notifications', [NotificationsController::class, 'index']);
+Route::get('/notifications/fetch', [NotificationsController::class, 'fetch']);
+Route::get('/notifications/count', [NotificationsController::class, 'count']);
+Route::post('/notifications/mark-read', [NotificationsController::class, 'markRead']);
+Route::post('/notifications/clear', [NotificationsController::class, 'clear']);
+
+
 // Galeria de imagenes
 Route::get('/gallery', [PhotoController::class, 'index'])->name('gallery.index');
 Route::get('/gallery/create', [PhotoController::class, 'create'])->name('gallery.create');
@@ -122,7 +140,7 @@ Route::get('/dashboard/gallery', [PhotoController::class, 'dashboardIndex'])->na
 
 // Email
 
-Route::get('/send-promotion', [MailController::class, 'sendPromotion']);
+/* Route::get('/send-promotion', [MailController::class, 'sendPromotion']); */
 Route::post('/products/{id}/promote', [ProductController::class, 'promote'])->name('products.promote');
 
 // Lista de Deseos
@@ -148,6 +166,8 @@ Route::get('/orders/{order}', [OrderController::class, 'adminTracking'])->name('
 
 Route::put('/orders/{order}/update-tracking', [OrderController::class, 'updateTracking'])->name('orders.admin_tracking.update');
 
+//Boleta
+Route::get('/webpay/download-invoice/{orderId}', [WebpayController::class, 'downloadInvoice'])->name('webpay.downloadInvoice');
 
 // Garaje
 // Define the routes
@@ -175,17 +195,14 @@ Route::get('/webpay/finish', [WebpayController::class, 'finish'])->name('webpay.
 //Perfil
 /* Route::resource('profile', App\Http\Controllers\UserController::class); */
 
-// cotizaciones
+//COTIZACIÓN
+//COTIZACIÓN
+//COTIZACIÓN
+//COTIZACIÓN
 
-Route::get('/cotizaciones', [CotizacionController::class, 'create'])->name('cotizaciones.form');
-Route::post('/cotizaciones', [CotizacionController::class, 'store'])->name('cotizaciones.store');
-
-
-Route::get('/xd', function () {
-    return view('welcome');
-});
-
-
+Route::get('/cotizaciones/create', [CotizacionController::class, 'create'])->name('cotizaciones.create');
+Route::post('/cotizaciones/store', [CotizacionController::class, 'store'])->name('cotizaciones.store');
+Route::get('/cotizaciones', [CotizacionController::class, 'index'])->name('cotizaciones.index');
 
 Auth::routes([
     #'verify' => 'true'
@@ -193,9 +210,7 @@ Auth::routes([
 
 // DashMix Example Routes
 Route::view('/landing', 'landing');
-Route::match(['get', 'post'], '/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [SalesController::class, 'index'])->name('dashboard');
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
